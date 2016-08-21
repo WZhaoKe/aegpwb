@@ -120,4 +120,4 @@ details see the file [Licence.txt][].
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
-[Mercurial]: http://mercurial.selenic.com
+[Mercurial]: https://www.mercurial-scm.org

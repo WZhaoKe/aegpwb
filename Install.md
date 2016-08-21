@@ -58,7 +58,7 @@ Four [Mie codes][] are supported for determining the absorption in spheres:
 
 4. [scatterlib][]: Supports homogeneous spheres with limited range of absorption. 
 
-Instruction for install each of these are given below.
+Instruction for installing each of these are given below.
 
 #### [SPlaC][]
 
@@ -86,9 +86,9 @@ Instruction for install each of these are given below.
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
-[Mercurial]: http://mercurial.selenic.com
+[Mercurial]: https://www.mercurial-scm.org/
 
-[SPlaC]: http://www.victoria.ac.nz/raman/book/codes.aspx
+[SPlaC]: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
 [scattnlay]: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view
 [scatterlib]: https://code.google.com/archive/p/scatterlib/
 [Matzler]: http://www.iap.unibe.ch/publications/download/2004-02
