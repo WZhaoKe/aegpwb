@@ -1,0 +1,9 @@
+digraph pwb_model {
+	rankdir=LR;
+	size="8,5"
+	node [ shape = circle , fontname = "Helvetica" , fontsize = 10 , height = 0.1 , width = 0.1 , margin = 0.01 ,  style=filled ];
+	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
+	"cavityTag" [ shape=circle fillcolor=cyan ];
+        "REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	cavityTag -> REF1 [ label = "tag" , arrowhead = "invdot" ];
+}

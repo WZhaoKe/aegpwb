@@ -1,0 +1,25 @@
+digraph pwb_model {
+	rankdir=LR;
+	size="8,5"
+	node [ shape = circle , fontname = "Helvetica" , fontsize = 10 , height = 0.1 , width = 0.1 , margin = 0.01 ,  style=filled ];
+	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
+	"EXT" [shape=circle , regular=1, style=filled , fillcolor=coral ];
+	"C1" [ shape=circle fillcolor=cyan ];
+	"C2" [ shape=circle fillcolor=cyan ];
+"REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C1 -> REF1 [ label = "C1" , arrowhead = "normal" ];
+"REF2" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C2 -> REF2 [ label = "C2" , arrowhead = "normal" ];
+"REF3" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C1 -> REF3 [ label = "AB" , arrowhead = "normal" ];
+	C1 -> EXT [ label = "AP1" , arrowhead = "empty" ];
+	C1 -> C2 [ label = "AP2" , arrowhead = "empty" ];
+"REF4" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	EXT -> REF4 [ label = "S" , arrowhead = "emptyodot" ];
+"REF5" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C1 -> REF5 [ label = "Tx" , arrowhead = "normal" ];
+"REF6" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C2 -> REF6 [ label = "Rx" , arrowhead = "normal" ];
+"REF7" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	C1 -> REF7 [ label = "S" , arrowhead = "invdot" ];
+}

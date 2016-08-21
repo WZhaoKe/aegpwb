@@ -1,0 +1,13 @@
+digraph pwb_model {
+	rankdir=LR;
+	size="8,5"
+	node [ shape = circle , fontname = "Helvetica" , fontsize = 10 , height = 0.1 , width = 0.1 , margin = 0.01 ,  style=filled ];
+	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
+	"cavity1Tag" [ shape=circle fillcolor=cyan ];
+	"cavity2Tag" [ shape=circle fillcolor=cyan ];
+        "REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	cavity1Tag -> REF1 [ label = "tag_A2" , arrowhead = "normal" ];
+        "REF2" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	cavity2Tag -> REF2 [ label = "tag_A1" , arrowhead = "normal" ];
+	cavity1Tag -> cavity2Tag [ label = "tag_T" , arrowhead = "empty" ];
+}

@@ -1,0 +1,24 @@
+digraph pwb_model {
+	rankdir=LR;
+	size="8,5"
+	node [ shape = circle , fontname = "Helvetica" , fontsize = 10 , height = 0.1 , width = 0.1 , margin = 0.01 ,  style=filled ];
+	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
+	"EXT" [shape=circle , regular=1, style=filled , fillcolor=coral ];
+	"RC1" [ shape=circle fillcolor=cyan ];
+	"RC2" [ shape=circle fillcolor=cyan ];
+"REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC1 -> REF1 [ label = "RC1" , arrowhead = "normal" ];
+"REF2" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC2 -> REF2 [ label = "RC2" , arrowhead = "normal" ];
+	RC1 -> RC2 [ label = "A1" , arrowhead = "empty" ];
+"REF3" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC1 -> REF3 [ label = "Tx" , arrowhead = "normal" ];
+"REF4" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC1 -> REF4 [ label = "Rx1" , arrowhead = "normal" ];
+"REF5" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC2 -> REF5 [ label = "Rx2" , arrowhead = "normal" ];
+"REF6" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC1 -> REF6 [ label = "STx" , arrowhead = "inv" ];
+"REF7" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+	RC2 -> REF7 [ label = "AB1" , arrowhead = "normal" ];
+}
