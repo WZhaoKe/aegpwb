@@ -8,6 +8,10 @@
 * Decide whether to stay with conventional of putting factor of 1/2 from wall
   shadowing into TCS. If so, write detailed note for user manual.
 
+* Should reference nodes but hidden in the documentation and EMT - replace
+  with small black dots ot make invisible? They are not really relevant to 
+  using the solver.
+
 * Make third party tools required for Mie Series discovered at run time and 
   error message if not found. Add instruction for obtaining and installing.
   

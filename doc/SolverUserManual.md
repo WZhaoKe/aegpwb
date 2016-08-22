@@ -193,12 +193,16 @@ argument/return | type      | unit | description
 
 ## Compaction
 
-![Figure: Compaction of an EMT](figures/Compaction.png)
+![Figure: Compaction of an EMT](figures/CompactedEMT_1.png) ![Figure: Compaction of an EMT](figures/CompactedEMT_2.png)
 
 Part of an EMT can be "compacted", i.e. reduced to an equivalent single
 object CCS. This allows stable models of parts of a large structure to be
-modelled efficiently while other parts are under development. Compaction
-is achivied using the function call
+modelled efficiently while other parts are under development. For example,
+in the EMT on the left hand side above cavity `C2` and eveything connected 
+to it can be replaced by a single absorber `ABC` as shown in the EMT on the 
+right hand side. 
+
+Compaction is achivied using the function call
 
     [ CCS ] = pwbsCompactModel( pwbm , objectType , objectTag , parameters )
 
@@ -639,7 +643,7 @@ side. Each layer is defined by its electrical parameters. The material parameter
 arrays should be either `1 x numLayer` vectors for frequency independent 
 parameters or `numFreq x numLayer` for frequency dependent parameters.
 
-![Figure: Lucent wall](figures/LucentWall.png)
+![Figure: Lucent wall](figures/LaminatedWall.png)
 
 ### `'LucentWallCCS'`, `'LucentWallCE'`, `'LucentWallFileCCS'` & `'LucentWallFileCE'`
 
