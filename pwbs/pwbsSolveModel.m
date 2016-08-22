@@ -99,9 +99,9 @@ function [ pwbm ] = pwbsSolveModel( pwbm )
       end % switch
     end % for
 
-    % Eliminate virtual external node.
-    % Sigma = Sigma(2:end,2:end);
-    % P = P(2:end);
+    % Add power density source to external environment.
+    % This will be short to reference if no power density source has been added.
+    % This adds constitutive relation of "voltage source to MNA matrices.
     Sigma(1,pwbm.numCavities+1) = 1.0;
     Sigma(pwbm.numCavities+1,1) = 1.0;
     P(pwbm.numCavities+1) = pwbm.powerDensitySource.powerDensity(freqIdx);
@@ -124,9 +124,10 @@ function [ pwbm ] = pwbsSolveModel( pwbm )
       S = Sigma \ P;
     end % if
 
-    % Pad to allow for external node.
-    %S = [ 0 ; S ];
+    % TRP is power through power density source.
     TRP(freqIdx) = full(S(pwbm.numCavities+1));
+    
+    % Remove constitutive relation row from MNA matrices.
     S(pwbm.numCavities+1)=[];
 
     % Store all power densities.
