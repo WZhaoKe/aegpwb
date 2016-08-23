@@ -396,17 +396,17 @@ The supported cavity types are
 
 with parameters
 
-parameter   | type              | unit | description
-:-----------|:-----------------:|:----:|:--------------------------------
-`a`         | double scalar     | m    | first side length
-`b`         | double scalar     | m    | second side length
-`c`         | double scalar     | m    | third side length
-`area`      | double scalar     | m^2  | area of closed bounding surface
-`volume`    | double scalar     | m^3  | volume
-`sigma`     | double vector [1] | S/m  | wall conductivity
-`mu_r`      | double vector [1] | -    | wall relative permeability
-`wallACS`   | double vector [1] | m^2  | ACS of cavity walls
-`fileName`  | string            | -    | file name for external ACS data
+parameter   | type              | unit | range | description
+:-----------|:-----------------:|:----:|:-----:|:-------------------------------
+`a`         | double scalar     | m    | >0    | first side length
+`b`         | double scalar     | m    | >0    | second side length
+`c`         | double scalar     | m    | >0    | third side length
+`area`      | double scalar     | m^2  | >0    | area of closed bounding surface
+`volume`    | double scalar     | m^3  | >0    | volume
+`sigma`     | double vector [1] | S/m  | >0    | wall conductivity
+`mu_r`      | double vector [1] | -    | >=1   | wall relative permeability
+`wallACS`   | double vector [1] | m^2  | >0    | ACS of cavity walls
+`fileName`  | string            | -    | -     | file name for external ACS data
 
 [1] Must be either a scalar or a `numFreq x 1` column vector. 
 
@@ -544,28 +544,28 @@ The supported aperture types are:
 
 with parameters
 
-parameter     | type              | unit | description
-:-------------|:-----------------:|:----:|:---------------------------------------------------
-`area`        | double scalar     | m^2  | area of aperture
-`TCS`         | double vector [1] | m^2  | average TCS of aperture
-`TE`          | double vector [1] | -    | average TE of aperture
-`fileName`    | string            | -    | name of ASCII file containing CCS/CE data
-`alpha_mxx`   | double scalar     | m^3  | x-component of magnetic polarisability tensor
-`alpha_myy`   | double scalar     | m^3  | y-component of magnetic polarisability tensor
-`alpha_ezz`   | double scalar     | m^3  | z-component of electric polarisability tensor
-`radius`      | double scalar     | m    | radius of circular aperture
-`a_x`         | double scalar     | m    | semi-axis of elliptical aperture in x-direction
-`a_y`         | double scalar     | m    | semi-axis of elliptical aperture in y-direction
-`side`        | double scalar     | m    | side length of square aperture
-`side_x`      | double scalar     | m    | side length of rectangular aperture in x-direction
-`side_y`      | double scalar     | m    | side length of rectangular aperture in y-direction
-`area`        | double scalar     | m^2  | area of aperture
-`thicknesses` | double vector     | m    | thicknesses of layers
-`epcs_r`      | complex array     | -    | complex relative permittivity of layers
-`sigma`       | double array      | S/m  | conductivity of layers
-`mu_r`        | double array      | -    | relative permeability of layers
-`ACS1`/`ACS2` | double vector [1] | m^2  | average ACS side1/side2 of lossy aperture
-`AE1`/`AE2`   | double vector [1] | -    | average AE side1/side2 of lossy aperture
+parameter     | type              | unit | range | description
+:-------------|:-----------------:|:----:|:-----:|:----------------------------------------------
+`area`        | double scalar     | m^2  | >0    | area of aperture
+`TCS`         | double vector [1] | m^2  | >0    | average TCS of aperture
+`TE`          | double vector [1] | -    | >0    | average TE of aperture
+`fileName`    | string            | -    | -     | name of ASCII file containing CCS/CE data
+`alpha_mxx`   | double scalar     | m^3  | >=0   | x-component of magnetic polarisability tensor
+`alpha_myy`   | double scalar     | m^3  | >=0   | y-component of magnetic polarisability tensor
+`alpha_ezz`   | double scalar     | m^3  | >=0   | z-component of electric polarisability tensor
+`radius`      | double scalar     | m    | >0    | radius of circular aperture
+`a_x`         | double scalar     | m    | >0    | semi-axis of elliptical aperture in x-direction
+`a_y`         | double scalar     | m    | >0    | semi-axis of elliptical aperture in y-direction
+`side`        | double scalar     | m    | >0    | side length of square aperture
+`side_x`      | double scalar     | m    | >0    | side length of rectangular aperture in x-direction
+`side_y`      | double scalar     | m    | >0    | side length of rectangular aperture in y-direction
+`area`        | double scalar     | m^2  | >0    | area of aperture
+`thicknesses` | double vector     | m    | >0    | thicknesses of layers
+`epcs_r`      | complex array     | -    | -     | complex relative permittivity of layers
+`sigma`       | double array      | S/m  | >0    | conductivity of layers
+`mu_r`        | double array      | -    | >=1   | relative permeability of layers
+`ACS1`/`ACS2` | double vector [1] | m^2  | >0    | average ACS side1/side2 of lossy aperture
+`AE1`/`AE2`   | double vector [1] | -    | >0    | average AE side1/side2 of lossy aperture
 
 [1] Must be either a scalar or an `numFreq` x 1 column vector.
 
@@ -724,17 +724,17 @@ The supported absorber types are:
 
 with parameters
 
-parameter     | type              | unit | description
-:-------------|:-----------------:|:----:|:------------------------------------------------------
-`area`        | double scalar     | m^2  | area of absorber
-`ACS`         | double vector [1] | m^2  | average ACS of absorber
-`AE`          | double vector [1] | -    | average AE of absorber
-`fileName`    | string            | -    | name of ASCII file containing ACS/AE data
-`thicknesses` | double vector     | m    | thicknesses of each layer of laminated surface
-`epcs_r`      | complex array     | -    | complex relative permittivity layers of sphere/surface
-`sigma`       | double array      | S/m  | conductivity of layers of sphere/surface
-`mu_r`        | double array      | -    | relative permeability of layers of sphere/surface
-`radii`       | double vector     | m    | radii of multi-layer sphere
+parameter     | type              | unit | range | description
+:-------------|:-----------------:|:----:|:-----:|:-------------------------------------------------
+`area`        | double scalar     | m^2  | >0    | area of absorber
+`ACS`         | double vector [1] | m^2  | >0    | average ACS of absorber
+`AE`          | double vector [1] | -    | >0    | average AE of absorber
+`fileName`    | string            | -    | -     | name of ASCII file containing ACS/AE data
+`thicknesses` | double vector     | m    | >0    | thicknesses of each layer of laminated surface
+`epcs_r`      | complex array     | -    | -     | complex relative permittivity layers of sphere/surface
+`sigma`       | double array      | S/m  | >0    | conductivity of layers of sphere/surface
+`mu_r`        | double array      | -    | >=1   | relative permeability of layers of sphere/surface
+`radii`       | double vector     | m    | >0    | radii of multi-layer sphere
 
 [1] Must be either a scalar or an `numFreq x 1` column vector.
 
@@ -853,14 +853,14 @@ The supported antenna types are:
 
 with parameters
 
-parameter        | type              | unit | description
-:----------------|:-----------------:|:----:|:-------------------------------------
-`AE`             | double vector [1] | -    | average AE of antenna
-`fileName`       | string            | -    | name of ASCII file containing AE data
-`length`         | double scalar     | m    | total length of monopole/dipole
-`radius`         | double scalar     | m    | radius of monopole/dipole
-`sigma`          | double vector [1] | -    | conductivity of monopole/dipole metal
-`loadResistance` | double scalar     | ohm  | load resistance
+parameter        | type              | unit | range |description
+:----------------|:-----------------:|:----:|:-----:|:------------------------------------
+`AE`             | double vector [1] | -    | >0    | average AE of antenna
+`fileName`       | string            | -    | -     | name of ASCII file containing AE data
+`length`         | double scalar     | m    | >0    | total length of monopole/dipole
+`radius`         | double scalar     | m    | >0    | radius of monopole/dipole
+`sigma`          | double vector [1] | -    | >0    | conductivity of monopole/dipole metal
+`loadResistance` | double scalar     | ohm  | >0    | load resistance
 
 [1] Must be either a scalar or an `numFreq x 1` column vector.
 
@@ -951,17 +951,17 @@ The supported source types are:
 
 The parameters are:
 
-parameter      | type              | unit   | description
-:--------------|:-----------------:|:------:|:----------------------------------------------------
-`sourcePower`  | double vector [1] | W      | power of source
-`powerDensity` | double vector [1] | W/m^2  | power density illuminating the aperture
-`theta`        | double scalar     | degree | angle of incidence on aperture
-`phi`          | double scalar     | degree | plane of incidence on aperture
-`psi`          | double scalar     | degree | polarisation of electric field
-`HxSC`         | double vector [1] | A/m    | x-polarised short-circuit magnetic field in aperture
-`HySC`         | double vector [1] | A/m    | y-polarised short-circuit magnetic field in aperture
-`EzSC`         | double vector [1] | V/m    | z-polarised short-circuit electric field in aperture
-`fileName`     | string            | -      | name of file containing short-circuit fields in aperture
+parameter      | type              | unit   |  range   | description
+:--------------|:-----------------:|:------:|:--------:|:------------------------------------------------------
+`sourcePower`  | double vector [1] | W      | >0       | power of source
+`powerDensity` | double vector [1] | W/m^2  | >0       | power density illuminating the aperture
+`theta`        | double scalar     | degree | >=0,<180 | angle of incidence on aperture
+`phi`          | double scalar     | degree | >=0,<360 | plane of incidence on aperture
+`psi`          | double scalar     | degree | >=0,<=180| polarisation of electric field
+`HxSC`         | double vector [1] | A/m    | >0       | x-polarised short-circuit magnetic field in aperture
+`HySC`         | double vector [1] | A/m    | >0       | y-polarised short-circuit magnetic field in aperture
+`EzSC`         | double vector [1] | V/m    | >0       | z-polarised short-circuit electric field in aperture
+`fileName`     | string            | -      | -        | name of file containing short-circuit fields in aperture
 
 [1] Must be either a scalar or an `numFreq x 1` column vector.
 
@@ -1064,12 +1064,12 @@ The supported scatterer types are:
 
 with parameters
 
-parameter | type              | unit | description
-:---------|:------------------|------|:--------------------------
-`radius`  | double scalar     | m    | effective radius of paddle
-`height`  | double scalar     | m    | effective height of paddle
-`SE`      | double vector [1] | -    | SE of paddle
-`SCS`     | double vector [1] | m^2  | effective SCS of scatterer
+parameter | type              | unit | range | description
+:---------|:------------------|------|:-----:|:--------------------------
+`radius`  | double scalar     | m    | >0    | effective radius of paddle
+`height`  | double scalar     | m    | >0    | effective height of paddle
+`SE`      | double vector [1] | -    | >0    | SE of paddle
+`SCS`     | double vector [1] | m^2  | >0    | effective SCS of scatterer
 
 [1] Must be either a scalar or an `numFreq x 1` column vector.
 
