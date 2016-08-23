@@ -12,7 +12,7 @@ research in electromagnetic compatibility ([EMC][]).
 
 The origins of the Power Balance (PWB) approach are in the work of Hill et al in 
 a paper that showed how to divide the power loss in a cavity into four component 
-parts [[Hill1994]][]: 
+parts ([Hill1994][]): 
 
 1. Power lost through apertures; 
 2. Power absorbed by receiving antennas in the cavity; 
@@ -21,9 +21,9 @@ parts [[Hill1994]][]:
 
 Further theoretical work was carried out at [NIST][] and the method was 
 developed into a systematic simulation technique overlaid on the Electromagnetic 
-Topology (EMT) methodology by Parmantier and Junqua at [ONERA][] [[Junqua2005]][], 
-[[Parmantier2007]][]. A very similar approach has recently being reported by Tait 
-[[Tait2011]][]. PWB treats the problem space as a topological model of shielded 
+Topology (EMT) methodology by Parmantier and Junqua at [ONERA][] ([Junqua2005][], 
+[Parmantier2007][]). A very similar approach has recently being reported by 
+([Tait2011][]). PWB treats the problem space as a topological model of shielded 
 cavities, coupled with wires, apertures, antennas etc. Each of these is assigned 
 a model for its coupling cross section, and the power transferred and the 
 resulting power density in each cavity is calculated over a broadband from a set 
@@ -167,33 +167,33 @@ details see the file [Licence.txt][].
 
 ## References
 
-[[Hill1996]]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=305461
+[Hill1994]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=305461
 
-[Hill1996] D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford and R. T. Johnk, 
+([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford and R. T. Johnk, 
            "Aperture excitation of electrically large, lossy cavities,"
            IEEE Transactions on Electromagnetic Compatibility, vol. 36, no. 3, pp. 169-178, Aug 1994.
 
-[[Hill1998]]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=709418
+[Hill1998]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=709418
 
-[Hill1998] D. A. Hill, 
+([Hill1998]) D. A. Hill, 
            "Plane wave integral representation for fields in reverberation chambers,"
            IEEE Transactions on Electromagnetic Compatibility, vol. 40, no. 3, pp. 209-217, Aug 1998.
 
-[[Junqua2005]]: http://www.tandfonline.com/doi/abs/10.1080/02726340500214845
+[Junqua2005]: http://www.tandfonline.com/doi/abs/10.1080/02726340500214845
 
-[Junqua2005] I. Junqua, J.-P. Parmantier and F. Issac,
+([Junqua2005]) I. Junqua, J.-P. Parmantier and F. Issac,
              "A Network Formulation of the Power Balance Method for High-Frequency Coupling",
              Electromagnetics Vol. 25 , Iss. 7-8,2005 
 
-[[Parmantier2007]]: http://link.springer.com/chapter/10.1007/978-0-387-37731-5_1
+[Parmantier2007]: http://link.springer.com/chapter/10.1007/978-0-387-37731-5_1
 
-[[Parmantier2007]] J.-P. Parmantier and I. Junqua,
-                   "EM Topology: From Theory to Application",
-                   in Ultra-Wideband, Short-Pulse Electromagnetics 7, Springer New York, pp. 3-12, 2007
+([Parmantier2007]) J.-P. Parmantier and I. Junqua,
+                 "EM Topology: From Theory to Application",
+                 in Ultra-Wideband, Short-Pulse Electromagnetics 7, Springer New York, pp. 3-12, 2007
     
-[[Tait2011]]: http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=5491150
+[Tait2011]: http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=5491150
 
-[Tait2001] G. B. Tait, R. E. Richardson, M. B. Slocum, M. O. Hatfield and M. J. Rodriguez, 
+([Tait2011]) G. B. Tait, R. E. Richardson, M. B. Slocum, M. O. Hatfield and M. J. Rodriguez, 
            "Reverberant Microwave Propagation in Coupled Complex Cavities",
            IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232, Feb. 2011.
 
@@ -210,12 +210,12 @@ details see the file [Licence.txt][].
 [GNU]: https://www.gnu.org/home.en.html
 [EMC]: http://www.york.ac.uk/electronics/research/physlayer/appliedem/emc/
 
-[Install.md]: Install.md
-[tutorial]: Tutorial.md
-[ToolboxUserManual.md]: ToolboxUserManual.md
-[SolverUserManual.md]: SolverUserManual.md
-[Bugs.md]: Bugs.md
-[ToDo.md]: ToDo.md
+[Install.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Install.md
+[tutorial]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/tutorial/Tutorial.md
+[ToolboxUserManual.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToolboxUserManual.md
+[SolverUserManual.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/SolverUserManual.md
+[Bugs.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/Bugs.md
+[ToDo.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToDo.md
 [Licence.txt]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Licence.txt
 
 [graphviz]: http://www.graphviz.org
