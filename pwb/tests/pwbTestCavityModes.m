@@ -1,4 +1,4 @@
-function pwbTestCavityModes()
+function [ isPass ] = pwbTestCavityModes()
 %
 % pwbTestCavityModes -
 %
@@ -8,20 +8,25 @@ function pwbTestCavityModes()
 % aegpwb power balance toolbox and solver.
 % Copyright (C) 2016 Ian Flintoft
 %
-% aegpwb is free software: you can redistribute it and/or modify
+% aeggpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
 % the Free Software Foundation, either version 3 of the License, or
 % (at your option) any later version.
 %
-% aegpwb is distributed in the hope that it will be useful,
+% aeggpwb is distributed in the hope that it will be useful,
 % but WITHOUT ANY WARRANTY; without even the implied warranty of
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 %
 % You should have received a copy of the GNU General Public License
-% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+% along with aeggpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
+% Author: I. D Flintoft
+% Date: 19/08/2016
+% Version: 1.0.0
 
+  isPass = true;
+  
   f = logspace( log10( 10e6 ) , log10(1e9) , 200 );
 
   a = 1.0;
@@ -35,7 +40,13 @@ function pwbTestCavityModes()
 
   [ numModes_Count , modeDensity_Count , f_1_Count , f_60_Count ] = pwbCuboidCavityModesCount( f , a  , b , c );
 
- 
+  numModes_Weyl(find( numModes_Weyl <= 0 )) = NaN;
+  numModes_Liu(find( numModes_Liu <= 0 )) = NaN;
+  numModes_Count(find( numModes_Count <= 0 )) = NaN;
+  modeDensity_Weyl(find( modeDensity_Weyl <= 0 )) = NaN;
+  modeDensity_Liu(find( modeDensity_Liu <= 0 )) = NaN;
+  modeDensity_Count(find( modeDensity_Count <= 0 )) = NaN;
+  
   hf1 = figure();
   hl1 = loglog( f ./1e6 , numModes_Weyl , 'r-' );
   hold on;

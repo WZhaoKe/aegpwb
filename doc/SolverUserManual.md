@@ -771,7 +771,7 @@ below. `thicknesses` should be a `1 x (numLayer-1)` vector giving the thickness
 of each layer of the surface, starting at the side facing into the cavity. Each 
 layer is defined by its electrical parameters. The material parameter arrays 
 should be either `1 x numLayer` vectors for frequency independent parameters or 
-`numFreq x numLayer` for frequency dependent parameters. The last layer is 
+`numFreq x numLayer` arrays for frequency dependent parameters. The last layer is 
 assumed to extend to infinity regarding the calculation of the overall 
 reflection coefficient.
 
@@ -784,7 +784,7 @@ diagram below. `radii` should be a `1 x numLayer` vector giving the radius of
 each layer of the sphere, starting at the outer shell facing into the cavity. 
 Each layer is defined by its electrical parameters. The material parameter 
 arrays should be either `1 x numLayer` vectors for frequency independent 
-parameters or `numFreq x numLayer` for frequency dependent parameters.
+parameters or `numFreq x numLayer` arrays for frequency dependent parameters.
 
 ![Figure: Sphere](figures/LaminatedSphere.png)
 

@@ -1,8 +1,8 @@
-function pwbsTests()
+function pwbTests()
 %
-% pwbsTests - Run solver test-suite
+% pwbTests - Run yoolbox test-suite
 %
-% pwbsTests()
+% pwbTests()
 %
 
 % aegpwb power balance toolbox and solver.
@@ -26,14 +26,14 @@ function pwbsTests()
 % Version: 1.0.0
 
   % Get base name of solver installation.
-  baseName = fileparts( which( 'pwbsTests' ) );
+  baseName = fileparts( which( 'pwbTests' ) );
   
   % Test folder.
   testDir = [ baseName , '/tests' ];
   addpath( testDir );
    
   % Any file in the test directory with name starting pwbsTest is a test.
-  testList = dir( [ testDir , '/pwbsTest*.m'] );
+  testList = dir( [ testDir , '/pwbTest*.m'] );
 
   % Run tests
   for testIdx = 1:length( testList )
