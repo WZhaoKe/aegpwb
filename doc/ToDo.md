@@ -1,7 +1,6 @@
+# AEG PWB: Things to do list
 
 [TOC]
-
-# AEG PWB: Things to do list
 
 ## General
 
@@ -22,6 +21,8 @@
 
 ## Toolbox
 
+* Use Legendre quadrature in pwbLucentWall.
+
 * Port rest of old toolbox:
 
   GaussLegendre.m
@@ -29,9 +30,6 @@
   pwbBiomat1.m
   pwbBiomat2.m
   pwbBiomat3.m
-  pwbDielectricSurfaceKernel.m
-  pwbDielectricSurface.m
-  pwbMetalSurface.m
   pwbMicrostripLine.m
   pwbMicrostripLineSimple.m
   pwbMicrostripLineZhou.m
@@ -40,15 +38,9 @@
   pwbMieMultiLayerSphere.m
   pwbMieSphere2.m
   pwbMieSphere.m
-  pwbMultiLayerSurface2.m
-  pwbMultiLayerSurface3.m 
-  pwbMultiLayerSurfaceKernel3R.m
-  pwbMultiLayerSurfaceKernel3T.m
-  pwbMultiLayerSurface.m
   pwbQuasiStaticEllipsoid.m
   pwbTestMicrostripLine.m
   pwbTestMieSphere.m
-  pwbTestMultiLayerSurface.m
   pwbTwoWireLineDiameter.m
   pwbTwoWireLineZc.m
   rcChamberModel2.m
@@ -72,6 +64,8 @@
 
 ## Solver
 
+* Tests for probability distributions.
+
 * Enforce it so that once a model is set up further objects cannot be added.
 
 * Estimate polarisabilities of apertures defined by TCS/TE from area and 
@@ -83,3 +77,7 @@
 
 * For Cuboid cavity use actual mode frequencies for first 1000? modes 
   spliced onto Weyl estimate at higher frequencies.
+
+* [Maybe] Make is possible to delete objects. Difficult as they are linked.
+  Maybe refuse to delete if object is referenced by another and feedback to
+  user names of linked onjects so the user can delete recursively if desired.

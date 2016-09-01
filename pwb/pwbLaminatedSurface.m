@@ -14,6 +14,7 @@ function [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , si
 % Parameters:
 %
 % f           - vector (numFreq) of required frequencies [Hz].
+% area        - real scalar, area of surface [m^2].
 % thicknesses - vector (numLayer-1) of layer thicknesses [m].
 % eps_r       - array (numFreq x numLayer) of relative permittivities [-].
 %               If first dimension is 1 assumed same for all frequencies.
@@ -46,7 +47,7 @@ function [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , si
   numLayer = length( thicknesses ) + 1;
   
   % Check and expand material arrays.
-  [ eps_r ] = expandMaterialArray( eps_r , numFreq , numLayer , 'epcs_r' );
+  [ eps_r ] = expandMaterialArray( eps_r , numFreq , numLayer , 'epsc_r' );
   [ sigma ] = expandMaterialArray( sigma , numFreq , numLayer , 'sigma' );
   [ mu_r ] = expandMaterialArray( mu_r , numFreq , numLayer , 'mu_r' );
   [ sigmam ] = expandMaterialArray( sigmam , numFreq , numLayer , 'sigmam' ); 

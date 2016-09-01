@@ -309,7 +309,37 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
     [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } );    
     tag = [ tag , '_T' ];
   case 'LucentWall'
-    error( 'unimplemented aperture type' , type );    
+    if( length( parameters ) ~= 5 )
+      error( 'Lucent wall aperture type requires five parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'nonnegative' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};
+    validateattributes( parameters{2} , { 'double' } , { 'vector' , 'positive' } , 'parameters{}' , 'thicknesses' , 2 );
+    thicknesses = parameters{2};
+    validateattributes( parameters{3} , { 'double' } , {} , 'parameters{}' , 'epsc_r' , 3 );
+    epsc_r = parameters{3};
+    validateattributes( parameters{4} , { 'double' } , { 'real' } , 'parameters{}' , 'sigma' , 4 );
+    sigma = parameters{4};
+    validateattributes( parameters{5} , { 'double' } , { 'real' } , 'parameters{}' , 'mu_r' , 5 );
+    mu_r = parameters{5};
+    numLayer = length( thicknesses );
+    if( size( epsc_r , 2 ) ~= numLayer || size( sigma , 2 ) ~= numLayer ||  size( mu_r , 2 ) ~= numLayer )
+      error( 'epsc_r, sigma and mu_r must have number columns equal to number of layers' );
+    end % if
+    if( size( epsc_r , 1 ) ~= 1 && size( epsc_r ,1 ) ~= numFreq )
+      error( 'epsc_r must be a scalar or the same size as f' );
+    end % if
+    if( size( sigma , 1 ) ~= 1 && size( sigma , 1 ) ~= numFreq )
+      error( 'sigma must be a scalar or the same size as f' );
+    end % if
+    if( size( mu_r , 1 ) ~= 1 && size( mu_r , 1 ) ~= numFreq )
+      error( 'mu_r must be a scalar or the same size as f' );
+    end % if
+    [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( pwbm.f , area , thicknesses , epsc_r , sigma , mu_r );
+    [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } ); 
+    tag = [ tag , '_T' ];
   otherwise
     error( 'unknown aperture type' , type );
   end % switch

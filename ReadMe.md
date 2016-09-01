@@ -31,32 +31,28 @@ of linear equations dervied from the overall power balance in each cavity.
 
 The set of linear equations can also be represented as a equivalent cicruit in 
 which cavities are nodes of the cicuit and power absorption and transmission 
-processes are admittances on the edges connecting the nodes. The power density 
-in the cavities are the across variables ("voltage") and the powers absorbed or 
-coupled through then admittances are the through variable ("currnet"). For a 
-power absorption process, the average power absorbed, Pa, is the product of 
-the average power density in the cavity, S, and the average absorption 
-cross-section, ACS:
+processes are admittances on the edges connecting the nodes. The power densities 
+in the cavities are the across variables ("voltages") and the powers absorbed or 
+coupled through the admittances are the through variables ("currents"). For a 
+power absorption process, the average power absorbed is the product of the 
+average power density in the cavity and the average absorption cross-section 
+(ACS). For a process that transfers energy between two cavities the net power 
+transmitted from one side to the other is the product of the difference in the 
+average power densities in the two cavities and the average transmission 
+cross-section (TCS) of the process.
 
-   Pa = ACS * S.		
+The power balance relationship for the equilibrium state of each cavity in the 
+system requires the total power transmitted into the cavity to be equal to the 
+total power absorption within the cavity; this leads to a linear equation 
+relating the power densities with the ACSs and TCSs as coefficients, analagous 
+to Kirchhoff's Current Law. The ACSs and TCSs can be referred to collectively as 
+coupling cross-section (CCSs). If a system contains `N` cavities then `N` such 
+linear equations can be formed from the power balance in each cavity and then 
+solved for the power densities of the cavities. 
 
-For a process that transfers energy between two cavities the net power 
-transmitted from one side to the other, Pt, is
-
-   Pt = TCS * ( S1 - S2 ),
-    
-where TCS is the average transmission cross-section (TCS) and S1 and S2 
-are the power densities in the two cavities. The power balance relationship for 
-the equilibrium state of each cavity in the system requires the total power 
-transmitted into the cavity to be equal to the total power absorption within the 
-cavity; this leads to a linear equation relating the power densities with the 
-CCS as coefficients, analagous to Kirchhoff's Current Law. If a system contains 
-N cavities then N such linear equations can be formed from the power balance in 
-each cavity and then solved for the power densities of the cavities. 
-
-The AEG PWB toolbox provides functions for the determination of average 
-coupling cross-section and associated utilities and the solver implements the
-equivalent circuit approach to constructing the EMT and solving the problem. 
+The AEG PWB toolbox provides functions for the determination of average CCSs and 
+associated utilities and the solver implements the equivalent circuit approach 
+to constructing the EMT and solving the problem. 
 
 ## Code features
 
@@ -159,11 +155,11 @@ details see the file [Licence.txt][].
 
 ## Credits
 
-[TBC]
+**[TBC]**
 
 ## Related links
 
-[TBC]
+**[TBC]**
 
 ## References
 

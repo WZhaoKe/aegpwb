@@ -66,6 +66,12 @@ TE      | Transmission efficiency
 
 # Absorbers
 
+# `pwbMetalSurface`
+
+# `pwbDielectricSurface`
+
+# `pwbLaminatedSurface`
+
 
 # Apertures
 

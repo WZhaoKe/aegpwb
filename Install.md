@@ -1,7 +1,6 @@
+# AEG PWB: Installation and testing
 
 [TOC]
-
-# AEG PWB: Installation and testing
 
 ## Requirements
 
@@ -78,11 +77,17 @@ Instruction for installing each of these are given below.
 
 ## Run the test-suite
 
-### Set up init file for GNU/Octave
+Once install the test-suite for the toolbox can be run using
 
-**[TBC]**
+    pwbTests();
 
+and that for the solver using
 
+    pwbsTests();
+    
+All the tests should pass. If not please report a bug.
+
+    
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab

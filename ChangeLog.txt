@@ -1,4 +1,89 @@
+2016-08-28  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* doc/SolverUserManual.md, pwb/private/emFresnelCoeff.m,
+	pwb/private/emMultiRefG.m, pwb/private/expandMaterialArray.m,
+	pwb/pwbDielectricSurface.m, pwb/pwbLaminatedSurface.m,
+	pwb/pwbMetalSurface.m, pwb/pwbTests.m, pwb/startup.m,
+	pwb/tests/pwbTestCavityModes.m,
+	pwb/tests/pwbTestLaminatedSurface1.m,
+	pwb/tests/pwbTestMetalSurface1.m, pwbs/pwbsAddAbsorber.m,
+	pwbs/pwbsTests.m, pwbs/tests/pwbsTestAbsorber5.m,
+	pwbs/tests/pwbsTestAbsorber6.m, pwbs/tests/pwbsTestAbsorber7.m,
+	pwbs/tests/pwbsTestAbsorber8.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwb/private/emFresnelCoeff.m added pwb/private/emMultiRefG.m
+	added pwb/private/expandMaterialArray.m added
+	pwb/pwbDielectricSurface.m added pwb/pwbLaminatedSurface.m added
+	pwb/pwbMetalSurface.m added pwb/pwbTests.m added pwb/startup.m added
+	pwb/tests/pwbTestLaminatedSurface1.m added
+	pwb/tests/pwbTestMetalSurface1.m added
+	pwbs/tests/pwbsTestAbsorber5.m added pwbs/tests/pwbsTestAbsorber6.m
+	added pwbs/tests/pwbsTestAbsorber7.m added
+	pwbs/tests/pwbsTestAbsorber8.m changed doc/SolverUserManual.md
+	changed pwb/tests/pwbTestCavityModes.m changed
+	pwbs/pwbsAddAbsorber.m changed pwbs/pwbsTests.m
+
+	 Added surface models.
+	[2a1d3d69f5d8] [tip]
+
+2016-08-23  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* doc/SolverUserManual.md, pwbs/tests/pwbsTestCavity1.m,
+	pwbs/tests/pwbsTestCavity2.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwbs/tests/pwbsTestCavity1.m added
+	pwbs/tests/pwbsTestCavity2.m changed doc/SolverUserManual.md
+
+	 New tests and doc update.
+	[c581cc7f16e6]
+
+	* ReadMe.md, doc/SolverUserManual.md:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed ReadMe.md changed doc/SolverUserManual.md
+
+	 Fix links in markdown.
+	[44768ff53449]
+
+2016-08-22  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* ReadMe.md:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed ReadMe.md
+	[de946892fa16]
+
+	* doc/ToDo.md, pwbs/pwbsCompactModel.m, pwbs/pwbsSolveModel.m,
+	pwbs/tests/pwbsTestCompaction1.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwbs/pwbsCompactModel.m added pwbs/tests/pwbsTestCompaction1.m
+	changed doc/ToDo.md changed pwbs/pwbsSolveModel.m
+
+	 Implemented compaction.
+	[40bd0e995e3a]
+
+	* doc/SolverUserManual.md, doc/ToDo.md,
+	doc/figures/CompactedEMT_1.png, doc/figures/CompactedEMT_2.png,
+	doc/figures/LaminatedWall.png, doc/figures/src/CompactedEMT_1.dot,
+	doc/figures/src/CompactedEMT_2.dot,
+	doc/figures/src/LaminatedWall.odg:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added doc/figures/CompactedEMT_1.png added
+	doc/figures/CompactedEMT_2.png added doc/figures/LaminatedWall.png
+	added doc/figures/src/CompactedEMT_1.dot added
+	doc/figures/src/CompactedEMT_2.dot added
+	doc/figures/src/LaminatedWall.odg changed doc/SolverUserManual.md
+	changed doc/ToDo.md
+
+	 Documentation updates.
+	[9f6372773f14]
+
 2016-08-21  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* ChangeLog.txt, Install.md, ReadMe.md:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed ChangeLog.txt changed Install.md changed ReadMe.md
+
+	 Fix up links.
+	[96570f9feacd]
 
 	* ChangeLog.txt, Install.md, Licence.txt, ReadMe.md, doc/Bugs.md,
 	doc/SolverUserManual.md, doc/ToDo.md, doc/ToolboxUserManual.md,
@@ -63,5 +148,5 @@
 	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
 
 	 Initial commit.
-	[2fa05cdd12b8] [tip]
+	[2fa05cdd12b8]
 

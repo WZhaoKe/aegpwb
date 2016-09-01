@@ -40,85 +40,21 @@ function [ Gamma_TE , Gamma_TM , Z_TE , Z_TM ] = emMultiRefG( f , theta , thickn
   j = sqrt( -1 );
 
   % Constants.
-  [ c0 , eps0 , mu0 , eta0 ] = emConst();
+  c0 = 299792458;                  
+  mu0 = 4 * pi * 1e-7; 
+  eps0 = 1.0 / ( mu0 * c0 * c0 );
   
   % Get number of layers and verify input arrays.
   f = f(:);
   numFreq = length( f );
   numLayer = length( thicknesses );
-
-  % Check and expand the relative permittivity array.
-  eps_numLayer  = size( eps_r , 2 );
-  eps_numFreq = size( eps_r , 1 );
-
-  if ( eps_numLayer ~= numLayer + 2 )
-    error( 'second dimension of eps_r must be the same as the number of layers plus two' );
-  end %if
-
-  if ( eps_numFreq ~= numFreq )
-    if( eps_numFreq == 1 )
-      eps_r = repmat( eps_r , [ numFreq , 1 ] ); 
-    else
-      error( 'first dimension of eps_r must be 1 or the same as the number of frequencies' );
-    end %if
-  end %if
-
-  assert( all( size( eps_r ) == [ numFreq , numLayer + 2 ] ) );
-
-  % Check and expand the conductivity array.
-  sigma_numLayer  = size( sigma , 2 );
-  sigma_numFreq = size( sigma , 1 );
-
-  if ( sigma_numLayer ~= numLayer + 2 )
-    error( 'second dimension of sigma must be the same as the number of layers plus two' );
-  end %if
-
-  if ( sigma_numFreq ~= numFreq )
-    if( sigma_numFreq == 1 )
-      sigma = repmat( sigma , [ numFreq , 1 ] ); 
-    else
-      error( 'first dimension of sigma must be 1 or the same as the number of frequencies' );
-    end %if
-  end %if
-
-  assert( all( size( sigma ) == [ numFreq , numLayer + 2 ] ) );
-
-  % Check and  expand the relative permeability.
-  mu_numLayer  = size( mu_r , 2 );
-  mu_numFreq = size( mu_r , 1 );
-
-  if ( mu_numLayer ~= numLayer + 2 )
-    error( 'second dimension of mu_r must be the same as the number of layers plus two' );
-  end %if
-
-  if ( mu_numFreq ~= numFreq )
-    if( mu_numFreq == 1 )
-      mu_r = repmat( mu_r , [ numFreq , 1 ] ); 
-    else
-      error( 'first dimension of mu_r must be 1 or the same as the number of frequencies' );
-    end %if
-  end %if
-
-  assert( all( size( mu_r ) == [ numFreq , numLayer + 2 ] ) );
-
-  % Check and expand the conductivity array.
-  sigmam_numLayer  = size( sigmam , 2 );
-  sigmam_numFreq = size( sigmam , 1 );
-
-  if ( sigmam_numLayer ~= numLayer + 2 )
-    error( 'second dimension of sigmam must be the same as the number of layers plus two' );
-  end %if
-
-  if ( sigmam_numFreq ~= numFreq )
-    if( sigmam_numFreq == 1 )
-      sigmam = repmat( sigmam , [ numFreq , 1 ] ); 
-    else
-      error( 'first dimension of sigmam must be 1 or the same as the number of frequencies' );
-    end %if
-  end %if
-
-  assert( all( size( sigmam ) == [ numFreq , numLayer + 2 ] ) );
-  
+ 
+  % Check and expand material parameters.
+  [ eps_r ] = expandMaterialArray( eps_r , numFreq , numLayer + 2 , 'eps_r' );
+  [ sigma ] = expandMaterialArray( sigma , numFreq , numLayer + 2 , 'sigma' );
+  [ mu_r ] = expandMaterialArray( mu_r , numFreq , numLayer + 2 , 'mu_r' );
+  [ sigmam ] = expandMaterialArray( sigmam , numFreq , numLayer + 2 , 'sigmam' );
+     
   % Absolute permittivity and permeability.
   eps = eps0 .* eps_r;
   mu = mu0 .* mu_r;
