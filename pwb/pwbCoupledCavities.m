@@ -1,6 +1,6 @@
-function [ S1 , S2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbsCoupledCavities( ACS1 , ACS2 , TCS , Pt1 , Pt2 )
+function [ S1 , S2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbCoupledCavities( ACS1 , ACS2 , TCS , Pt1 , Pt2 )
 %
-% pwbsCoupledCavities - power densities in coupled cavities. 
+% pwbCoupledCavities - power densities in coupled cavities. 
 %
 
 % This file is part of aegpwb.

@@ -1,3 +1,33 @@
+2016-09-01  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* ChangeLog.txt, Install.md, ReadMe.md, doc/Bugs.md, doc/ToDo.md,
+	doc/ToolboxUserManual.md, pwb/private/emFresnelCoeff.m,
+	pwb/private/emMultiRefAniso.m, pwb/private/emMultiRefG.m,
+	pwb/private/expandMaterialArrayAniso.m,
+	pwb/private/tests/emTestMultiRefAniso1.m, pwb/pwbLaminatedSurface.m,
+	pwb/pwbLucentWall.m, pwb/pwbsCoupledCavities.m,
+	pwb/tests/pwbTestLucentWall1.m, pwbs/pwbsAddAperture.m,
+	pwbs/tests/pwbsTestLucentWall1.m, pwbs/tests/pwbsTestLucentWall2.m,
+	pwbs/tests/pwbsTestLucentWall3.m, pwbs/tests/pwbsTestLucentWall4.m,
+	pwbs/tests/pwbsTestLucentWall5.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwb/private/emMultiRefAniso.m added
+	pwb/private/expandMaterialArrayAniso.m added
+	pwb/private/tests/emTestMultiRefAniso1.m added pwb/pwbLucentWall.m
+	added pwb/pwbsCoupledCavities.m added pwb/tests/pwbTestLucentWall1.m
+	added pwbs/tests/pwbsTestLucentWall1.m added
+	pwbs/tests/pwbsTestLucentWall2.m added
+	pwbs/tests/pwbsTestLucentWall3.m added
+	pwbs/tests/pwbsTestLucentWall4.m added
+	pwbs/tests/pwbsTestLucentWall5.m changed ChangeLog.txt changed
+	Install.md changed ReadMe.md changed doc/Bugs.md changed doc/ToDo.md
+	changed doc/ToolboxUserManual.md changed
+	pwb/private/emFresnelCoeff.m changed pwb/private/emMultiRefG.m
+	changed pwb/pwbLaminatedSurface.m changed pwbs/pwbsAddAperture.m
+
+	 Added lucent walls.
+	[1de6da4e6faf] [tip]
+
 2016-08-28  Ian David Flintoft  <ian.flintoft@york.ac.uk>
 
 	* doc/SolverUserManual.md, pwb/private/emFresnelCoeff.m,
@@ -24,7 +54,7 @@
 	pwbs/pwbsAddAbsorber.m changed pwbs/pwbsTests.m
 
 	 Added surface models.
-	[2a1d3d69f5d8] [tip]
+	[2a1d3d69f5d8]
 
 2016-08-23  Ian David Flintoft  <ian.flintoft@york.ac.uk>
 

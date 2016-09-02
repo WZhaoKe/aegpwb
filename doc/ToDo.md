@@ -17,7 +17,7 @@
   error message if not found. Add instruction for obtaining and installing.
   
 * scattnlay has been updated and is GPL3. Could consider distributing with
-  toolbox. Us SPlaC if found.
+  toolbox.
 
 ## Toolbox
 
@@ -25,30 +25,27 @@
 
 * Port rest of old toolbox:
 
+  pwbTwoWireLineDiameter.m
+  pwbTwoWireLineZc.m
+
+  tlTestExcitedMicrostrip3.m
+  tlTestExcitedMicrostrip4.m
+  tlTestExcitedMicrostrip.m
+  pwbMicrostripLine.m
+  pwbMicrostripLineSimple.m
+  pwbMicrostripLineZhou.m
+  pwbTestMicrostripLine.m
+
   GaussLegendre.m
   pwbAcsFromNormTransmission.m
   pwbBiomat1.m
   pwbBiomat2.m
   pwbBiomat3.m
-  pwbMicrostripLine.m
-  pwbMicrostripLineSimple.m
-  pwbMicrostripLineZhou.m
-  pwbMieMultiLayerSphere2.m
-  pwbMieMultiLayerSphere3.m
-  pwbMieMultiLayerSphere.m
-  pwbMieSphere2.m
-  pwbMieSphere.m
   pwbQuasiStaticEllipsoid.m
-  pwbTestMicrostripLine.m
-  pwbTestMieSphere.m
-  pwbTwoWireLineDiameter.m
-  pwbTwoWireLineZc.m
   rcChamberModel2.m
   rcChamberModel.m
+
   rcStirringEfficiency.m
-  tlTestExcitedMicrostrip3.m
-  tlTestExcitedMicrostrip4.m
-  tlTestExcitedMicrostrip.m
 
 * Integrate and test new version of scattnlay. 
 

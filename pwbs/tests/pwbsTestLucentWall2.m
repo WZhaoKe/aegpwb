@@ -58,7 +58,7 @@ function [ isPass ] = pwbsTestLucentWall2()
   isPass = isPass && isValid( data{2} , AE2_val ); 
   [ data , units ] = pwbsGetOutput( pwbm , 'Cavity' , 'C1' , { 'powerDensity' } );
   
-  [ S1_val , S2_val , ~ , ~ , ~ , ~ ] = pwbsCoupledCavities( ACS1_val , ACS2_val , TCS_val , 1.0 , 0.0 );
+  [ S1_val , S2_val , ~ , ~ , ~ , ~ ] = pwbCoupledCavities( ACS1_val , ACS2_val , TCS_val , 1.0 , 0.0 );
   isPass = isPass && isValid( data{1} , S1_val );
   [ data , units ] = pwbsGetOutput( pwbm , 'Cavity' , 'C2' , { 'powerDensity' } );
   isPass = isPass && isValid( data{1} , S2_val );

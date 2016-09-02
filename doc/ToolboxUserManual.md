@@ -58,6 +58,7 @@ TE      | Transmission efficiency
 
 ## `pwbEnergyParamsFromTimeConst`
 
+## `pwbCoupledCavities`
 
 # Antennas
 
@@ -66,11 +67,15 @@ TE      | Transmission efficiency
 
 # Absorbers
 
-# `pwbMetalSurface`
+## `pwbMetalSurface`
 
-# `pwbDielectricSurface`
+## `pwbDielectricSurface`
 
-# `pwbLaminatedSurface`
+## `pwbLaminatedSurface`
+
+## `pwbSphere`, `pwbSphere_Markowicz`,  `pwbSphere_Matzler`
+
+## `pwbLaminatedSphere`, `pwbLaminatedSphere_SPlaC`, `pwbLaminatedSphere_PenaPal`, `pwbLaminatedSphere_PenaPalM`
 
 
 # Apertures
@@ -86,3 +91,5 @@ TE      | Transmission efficiency
 ## `pwbApertureSquarePol`
 
 ## `pwbApertureTCS`
+
+## `pwbLucentWall`

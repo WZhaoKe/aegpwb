@@ -209,7 +209,7 @@ function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , ty
     [ ACS , AE ] = pwbMetalSurface( pwbm.f , area , sigma , mu_r );
   case 'LaminatedSurface'
     if( length( parameters ) ~= 5 )
-      error( 'Dielectric surface absorber type requires four parameters' );
+      error( 'Dielectric surface absorber type requires five parameters' );
     end % if
     validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'nonnegative' } , 'parameters{}' , 'area' , 1 );
     area = parameters{1};
@@ -236,12 +236,59 @@ function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , ty
     end % if
     [ ACS , AE ] = pwbLaminatedSurface( pwbm.f , area , thicknesses , epsc_r , sigma , mu_r , zeros( size( sigma ) )  );
   case 'LaminatedSphere'
+    if( length( parameters ) ~= 4 )
+      error( 'Laminated sphere absorber type requires four parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'vector' , 'positive' } , 'parameters{}' , 'radii' , 1 );
+    radii = parameters{1};
+    validateattributes( parameters{2} , { 'double' } , {} , 'parameters{}' , 'epsc_r' , 2 );
+    epsc_r = parameters{2};
+    validateattributes( parameters{3} , { 'double' } , { 'real' } , 'parameters{}' , 'sigma' , 3 );
+    sigma = parameters{3};
+    validateattributes( parameters{4} , { 'double' } , { 'real' } , 'parameters{}' , 'mu_r' , 4 );
+    mu_r = parameters{4};
+    numLayer = length( radii );
+    if( size( epsc_r , 2 ) ~= numLayer || size( sigma , 2 ) ~= numLayer ||  size( mu_r , 2 ) ~= numLayer )
+      error( 'epsc_r, sigma and mu_r must have number columns equal to number of layers' );
+    end % if
+    if( size( epsc_r , 1 ) ~= 1 && size( epsc_r ,1 ) ~= numFreq )
+      error( 'epsc_r must be a scalar or the same size as f' );
+    end % if
+    if( size( sigma , 1 ) ~= 1 && size( sigma , 1 ) ~= numFreq )
+      error( 'sigma must be a scalar or the same size as f' );
+    end % if
+    if( size( mu_r , 1 ) ~= 1 && size( mu_r , 1 ) ~= numFreq )
+      error( 'mu_r must be a scalar or the same size as f' );
+    end % if
+    area = 4.0 * pi * radii(1)^2;
+    [ ACS , AE ] = pwbLaminatedSphere( pwbm.f , radii , epsc_r , sigma , mu_r );  
   case 'ConvexHomoBody'
-    error( 'unimplemented absorber type' , type );
+    if( length( parameters ) ~= 4 )
+      error( 'Convex homogeneous body absorber type requires four parameters' );
+    end % if    
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'nonnegative' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};
+    validateattributes( parameters{2} , { 'double' } , { 'vector' } , 'parameters{}' , 'epsc_r' , 2 );
+    epsc_r = parameters{2};
+    validateattributes( parameters{3} , { 'double' } , { 'real' , 'vector' } , 'parameters{}' , 'sigma' , 3 );
+    sigma = parameters{3};
+    validateattributes( parameters{4} , { 'double' } , { 'real' , 'vector' } , 'parameters{}' , 'mu_r' , 4 );
+    mu_r = parameters{4};
+    if( length( epsc_r ) ~= 1 && length( epsc_r ) ~= length( pwbm.f ) )
+      error( 'epsc_r must be a scalar or the same size as f' );
+    end % if
+    if( length( sigma ) ~= 1 && length( sigma ) ~= length( pwbm.f ) )
+      error( 'sigma must be a scalar or the same size as f' );
+    end % if
+    if( length( mu_r ) ~= 1 && length( mu_r ) ~= length( pwbm.f ) )
+      error( 'mu_r must be a scalar or the same size as f' );
+    end % if
+    radius = sqrt( area / 4.0 / pi );
+    [ ACS , AE ] = pwbSphere( pwbm.f , radius , epsc_r , sigma , mu_r );
   otherwise
     error( 'unknown absorber type' , type );
   end % switch
-  
+
   % Change state.
   pwbm.state = 'init';
   
