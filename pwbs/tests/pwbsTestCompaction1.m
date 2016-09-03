@@ -42,6 +42,6 @@ function [ isPass ] = pwbsTestCompaction1()
 
   delete( 'TestCompact1_Aperture_A1_compaction1.asc' );
 
-  isPass = isPass && isValid( CCS , 0.5 , 100 * eps );
+  isPass = isPass && isValid( CCS , 0.5 );
 
 end % function

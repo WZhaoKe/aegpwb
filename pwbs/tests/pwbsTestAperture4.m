@@ -29,7 +29,7 @@ function [ isPass ] = pwbsTestAperture4()
   isValid=@(x,y) all( abs( x - y ) < tol );
   isPass = true;
  
-  dlmwrite( 'pwbsTestAperture4.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] );
+  dlmwrite( 'pwbsTestAperture4.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] , ' ' );
   
   c0 = 299792458;
   f = [ 1e9 ];

@@ -37,7 +37,7 @@ function pwbTests()
 
   % Run tests
   for testIdx = 1:length( testList )
-    [ ~ , testName , suffix , ~ ] = fileparts( testList(testIdx).name );
+    [ ~ , testName , suffix ] = fileparts( testList(testIdx).name );
     fprintf( 'running test: %s ... ' ,  testName );
     isPass(testIdx) = feval( testName );
     if( isPass(testIdx) )

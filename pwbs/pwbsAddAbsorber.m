@@ -1,10 +1,9 @@
 function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , type , parameters )
-%
 % pwbsAddAbsorber - Add an Absorber to a PWB model.
 %
 % [ pwbm ] = pwbsAddAbsorber( pwbm , tag , cavityTag , multiplicity , type , parameters )
 %
-% Inputs:
+%% Inputs:
 %
 % pwbm         - structure, model state 
 % tag          - string, absorber name
@@ -13,7 +12,7 @@ function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , ty
 % type         - string, type of absorber
 % parameters   - cell array, type specific parameter list
 %
-% Outputs:
+%% Outputs:
 %
 % pwbm         - structure, model state
 %
@@ -46,7 +45,7 @@ function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , ty
 % mu_r        | double array  | -    | relative permeability of layers of sphere/surface
 % radii       | double vector | m    | radii of multi-layer sphere
 %
-% ACS/AE file format:
+%% ACS/AE file format:
 %
 % # Optional header/comment using initial # character. 
 % # Two columns of real data

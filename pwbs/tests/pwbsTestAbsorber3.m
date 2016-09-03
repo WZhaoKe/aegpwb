@@ -29,7 +29,7 @@ function [ isPass ] = pwbsTestAbsorber3()
   isValid=@(x,y) all( abs( x - y ) < tol );
   isPass = true;
     
-  dlmwrite( 'pwbsTestAbsorber3.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] );
+  dlmwrite( 'pwbsTestAbsorber3.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] , ' ' );
     
   f = [ 1e9 ];
   pwbm = pwbsInitModel( f , 'TestAbsorber3' );

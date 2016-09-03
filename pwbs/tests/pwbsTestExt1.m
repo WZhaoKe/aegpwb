@@ -41,12 +41,12 @@ function [ isPass ] = pwbsTestExt1()
   pwbm = pwbsSolveModel( pwbm );
   
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'AB' , { 'ACS' , 'absorbedPower' } );
-  isPass = isPass && isValid( data{2} , 0.5 , 100 * eps );
+  isPass = isPass && isValid( data{2} , 0.5 );
   [ data , units ] = pwbsGetOutput( pwbm , 'Aperture' , 'AP' , { 'TCS' , 'coupledPower' } );
-  isPass = isPass && isValid( data{2} , 0.5 , 100 * eps );
+  isPass = isPass && isValid( data{2} , 0.5 );
   [ data , units ] = pwbsGetOutput( pwbm , 'Cavity' , 'C' , { 'powerDensity' } );
-  isPass = isPass && isValid( data{1} , 0.5 , 100 * eps );
+  isPass = isPass && isValid( data{1} , 0.5 );
   [ data , units ] = pwbsGetOutput( pwbm , 'Cavity' , 'EXT' , { 'totalAbsorbedPower' } );  
-  isPass = isPass && isValid( data{1} , 0.5 , 100 * eps );
+  isPass = isPass && isValid( data{1} , 0.5 );
   
 end % function

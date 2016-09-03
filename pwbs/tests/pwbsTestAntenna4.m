@@ -33,7 +33,7 @@ function [ isPass ] = pwbsTestAntenna4()
   f = [ 1e9 ];
   lambda = c0 ./ f;
   
-  dlmwrite( 'pwbsTestAntenna4.asc' , [ 0.99e9 , 0.5 ; 1.0e9 , 0.5 ; 1.1e9 , 0.5 ] );
+  dlmwrite( 'pwbsTestAntenna4.asc' , [ 0.99e9 , 0.5 ; 1.0e9 , 0.5 ; 1.1e9 , 0.5 ] , ' ' );
   
   pwbm = pwbsInitModel( f , 'TestAntenna4' );
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );

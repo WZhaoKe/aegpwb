@@ -25,7 +25,7 @@ function [ isPass ] = pwbTestMetalSurface1()
 % Date: 19/08/2016
 % Version: 1.0.0
 
-  tol = 1e-6;
+  tol = 1e-5;
   isValid=@(x,y) all( abs( x - y ) < tol );
   isPass = true;
   

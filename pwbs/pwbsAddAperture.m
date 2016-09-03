@@ -92,8 +92,9 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
   function [ f_c ] = estimateCutoffFreq( f , TCS )
     if( length( TCS ) > 1 )
       fitFcn = @(p,x) x.^4 ./ ( x.^2 + p.^2 ).^2;
-      settings = optimset( 'inequc' , { 1 , 0 } );
-      [ f_c , model_values, cvg, outp] = nonlin_curvefit( fitFcn , pwbm.f(floor(end/2)) , pwbm.f , TCS ./ TCS(end) , settings );  
+ %     settings = optimset( 'inequc' , { 1 , 0 } );
+%[ f_c , model_values, cvg, outp] = nonlin_curvefit( fitFcn , pwbm.f(floor(end/2)) , pwbm.f , TCS ./ TCS(end) , settings );  
+f_c = NaN;
     else
       f_c = NaN;
     end % if  

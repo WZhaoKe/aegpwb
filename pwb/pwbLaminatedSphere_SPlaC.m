@@ -59,8 +59,10 @@ function [ ACS , AE ] = pwbLaminatedSphere_SPlaC( f , radii , eps_r , sigma , mu
 % Version: 1.0.0
 
   % EM Constants.
-  [ c0 , eps0 , mu0 , eta0 ] = emConst();
-
+  c0 = 299792458;                  
+  mu0 = 4 * pi * 1e-7;             
+  eps0 = 1.0 / ( mu0 * c0 * c0 );
+  
   % Get number of frequencies and layers.
   f = f(:);
   numFreq = length( f );

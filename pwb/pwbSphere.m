@@ -45,7 +45,7 @@ function [ ACS , AE ] = pwbSphere( f , radius , eps_r , sigma , mu_r )
 % Date: 19/08/2016
 % Version: 1.0.0
 
-  persistent MieFcn = [];
+  persistent MieFcn
   
   if( isempty( MieFcn ) )
     if( exist( 'mie' ) )

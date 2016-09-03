@@ -42,7 +42,7 @@ function [ data ] = pwbImportAndInterp( f , fileName )
     error( 'failed to open file %s for reading' , fileName );
   end % if
 
-  % Deteect number of header lines in file.
+  % Detect number of header lines in file.
   headerLines = 0;
   line = fgets( fid );
   trimmed =  strtrim( line );

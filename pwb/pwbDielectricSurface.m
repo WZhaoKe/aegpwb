@@ -27,7 +27,7 @@ function [ ACS , AE ] = pwbDielectricSurface( f , area , epsc_r , sigma , mu_r )
   function [ kernel ] = pwbDielectricSurfaceKernel( theta , n_a , n_b )
 
     [ rhoTE , rhoTM , tauTE , tauTM ] = emFresnelCoeff( n_a , n_b , theta );
-    kernel = ( 1 - 0.5 * ( abs( rhoTE )^2 + abs( rhoTM )^2 ) ) * cos( theta ) * sin( theta );
+    kernel = ( 1 - 0.5 .* ( abs( rhoTE ).^2 + abs( rhoTM ).^2 ) ) .* cos( theta ) .* sin( theta );
 
   end %function
 

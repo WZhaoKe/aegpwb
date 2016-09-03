@@ -25,7 +25,7 @@ function [ isPass ] = pwbsTestLucentWall4()
 % Date: 19/08/2016
 % Version: 1.0.0
 
-  tol = 100 * eps;
+  tol = 1e-5;
   isValid=@(x,y) all( abs( x - y ) < tol );
   isPass = true;
    
@@ -39,7 +39,7 @@ function [ isPass ] = pwbsTestLucentWall4()
   
   [ ACS1_val , ACS2_val , TCS_val , AE1_val , AE2_val , TE_val ] = pwbLucentWall( f , area , thickness , epsc_r , sigma , mu_r );
   
-  dlmwrite( 'pwbsTestLucentWall4.asc' , [ f , ACS1_val , ACS2_val , TCS_val ] );
+  dlmwrite( 'pwbsTestLucentWall4.asc' , [ f , ACS1_val , ACS2_val , TCS_val ] , ' ' );
   
   pwbm = pwbsInitModel( f , 'TestLucentWall4' );
   pwbm = pwbsAddCavity( pwbm , 'C1' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
@@ -53,13 +53,13 @@ function [ isPass ] = pwbsTestLucentWall4()
  
   [ data , units ] = pwbsGetOutput( pwbm , 'Aperture' , 'LW_T' , { 'TCS' , 'TE' } );
   isPass = isPass && isValid( data{1} , TCS_val );
-  isPass = isPass && isValid( data{2} , TE_val );  
+  isPass = isPass && isValid( data{2} , TE_val );
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'LW_A1' , { 'ACS' , 'AE' } );
-  isPass = isPass && isValid( data{1} , ACS1_val );  
-  isPass = isPass && isValid( data{2} , AE1_val ); 
+  isPass = isPass && isValid( data{1} , ACS1_val );
+  isPass = isPass && isValid( data{2} , AE1_val );
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'LW_A2' , { 'ACS' , 'AE' } );
-  isPass = isPass && isValid( data{1} , ACS2_val );  
-  isPass = isPass && isValid( data{2} , AE2_val ); 
+  isPass = isPass && isValid( data{1} , ACS2_val );
+  isPass = isPass && isValid( data{2} , AE2_val );
   [ data , units ] = pwbsGetOutput( pwbm , 'Cavity' , 'C1' , { 'powerDensity' } );
   
   [ S1_val , S2_val , ~ , ~ , ~ , ~ ] = pwbCoupledCavities( ACS1_val , ACS2_val , TCS_val , 1.0 , 0.0 );

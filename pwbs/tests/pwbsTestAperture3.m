@@ -32,7 +32,7 @@ function [ isPass ] = pwbsTestAperture3()
   c0 = 299792458;
   f = [ 1e9 ];
   
-  dlmwrite( 'pwbsTestAperture3.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] );
+  dlmwrite( 'pwbsTestAperture3.asc' , [ 0.99e9 , 1.0 ; 1.0e9 , 1.0 ; 1.1e9 , 1.0 ] , ' ' );
   
   pwbm = pwbsInitModel( f , 'TestAperture3' );
   pwbm = pwbsAddCavity( pwbm , 'C1' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
