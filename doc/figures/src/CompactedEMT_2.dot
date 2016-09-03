@@ -5,17 +5,17 @@ digraph pwb_model {
 	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
 	"EXT" [shape=circle , regular=1, style=filled , fillcolor=coral ];
 	"C1" [ shape=circle fillcolor=cyan ];
-"REF2" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF2" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	C1 -> REF2 [ label = "ABC" , arrowhead = "normal" ];
-"REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF1" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	C1 -> REF1 [ label = "C1" , arrowhead = "normal" ];
-"REF3" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF3" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	C1 -> REF3 [ label = "AB" , arrowhead = "normal" ];
 	C1 -> EXT [ label = "AP1" , arrowhead = "empty" ];
-"REF4" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF4" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	EXT -> REF4 [ label = "S" , arrowhead = "emptyodot" ];
-"REF5" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF5" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	C1 -> REF5 [ label = "Tx" , arrowhead = "normal" ];
-"REF7" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+"REF7" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	C1 -> REF7 [ label = "S" , arrowhead = "invdot" ];
 }

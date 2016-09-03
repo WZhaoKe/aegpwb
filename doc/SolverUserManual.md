@@ -145,7 +145,6 @@ The elements of the PWB model are represented by:
 
 object                   | representation
 :------------------------|:--------------------------------------------------------------------------
-reference node           | small green circle without a label
 cavity                   | aqua circle with cavity name inside 
 cavity with scatterer(s) | aqua circle with cavity name inside inside another circle
 external environment     | coral circle with label 'EXT' inside
@@ -153,8 +152,6 @@ absorber/antenna         | named edge with filled arrow in direction of power ab
 aperture                 | named edge with unfilled arrow in direction of net power flow
 source (power )          | named edge with filled arrow and circle in direction of source power
 source (power density)   | named edge with unfilled arrow and circle in direction of power absorption
-
-The reference node is the ultimate source/sink of all power in the model.
 
 ## Solving the model
 

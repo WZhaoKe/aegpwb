@@ -56,12 +56,12 @@ function pwbsDrawEMT( pwbm )
     if( strcmp( node1 , 'REF' ) )
       node1 = sprintf( 'REF%d' , nextRef );
       nextRef = nextRef + 1;
-      fprintf( fp , '"%s" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];\n' , node1 );
+      fprintf( fp , '"%s" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];\n' , node1 );
     end % if
     if( strcmp( node2 , 'REF' ) )
       node2 = sprintf( 'REF%d' , nextRef );
       nextRef = nextRef + 1;
-      fprintf( fp , '"%s" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];\n' , node2 );
+      fprintf( fp , '"%s" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];\n' , node2 );
     end % if   
     switch( pwbm.edges{edgeIdx,4} )
     case 'Antenna'

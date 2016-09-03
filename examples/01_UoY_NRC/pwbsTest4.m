@@ -32,7 +32,6 @@ pwbm = pwbsAddAntenna( pwbm , 'Rx_NRC' , 'NRC' , 1 , 'Matched' , { 50.0 } );
 pwbm = pwbsAddSource( pwbm , 'S1' , 'Antenna' , 'Tx' , { 1 } );
 % pwbm = pwbsAddAbsorber( pwbm , 'Cube110' , 'RC' , 'Sphere' , { [ 76e-3 ] , eps_r_LS22 , sigma_LS22 } );
 
-pwbm = pwbsSetupModel( pwbm );
 pwbm = pwbsSolveModel( pwbm );
 
 pwbsExportAll( pwbm );

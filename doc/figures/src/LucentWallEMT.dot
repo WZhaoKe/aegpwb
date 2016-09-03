@@ -5,9 +5,9 @@ digraph pwb_model {
 	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
 	"cavity1Tag" [ shape=circle fillcolor=cyan ];
 	"cavity2Tag" [ shape=circle fillcolor=cyan ];
-        "REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+        "REF1" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	cavity1Tag -> REF1 [ label = "tag_A2" , arrowhead = "normal" ];
-        "REF2" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+        "REF2" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	cavity2Tag -> REF2 [ label = "tag_A1" , arrowhead = "normal" ];
 	cavity1Tag -> cavity2Tag [ label = "tag_T" , arrowhead = "empty" ];
 }

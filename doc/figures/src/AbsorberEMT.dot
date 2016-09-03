@@ -4,6 +4,6 @@ digraph pwb_model {
 	node [ shape = circle , fontname = "Helvetica" , fontsize = 10 , height = 0.1 , width = 0.1 , margin = 0.01 ,  style=filled ];
 	edge [ fontname = "Helvetica" , forcelabels= true , fontsize = 10 ];
 	"cavityTag" [ shape=circle fillcolor=cyan ];
-        "REF1" [shape=circle , label ="", width=0.1 , height=0.1, regular=1, style=filled , fillcolor=green ];
+        "REF1" [shape=point , label ="", width=0.02 , height=0.02, regular=1, style=filled , fillcolor=black ];
 	cavityTag -> REF1 [ label = "tag" , arrowhead = "normal" ];
 }

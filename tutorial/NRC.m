@@ -36,14 +36,13 @@
       pwbm = pwbsAddSource( pwbm , 'STx', 'Antenna' , 'Tx' , { 1 } );
       pwbm = pwbsAddAbsorber( pwbm , 'AB1', 'RC2' , 1.0 , 'AE' , { 0.01 , 1.0 } );
       
-      % Setup the model and visualise the EMT.
-      pwbm = pwbsSetupModel( pwbm );
+      % Visualise the EMT.
       pwbsDrawEMT( pwbm );    
       
       % Solve the model.
       pwbm = pwbsSolveModel( pwbm );
       
-      % Expoer all the results to ASCII files.
+      % Export all the results to ASCII files.
       pwbsExportAll( pwbm );
      
       % Get the power density in each chamber.
