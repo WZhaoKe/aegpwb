@@ -1,37 +1,66 @@
 function [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
-%
-% pwbLucentWall - translucent multilayer wall.
+% pwbLucntWall - Absorption and transmission cross-sections of a translucent surface.
 %
 % [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 %
 %             |   |   |       |          |
 %             |   |   |       |          |
-%  cavity 1   | 1 | 2 | ..... | numLayer |  cavity 2
+%    side 1   | 1 | 2 | ..... | numLayer |  side 2
 %             |   |   |       |          |
 %  eps0 , mu0 |   |   |       |          | eps0 , mu0
 %             |   |   |       |          |
 %
-% Parameters:
+% Determines the average absorption and transmission cross-sections and efficiencies of 
+% a lossy multilayer surface by averaging the reflectance over angles of arrival and 
+% polarisation [1].
 %
-% f           - vector (numFreq) of required frequencies [Hz].
+% Inputs:
+%
+% f           - real vector (numFreq), frequencies [Hz].
 % area        - real scalar, area of surface [m^2].
-% thicknesses - vector (numLayer) of layer thicknesses [m].
-% eps_r       - array (numFreq x numLayer) of relative permittivities [-].
+% thicknesses - real vector (numLayer), layer thicknesses [m].
+% eps_r       - complex array (numFreq x numLayer) complex relative permittivities of layers [-].
 %               If first dimension is 1 assumed same for all frequencies.
-% sigma       - array (numFreq x numLayer) of electrical conductivities [S/m].
+% sigma       - real array (numFreq x numLayer), electrical conductivities of layers [S/m].
 %               If first dimension is 1 assumed same for all frequencies.
-% mu_r        - array (numFreq x numLayer) of relative permeabilities [-].
+% mu_r        - real array (numFreq x numLayer), relative permeabilities of layers [-].
 %               If first dimension is 1 assumed same for all frequencies.
 %         
 % Outputs:
 %
-% ACS1 - average absorption cross-section of side 1 [m^2].
-% ACS2 - average absorption cross-section of side 2 [m^2].
-% TCS  - average transmission cross-section [m^2].
-% AE1  - average absorption efficiency of side 1 [-].
-% AE2  - average absorption efficiency of side 2 [-].
-% TE   - average transmission efficiency [-].
+% ACS1 - real vector (numFreq x 1), average absorption cross-section of side 1 [m^2].
+% ACS2 - real vector (numFreq x 1), average absorption cross-section of side 2 [m^2].
+% TCS  - real vector (numFreq x 1), average transmission cross-section [m^2].
+% AE1  - real vector (numFreq x 1), average absorption efficiency of side 1 [-].
+% AE2  - real vector (numFreq x 1), average absorption efficiency of side 2 [-].
+% TE   - real vector (numFreq x 1), average transmission efficiency [-].
 %
+% References:
+%
+% [1] S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers University,
+%     New Brunswick, NJ , 2016. URL: http://www.ece.rutgers.edu/~orfanidi/ewa
+%
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aeggpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aeggpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D Flintoft
+% Date: 01/09/2016
   
   % Get number of frequencies and layers.
   f = f(:);

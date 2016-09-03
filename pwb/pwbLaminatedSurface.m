@@ -1,6 +1,5 @@
 function [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , sigma , mu_r , sigmam )
-%
-% pwbLaminatedSurface - lossy multilayer surface absorption cross-section.
+% pwbLaminatedSurface - Absorption cross-section of a laminated surface.
 %
 % [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , sigma , mu_r , sigmam )
 %
@@ -11,25 +10,54 @@ function [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , si
 %  eps0 , m0  |   |   |       |
 %             |   |   |       |
 %
-% Parameters:
+% Determines the absorption cross-section and efficiency of a lossy multilayer surface
+% by averaging the reflectance over angles of arrival and polarisation [1].
 %
-% f           - vector (numFreq) of required frequencies [Hz].
+% Inputs:
+%
+% f           - real vector (numFreq), frequencies [Hz].
 % area        - real scalar, area of surface [m^2].
-% thicknesses - vector (numLayer-1) of layer thicknesses [m].
-% eps_r       - array (numFreq x numLayer) of relative permittivities [-].
+% thicknesses - real vector (numLayer-1), layer thicknesses [m].
+% eps_r       - complex array (numFreq x numLayer) complex relative permittivities of layers [-].
 %               If first dimension is 1 assumed same for all frequencies.
-% sigma       - array (numFreq x numLayer) of electrical conductivities [S/m].
+% sigma       - real array (numFreq x numLayer), electrical conductivities of layers [S/m].
 %               If first dimension is 1 assumed same for all frequencies.
-% mu_r        - array (numFreq x numLayer) of relative permeabilities [-].
+% mu_r        - real array (numFreq x numLayer), relative permeabilities of layers [-].
 %               If first dimension is 1 assumed same for all frequencies.
-% sigmam      - array (numFreq x numLayer) of magnetic conductivities [ohm/m].
+% sigmam      - real array (numFreq x numLayer), magnetic conductivities of layers [ohm/m].
 %               If first dimension is 1 assumed same for all frequencies.
 %         
 % Outputs:
 %
-% ACS - average absorption cross-section [m^2].
-% AE  - average absorption efficiency [-].
+% ACS - real vector (numFreq x 1), average absorption cross-section [m^2].
+% AE  - real vector (numFreq x 1), average absorption efficiency [-].
 %
+% References:
+%
+% [1] S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers University,
+%     New Brunswick, NJ , 2016. URL: http://www.ece.rutgers.edu/~orfanidi/ewa
+%
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aeggpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aeggpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D Flintoft
+% Date: 01/09/2016
 
   function [ kernel ] = pwbLaminatedSurfaceKernel( f , theta , thicknesses ,  eps_r , sigma , mu_r , sigmam ) 
 

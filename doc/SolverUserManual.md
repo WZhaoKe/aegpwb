@@ -405,7 +405,7 @@ the losses in the measurement antennas used and any apertures in the cavity.
 
 For the `'Generic'` types the number of modes (`numModes`) and mode density 
 (`modeDensity`) in the cavity are determined from the Weyl formula with first 
-order correction ([Liu1983][]). This formula is also used to estimate the 
+order correction. This formula is also used to estimate the 
 frequency of the first and sixtieth modes, `f_1` and `f_60`. For the `'Cuboid'` 
 type exact mode frequencies are calculated for the lowest 1000 modes and the 
 number of modes and modeDEnsity is then smoothly matched onto the Weyl estimate 
@@ -1159,13 +1159,6 @@ The result of the model is shown below.
 ![Figure: EMT for nested reverberation chambers](figures/NRC_SR.png)
 
 # References
-
-[Liu1983]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1066.pdf 
-
-([Liu1983]) B. H. Liu, D. C. Chang, and M. T. Ma, 
-            "Eigenmodes and the Composite Quality Factor of a Reverberation Chamber", 
-            NBS Technical Note 1066, National Institute of Standards and Technology, Boulder, Colorado, 1983
-
 
 [ASCII]: https://en.wikipedia.org/wiki/ASCII
 

@@ -1,8 +1,13 @@
 function pwbTests()
-%
-% pwbTests - Run yoolbox test-suite
+% pwbTests - Run toolbox test-suite
 %
 % pwbTests()
+%
+% Runs all tests found in the tests sub-directory of the installation 
+% directory of the function. Any m-files in the tests sub-directory
+% with name beginning pwbTest is assumed to be a test and is called.
+% All test functions should return a single boolean parameter indicating
+% whether the test was successful or not.
 %
 
 % aegpwb power balance toolbox and solver.
@@ -19,11 +24,10 @@ function pwbTests()
 % GNU General Public License for more details.
 %
 % You should have received a copy of the GNU General Public License
-% along with aeggpwb.  If not, see <http://www.gnu.org/licenses/>.
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
 % Author: I. D Flintoft
-% Date: 19/08/2016
-% Version: 1.0.0
+% Date: 01/09/2016
 
   % Get base name of solver installation.
   baseName = fileparts( which( 'pwbTests' ) );

@@ -6,9 +6,8 @@
 * Decide whether to stay with conventional of putting factor of 1/2 from wall
   shadowing into TCS. If so, write detailed note for user manual.
 
-* Make third party tools required for Mie Series discovered at run time and 
-  error message if not found. Add instruction for obtaining and installing.
-  
+* Add instruction for obtaining and installing Mie codes.
+
 * scattnlay has been updated and is GPL3. Could consider distributing with
   toolbox.
 
@@ -42,8 +41,6 @@
 
   rcStirringEfficiency.m
 
-* Integrate and test new version of scattnlay. 
-
 * Improve mode density determination algorithm in pwbCubiodCavityModesCount.
 
 * Write function [ numModesInBW ] = pwbCavityModesInBandwidth( numModes , BW )
@@ -56,20 +53,25 @@
 
 ## Solver
 
+* Fix estimateCutoffFreq in pwbsAddAperture to work in both MATLAB and Octave.
+
 * Tests for probability distributions.
 
-* Enforce it so that once a model is set up further objects cannot be added.
-
 * Estimate polarisabilities of apertures defined by TCS/TE from area and 
-  cut-off frequency by assuming circular aperture
+  cut-off frequency by assuming circular aperture.
 
 * Add areScatterers attribute to cavitites.
-
-* Make scatterer change cavity outline to double circle.
 
 * For Cuboid cavity use actual mode frequencies for first 1000? modes 
   spliced onto Weyl estimate at higher frequencies.
 
-* [Maybe] Make is possible to delete objects. Difficult as they are linked.
+* Improve state model
+ 
+  Maybe make it possible to delete objects. Difficult as they are linked.
   Maybe refuse to delete if object is referenced by another and feedback to
   user names of linked onjects so the user can delete recursively if desired.
+  
+  Review state - is it safe to allow adding new objects after solved ans running
+  solver again? 
+  
+  Is setup function safe to run multiple times, e.g. in compaction function?

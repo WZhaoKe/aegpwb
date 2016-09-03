@@ -1,7 +1,7 @@
 function [ ACS , AE ] = pwbSphere_Matzler( f , radius , eps_r , sigma , mu_r )
 %
 % pwbSphere_Matzler - Mie absorption cross-sections of a homogeneous lossy sphere
-%                     using Christian Matzler's MATLAB code [1].
+%                     using Christian Matzler's MATLAB code [1,2,3].
 %
 % [ ACS , AE ] = pwbSphere_Matzler( f , area , radius , eps_r , sigma , mu_r )
 %

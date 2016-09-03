@@ -1,24 +1,53 @@
 function [ ACS , AE ] = pwbDielectricSurface( f , area , epsc_r , sigma , mu_r )
+% pwbDielectricSurface - Absorption cross-section of a lossy dielectric surface.
 %
-% pwbDielectricSurface - lossy dielectric surface absorption cross-section.
+% [ ACS , AE ] = pwbDielectricSurface( f , area , epsc_r , sigma , mu_r )
 %
-% [ ACS , AE ] = pwbDielectricSurface( f , area , eps_r , sigma , mu_r )
+% Determines the absorption cross-section and efficiency of a lossy dielectric surface
+% by averaging the reflectance over angles of arrival and polarisation [1].
 %
-% Parameters:
+% Inputs:
 %
-% f         - real vector of frequencies [Hz].
-% area      - real scalar, total area of surface [m^2]
-% epsc_r    - complex vector, complex relative permittivity [-].
-% sigma     - real vector, conductivity of surface [S/m]
-% mu_r      - real vector, relative permeability of surface [-]
-%
-% epsc_r, sigma and mu_r must be scalars or the same length as f.
-%
+% f     - real vector (numFreq), frequencies [Hz].
+% area  - real scalar, area of surface [m^2].
+% eps_r - complex array (numFreq) complex relative permittivity [-].
+%         If first dimension is 1 assumed same for all frequencies.
+% sigma - real array (numFreq), electrical conductivity [S/m].
+%         If first dimension is 1 assumed same for all frequencies.
+% mu_r  - real array (numFreq), relative permeability [-].
+%         If first dimension is 1 assumed same for all frequencies.
+%         
 % Outputs:
 %
-% ACS       - real vector, absorption cross-section [m^2].
-% AE        - real vector, absorption efficiency [-].
+% ACS - real vector (numFreq x 1), average absorption cross-section [m^2].
+% AE  - real vector (numFreq x 1), average absorption efficiency [-].
 %
+% References:
+%
+% [1] S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers University,
+%     New Brunswick, NJ , 2016. URL: http://www.ece.rutgers.edu/~orfanidi/ewa
+%
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aeggpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aeggpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D Flintoft
+% Date: 01/09/2016
 
   c0 = 299792458;                  
   mu0 = 4 * pi * 1e-7; 

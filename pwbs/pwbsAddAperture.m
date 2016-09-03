@@ -88,6 +88,7 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 % Author: I. D Flintoft
 % Date: 19/08/2016
 % Version: 1.0.0
+
   % Function to estimate cutoff frequency by fitting high pass response to TCS/TE.
   function [ f_c ] = estimateCutoffFreq( f , TCS )
     if( length( TCS ) > 1 )

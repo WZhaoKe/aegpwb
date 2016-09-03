@@ -1,3 +1,151 @@
+2016-09-03  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* doc/SolverUserManual.md, doc/ToDo.md, doc/figures/AbsorberEMT.png,
+	doc/figures/CavityEMT.png, doc/figures/CompactedEMT_1.png,
+	doc/figures/CompactedEMT_2.png, doc/figures/ExampleEMT.png,
+	doc/figures/LucentWallEMT.png, doc/figures/NRC_EMT.png,
+	doc/figures/PowerDensitySourceEMT.png,
+	doc/figures/PowerSourceEMT.png, doc/figures/src/AbsorberEMT.dot,
+	doc/figures/src/CavityEMT.dot, doc/figures/src/CompactedEMT_1.dot,
+	doc/figures/src/CompactedEMT_2.dot, doc/figures/src/ExampleEMT.dot,
+	doc/figures/src/LucentWallEMT.dot, doc/figures/src/NRC_EMT.dot,
+	doc/figures/src/PowerDensitySourceEMT.dot,
+	doc/figures/src/PowerSourceEMT.dot, examples/01_UoY_NRC/pwbsTest4.m,
+	pwbs/pwbsDrawEMT.m, tutorial/NRC.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed doc/SolverUserManual.md changed doc/ToDo.md changed
+	doc/figures/AbsorberEMT.png changed doc/figures/CavityEMT.png
+	changed doc/figures/CompactedEMT_1.png changed
+	doc/figures/CompactedEMT_2.png changed doc/figures/ExampleEMT.png
+	changed doc/figures/LucentWallEMT.png changed
+	doc/figures/NRC_EMT.png changed
+	doc/figures/PowerDensitySourceEMT.png changed
+	doc/figures/PowerSourceEMT.png changed
+	doc/figures/src/AbsorberEMT.dot changed
+	doc/figures/src/CavityEMT.dot changed
+	doc/figures/src/CompactedEMT_1.dot changed
+	doc/figures/src/CompactedEMT_2.dot changed
+	doc/figures/src/ExampleEMT.dot changed
+	doc/figures/src/LucentWallEMT.dot changed
+	doc/figures/src/NRC_EMT.dot changed
+	doc/figures/src/PowerDensitySourceEMT.dot changed
+	doc/figures/src/PowerSourceEMT.dot changed
+	examples/01_UoY_NRC/pwbsTest4.m changed pwbs/pwbsDrawEMT.m changed
+	tutorial/NRC.m
+
+	 Make reference node in EMT implicit.
+	[4b684a65f5a8] [tip]
+
+	* doc/SolverUserManual.md, doc/ToDo.md, pwbs/private/pwbsSetupModel.m,
+	pwbs/pwbsCompactModel.m, pwbs/pwbsSetupModel.m,
+	pwbs/pwbsSolveModel.m, pwbs/tests/pwbsTestAbsorber1.m,
+	pwbs/tests/pwbsTestAbsorber2.m, pwbs/tests/pwbsTestAbsorber3.m,
+	pwbs/tests/pwbsTestAbsorber4.m, pwbs/tests/pwbsTestAbsorber5.m,
+	pwbs/tests/pwbsTestAbsorber6.m, pwbs/tests/pwbsTestAbsorber7.m,
+	pwbs/tests/pwbsTestAbsorber8.m, pwbs/tests/pwbsTestAllEMT.m,
+	pwbs/tests/pwbsTestAntenna1.m, pwbs/tests/pwbsTestAntenna2.m,
+	pwbs/tests/pwbsTestAntenna3.m, pwbs/tests/pwbsTestAntenna4.m,
+	pwbs/tests/pwbsTestAperture1.m, pwbs/tests/pwbsTestAperture2.m,
+	pwbs/tests/pwbsTestAperture3.m, pwbs/tests/pwbsTestAperture4.m,
+	pwbs/tests/pwbsTestAperture5.m, pwbs/tests/pwbsTestCavity1.m,
+	pwbs/tests/pwbsTestCavity2.m, pwbs/tests/pwbsTestCompaction1.m,
+	pwbs/tests/pwbsTestExt1.m, pwbs/tests/pwbsTestExt2.m,
+	pwbs/tests/pwbsTestLucentWall1.m, pwbs/tests/pwbsTestLucentWall2.m,
+	pwbs/tests/pwbsTestLucentWall3.m, pwbs/tests/pwbsTestLucentWall4.m,
+	pwbs/tests/pwbsTestLucentWall5.m, pwbs/tests/pwbsTestSphere1.m,
+	pwbs/tests/pwbsTestSphere2.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwbs/private/pwbsSetupModel.m changed doc/SolverUserManual.md
+	changed doc/ToDo.md changed pwbs/pwbsCompactModel.m changed
+	pwbs/pwbsSolveModel.m changed pwbs/tests/pwbsTestAbsorber1.m changed
+	pwbs/tests/pwbsTestAbsorber2.m changed
+	pwbs/tests/pwbsTestAbsorber3.m changed
+	pwbs/tests/pwbsTestAbsorber4.m changed
+	pwbs/tests/pwbsTestAbsorber5.m changed
+	pwbs/tests/pwbsTestAbsorber6.m changed
+	pwbs/tests/pwbsTestAbsorber7.m changed
+	pwbs/tests/pwbsTestAbsorber8.m changed pwbs/tests/pwbsTestAllEMT.m
+	changed pwbs/tests/pwbsTestAntenna1.m changed
+	pwbs/tests/pwbsTestAntenna2.m changed pwbs/tests/pwbsTestAntenna3.m
+	changed pwbs/tests/pwbsTestAntenna4.m changed
+	pwbs/tests/pwbsTestAperture1.m changed
+	pwbs/tests/pwbsTestAperture2.m changed
+	pwbs/tests/pwbsTestAperture3.m changed
+	pwbs/tests/pwbsTestAperture4.m changed
+	pwbs/tests/pwbsTestAperture5.m changed pwbs/tests/pwbsTestCavity1.m
+	changed pwbs/tests/pwbsTestCavity2.m changed
+	pwbs/tests/pwbsTestCompaction1.m changed pwbs/tests/pwbsTestExt1.m
+	changed pwbs/tests/pwbsTestExt2.m changed
+	pwbs/tests/pwbsTestLucentWall1.m changed
+	pwbs/tests/pwbsTestLucentWall2.m changed
+	pwbs/tests/pwbsTestLucentWall3.m changed
+	pwbs/tests/pwbsTestLucentWall4.m changed
+	pwbs/tests/pwbsTestLucentWall5.m changed
+	pwbs/tests/pwbsTestSphere1.m changed pwbs/tests/pwbsTestSphere2.m
+	removed pwbs/pwbsSetupModel.m
+
+	 Made setup phase transparent.
+	[ebc5e792d18d]
+
+	* pwb/pwbDielectricSurface.m, pwb/pwbImportAndInterp.m,
+	pwb/pwbLaminatedSphere.m, pwb/pwbLaminatedSphere_PenaPal.m,
+	pwb/pwbLaminatedSphere_SPlaC.m, pwb/pwbSphere.m, pwb/pwbTests.m,
+	pwb/tests/pwbTestMetalSurface1.m, pwbs/pwbsAddAbsorber.m,
+	pwbs/pwbsAddAperture.m, pwbs/pwbsTests.m,
+	pwbs/tests/pwbsTestAbsorber3.m, pwbs/tests/pwbsTestAbsorber4.m,
+	pwbs/tests/pwbsTestAntenna4.m, pwbs/tests/pwbsTestAperture3.m,
+	pwbs/tests/pwbsTestAperture4.m, pwbs/tests/pwbsTestCompaction1.m,
+	pwbs/tests/pwbsTestExt1.m, pwbs/tests/pwbsTestExt2.m,
+	pwbs/tests/pwbsTestLucentWall4.m, pwbs/tests/pwbsTestLucentWall5.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed pwb/pwbDielectricSurface.m changed pwb/pwbImportAndInterp.m
+	changed pwb/pwbLaminatedSphere.m changed
+	pwb/pwbLaminatedSphere_PenaPal.m changed
+	pwb/pwbLaminatedSphere_SPlaC.m changed pwb/pwbSphere.m changed
+	pwb/pwbTests.m changed pwb/tests/pwbTestMetalSurface1.m changed
+	pwbs/pwbsAddAbsorber.m changed pwbs/pwbsAddAperture.m changed
+	pwbs/pwbsTests.m changed pwbs/tests/pwbsTestAbsorber3.m changed
+	pwbs/tests/pwbsTestAbsorber4.m changed pwbs/tests/pwbsTestAntenna4.m
+	changed pwbs/tests/pwbsTestAperture3.m changed
+	pwbs/tests/pwbsTestAperture4.m changed
+	pwbs/tests/pwbsTestCompaction1.m changed pwbs/tests/pwbsTestExt1.m
+	changed pwbs/tests/pwbsTestExt2.m changed
+	pwbs/tests/pwbsTestLucentWall4.m changed
+	pwbs/tests/pwbsTestLucentWall5.m
+
+	 MATLAB fixes.
+	[65866faa50b7]
+
+2016-09-02  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* ChangeLog.txt, doc/ToDo.md, doc/ToolboxUserManual.md,
+	pwb/pwbCoupledCavities.m, pwb/pwbLaminatedSphere.m,
+	pwb/pwbLaminatedSphere_PenaPal.m, pwb/pwbLaminatedSphere_PenaPalM.m,
+	pwb/pwbLaminatedSphere_SPlaC.m, pwb/pwbSphere.m,
+	pwb/pwbSphere_Markowicz.m, pwb/pwbSphere_Matzler.m,
+	pwb/pwbsCoupledCavities.m, pwb/tests/pwbTestSphere1.m,
+	pwbs/pwbsAddAbsorber.m, pwbs/tests/pwbsTestLucentWall1.m,
+	pwbs/tests/pwbsTestLucentWall2.m, pwbs/tests/pwbsTestLucentWall3.m,
+	pwbs/tests/pwbsTestLucentWall4.m, pwbs/tests/pwbsTestLucentWall5.m,
+	pwbs/tests/pwbsTestSphere1.m, pwbs/tests/pwbsTestSphere2.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	added pwb/pwbCoupledCavities.m added pwb/pwbLaminatedSphere.m added
+	pwb/pwbLaminatedSphere_PenaPal.m added
+	pwb/pwbLaminatedSphere_PenaPalM.m added
+	pwb/pwbLaminatedSphere_SPlaC.m added pwb/pwbSphere.m added
+	pwb/pwbSphere_Markowicz.m added pwb/pwbSphere_Matzler.m added
+	pwb/tests/pwbTestSphere1.m added pwbs/tests/pwbsTestSphere1.m added
+	pwbs/tests/pwbsTestSphere2.m changed ChangeLog.txt changed
+	doc/ToDo.md changed doc/ToolboxUserManual.md changed
+	pwbs/pwbsAddAbsorber.m changed pwbs/tests/pwbsTestLucentWall1.m
+	changed pwbs/tests/pwbsTestLucentWall2.m changed
+	pwbs/tests/pwbsTestLucentWall3.m changed
+	pwbs/tests/pwbsTestLucentWall4.m changed
+	pwbs/tests/pwbsTestLucentWall5.m removed pwb/pwbsCoupledCavities.m
+
+	 Added absorbing spheres.
+	[ddc8396e1f5d]
+
 2016-09-01  Ian David Flintoft  <ian.flintoft@york.ac.uk>
 
 	* ChangeLog.txt, Install.md, ReadMe.md, doc/Bugs.md, doc/ToDo.md,
@@ -26,7 +174,7 @@
 	changed pwb/pwbLaminatedSurface.m changed pwbs/pwbsAddAperture.m
 
 	 Added lucent walls.
-	[1de6da4e6faf] [tip]
+	[1de6da4e6faf]
 
 2016-08-28  Ian David Flintoft  <ian.flintoft@york.ac.uk>
 

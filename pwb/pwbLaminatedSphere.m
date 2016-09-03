@@ -1,32 +1,33 @@
 function [ ACS , AE ] = pwbLaminatedSphere( f , radii , eps_r , sigma , mu_r )
+% pwbLaminatedSphere - Absorption cross-section of a lossy multi-layer sphere.
 %
-% pwbLaminatedSphere - Mie absorption cross-sections of a multi-layer lossy sphere.
-%                      Choose best available Mie code.
+% [ ACS , AE ] = pwbLaminatedSphere( f , radii , eps_r , sigma , mu_r )
 %
-% [ ACS , AE ] = pwbLaminatedSphere( f , area , radii , eps_r , sigma , mu_r )
+%     cavity     /   /  /        /
+%               |   |   |       |
+%               | 1 | 2 | ..l.. | numLayer      * centre 
+%               |   |   |       |               |
+%    eps0 , m0   \   \   \      \               |
+%                            <----radii(l)------|
 %
-%              /   /  /        /
-%             |   |   |       |
-%  cavity     | 1 | 2 | ..... | numLayer      * centre 
-%             |   |   |       |
-%  eps0 , m0   \   \   \      \ 
+% Chooses the best available Mie code to determine the absorption cross-section 
+% and efficiency of a lossy multilayer sphere.
 %
-% Parameters:
+% Inputs:
 %
-% f     - vector (numFreq) of required frequencies [Hz].
-% area  - real scalar, area of surface [m^2].
-% radii - vector (numLayer-1) of layer radii [m].
-% eps_r - array (numFreq x numLayer) of relative permittivities [-].
+% f     - real vector (numFreq), frequencies [Hz].
+% radii - real vector (numLayer), radii of layers, outer first [m].
+% eps_r - complex array (numFreq x numLayer), complex relative permittivities of layers [-].
 %         If first dimension is 1 assumed same for all frequencies.
-% sigma - array (numFreq x numLayer) of electrical conductivities [S/m].
+% sigma - real array (numFreq x numLayer), electrical conductivities of layers [S/m].
 %         If first dimension is 1 assumed same for all frequencies.
-% mu_r  - array (numFreq x numLayer) of relative permeabilities [-].
+% mu_r  - real array (numFreq x numLayer), relative permeabilities of layers [-].
 %         If first dimension is 1 assumed same for all frequencies.
 %         
 % Outputs:
 %
-% ACS - average absorption cross-section [m^2].
-% AE  - average absorption efficiency [-].
+% ACS - real vector (numFreq x 1), average absorption cross-section [m^2].
+% AE  - real vector (numFreq x 1), average absorption efficiency [-].
 %
 
 % This file is part of aegpwb.
@@ -45,27 +46,29 @@ function [ ACS , AE ] = pwbLaminatedSphere( f , radii , eps_r , sigma , mu_r )
 % GNU General Public License for more details.
 %
 % You should have received a copy of the GNU General Public License
-% along with aeggpwb.  If not, see <http://www.gnu.org/licenses/>.
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
 % Author: I. D Flintoft
-% Date: 19/08/2016
-% Version: 1.0.0
+% Date: 03/09/2016
 
+  % Cache function handle of first alternative found.
   persistent MieFcn
   
   if( isempty( MieFcn ) )
     if( exist( 'MulPweSolveMultiSphere' ) )
+      % SPlaC.
       MieFcn = @pwbLaminatedSphere_SPlaC;
     else
-      % Check for scattnley in path.
       cmd = sprintf( 'scattnlay -l 1 1.0 1.0 1.0' );
       [ status , resultString ] = system( cmd );
       if( status == 0 )
+        % Pena & Pal scattnlay C program.
         MieFcn = pwbLaminatedSphere_PenaPal;
       elseif ( exist( 'nMie' ) )
+        % Pena & Pal scattnlay MATLAB function.
         MieFcn = pwbLaminatedSphere_PenaPalM;
       else
-        error( 'could not find multilayer Mie code' );
+        error( 'could not find a multilayer Mie code' );
       end % if
     end % if
   end % if
