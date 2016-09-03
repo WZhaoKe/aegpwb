@@ -1,6 +1,5 @@
 function [ data ] = pwbImportAndInterp( f , fileName )
-%
-% pwbInterpFile - Load  and interpolate frequency dependent data from an ASCII file.
+% pwbInterpFile - load  and interpolate frequency dependent data from an ASCII file.
 %
 % [ data ] = pwbInterpFile( f , fileName )
 %
@@ -9,7 +8,7 @@ function [ data ] = pwbImportAndInterp( f , fileName )
 % f        - real vector, frequencies to determine CCS at [Hz].
 % fileName - string, name of file contaiing frequency dependent data.
 % 
-%            File format: 
+%            The input ASCII file must have the format: 
 %
 %            # Optional header/comment using initial # character. 
 %            # M+1 columns of real data with N rows
@@ -32,6 +31,27 @@ function [ data ] = pwbImportAndInterp( f , fileName )
 %
 % data - real array (NxM), of data in file interpolated onto frequencies in f.
 %
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aegpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aegpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D Flintoft
+% Date: 01/09/2016
 
   if( ~exist( fileName , 'file' ) )
     error( 'cannot find file %s' , fileName );

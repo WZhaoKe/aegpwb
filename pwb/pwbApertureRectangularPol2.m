@@ -1,20 +1,25 @@
 function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol2( side_x , side_y )
-%
-% pwbsApertureRectangularPol2 - Polarisabilities of rectangular aperture.
+% pwbsApertureRectangularPol2 - polarisabilities of rectangular aperture.
 %
 % [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol2( side_x , side_y )
 %
+% Determines the polarisabilitites using a parametric fit to simulation data [1].
+%
 % Inputs:
 %
-% side_x - side side_x along x direction [m].
-% side_y - side side_x along y direction [m].
+% side_x - real scalar, side length along x direction [m].
+% side_y - real scalar, side length along y direction [m].
 %
-% Output:
+% Outputs:
 %
 % area      - real scalar, aperture area [m^2].
 % alpha_mxx - real scalar, tangnetial magnetic polarisability along x direction [m^3].
 % alpha_myy - real scalar, tangnetial magnetic polarisability along y direction [m^3].
 % alpha_ezz - real scalar, normal electric polarisability along z direction [m^3].
+%
+% References:
+%
+% [1] [TBC]
 %
 
   area  = side_x * side_y;

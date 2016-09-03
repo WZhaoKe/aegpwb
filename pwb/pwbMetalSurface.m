@@ -32,12 +32,12 @@ function [ ACS , AE ] = pwbMetalSurface( f , area , sigma , mu_r )
 % aegpwb power balance toolbox and solver.
 % Copyright (C) 2016 Ian Flintoft
 %
-% aeggpwb is free software: you can redistribute it and/or modify
+% aegpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
 % the Free Software Foundation, either version 3 of the License, or
 % (at your option) any later version.
 %
-% aeggpwb is distributed in the hope that it will be useful,
+% aegpwb is distributed in the hope that it will be useful,
 % but WITHOUT ANY WARRANTY; without even the implied warranty of
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
@@ -47,25 +47,6 @@ function [ ACS , AE ] = pwbMetalSurface( f , area , sigma , mu_r )
 %
 % Author: I. D Flintoft
 % Date: 01/09/2016
-%
-% pwbMetalSurface - absorption cross-section of metal surface.
-%
-% [ ACS , AE ] = pwbMetalSurface( f , area , sigma , mu_r )
-%
-% Parameters:
-%
-% f         - real vector of frequencies [Hz].
-% area      - real scalar, total area of surface [m^2]
-% sigma     - real vector, conductivity of surface [S/m]
-% mu_r      - real vector, relative permeability of surface [-]
-%
-% sigma and mu_r must be scalars or the same length as f.
-%
-% Outputs:
-%
-% ACS       - real vector, absorption cross-section [m^2].
-% AE        - real vector, absorption efficiency [-].
-%
 
   c0 = 299792458;                  
   mu0 = 4 * pi * 1e-7;             

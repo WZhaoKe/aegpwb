@@ -37,7 +37,37 @@ TM      | Transverse magnetic
 
 ## `pwbImportAndInterp`
 
-**[TBC]**
+The function
+
+    [ data ] = pwbImportAndInterp( f , fileName )
+
+loads and interpolates frequency dependent data from an ASCII file.
+The input ASCII file must have the format: 
+
+    # Optional header/comment using initial # character. 
+    # M+1 columns of real data with N rows
+    # Column 1: Frequency [Hz].
+    # Column 2: Data vector 1
+    # ....................
+    # Column ND+1: Data vector ND
+    # f [Hz]  DV1 [-] .....  DVM [-] 
+    ft(1)     DV1(1)          DVM(1) 
+    ......    .....   .....   ......
+    ft(N)     DV1(N)  .....   DVM(N)
+
+The first frequency in the file, `ft(1)`, must less than or equal to the 
+lowest frequency in `f` and the last frequency in the file, `ft(N)`,
+must greater than or equal to the highest frequency in `f`. The data at 
+the frequencies given in the file are interpolated onto the frequencies 
+requested. 
+
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:------------------
+`f`             | real vector | Hz    | frequencies
+`fileName`      | string      | -     | input file name
+`data`          | real array  | -     | interpolated data
 
 ## `pwbDistDiffuse`
 
@@ -89,7 +119,23 @@ TM      | Transverse magnetic
 
 ## `pwbAntenna`
 
-**[TBC]**
+The funtcion
+
+    [ ACS , AE ] = pwbAntenna( f , isTx , AE )
+
+determines the average absorption cross-section and efficiency of an antenna.
+Transmitting antennas have twice the absorption cross-section of receiving
+antennas due to coherent enhanced back-scatttering (**[TBC]**).
+
+The arguments and return values are:
+
+argument/return | type            | unit | description
+:---------------|:---------------:|:----:|:------------------------------------
+`f`             | real vector     | Hz   | frequencies
+`isTx`          | boolean         | -    | true if transmitting antenna
+`AE`            | real vector [1] | -    | total antenna/absorption efficiency
+  
+[1] Scalar of the same length as `f`.
 
 # Absorbers
 
@@ -107,7 +153,7 @@ The input arguments and output values are:
 
 argument/return | type               | unit  | description
 :---------------|:------------------:|:-----:|:-------------------------
-`f`             | string             | Hz    | frequencies
+`f`             | real vector        | Hz    | frequencies
 `area`          | real scalar        | m^2   | area
 `sigma`         | real vector [1]    | S/m   | conductivity
 `mu_r`          | real vector [1]    | -     | relative permeability
@@ -131,7 +177,7 @@ The input arguments and output values are:
 
 argument/return | type               | unit  | description
 :---------------|:------------------:|:-----:|:-----------------------------
-`f`             | string             | Hz    | frequencies
+`f`             | real vector        | Hz    | frequencies
 `area`          | real scalar        | m^2   | area
 `eps_r`         | complex vector [1] | -     | complex relative permittivity
 `sigma`         | real vector [1]    | S/m   | conductivity
@@ -159,7 +205,7 @@ The input arguments and output values are:
 
 argument/return | type              | unit  | description
 :---------------|:-----------------:|:-----:|:---------------------------------------
-`f`             | string            | Hz    | frequencies
+`f`             | real vector       | Hz    | frequencies
 `area`          | real scalar       | m^2   | area
 `thicknesses`   | real vector       | m     | thicknesses of layers, outer first
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
@@ -193,7 +239,7 @@ The input arguments and output values are:
 
 argument/return | type            | unit | description
 :---------------|:---------------:|:----:|:------------------------------
-`f`             | string          | Hz   | frequencies
+`f`             | real vector     | Hz   | frequencies
 `radius`        | real scalar     | m    | radius of sphere 
 `eps_r`         | complex vector  | -    | complex relative permittivity
 `sigma`         | real vector [1] | S/m  | conductivity
@@ -236,7 +282,7 @@ The input arguments and output values are:
 
 argument/return | type              | unit | description
 :---------------|:-----------------:|:----:|:---------------------------------------
-`f`             | string            | Hz   | frequencies
+`f`             | real vector       | Hz   | frequencies
 `radii`         | real vector       | m    | radii of layers 
 `eps_r`         | complex array [1] | -    | complex relative permittivity of layers
 `sigma`         | real array [1]    | S/m  | conductivities of layers
@@ -271,29 +317,112 @@ electrical size of the sphere.
 
 # Apertures
 
-## `pwbApertureCircularPol`
+Note: TCSs and TEs used in the toolbbox follow the convention of including the 
+factor of half from the half-space illumination in the cross-section itself. 
+Taking the product of the power density in the cavity with such a TCS therefore 
+directly yields the power coupled through the aperture without needing a factor
+of a half to be included.
 
-**[TBC]**
+## Aperture polarisabilities
 
-## `pwbApertureEllipticalPol`
+### `pwbApertureCircularPol`
 
-**[TBC]**
+![Figure: Circular aperture](figures/CircularAperture.png)
 
-## `pwbApertureRectangularPol2`
+A circular aperture is defined by its `radius` (**[TBC]**).
 
-**[TBC]**
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureCircularPol( radius )
 
-## `pwbApertureRectangularPol`
+parameter     | type              | unit | description
+:-------------|:-----------------:|:----:|:---------------------------------------------
+`radius`      | double scalar     | m    | radius of circular aperture
+`area`        | double scalar     | m^2  | area of aperture
+`alpha_mxx`   | double scalar     | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy`   | double scalar     | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz`   | double scalar     | m^3  | z-component of electric polarisability tensor
 
-**[TBC]**
+### `pwbApertureEllipticalPol`
 
-## `pwbApertureSquarePol`
+![Figure: Elliptical aperture](figures/EllipticalAperture.png)
 
-**[TBC]**
+An elliptical aperture is defined by its semi-axes along the x- and 
+y-directions, `a_x` and `a_y` (**[TBC]**).
+
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol( a_x , b_y )
+
+parameter     | type              | unit | description
+:-------------|:-----------------:|:----:|:-----------------------------------------------
+`a_x`         | double scalar     | m    | semi-axis of elliptical aperture in x-direction
+`a_y`         | double scalar     | m    | semi-axis of elliptical aperture in y-direction
+`area`        | double scalar     | m^2  | area of aperture
+`alpha_mxx`   | double scalar     | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy`   | double scalar     | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz`   | double scalar     | m^3  | z-component of electric polarisability tensor    
+
+### `pwbApertureSquarePol`
+
+![Figure: Square aperture](figures/SquareAperture.png)
+
+A square aperture is defined by its `side` length (**[TBC]**).
+
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureSquarePol( side )
+
+The function determines the polarisabilitites as those of a circular aperture with 
+the same area.
+
+parameter   | type              | unit | description
+:-----------|:-----------------:|:----:|:---------------------------------------------
+`side`      | double scalar     | m    | side length of aperture
+`area`      | double scalar     | m^2  | area of aperture
+`alpha_mxx` | double scalar     | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy` | double scalar     | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz` | double scalar     | m^3  | z-component of electric polarisability tensor  
+
+### `pwbApertureRectangularPol`, `pwbApertureRectangularPol2`
+
+![Figure: Rectangular aperture](figures/RectangularAperture.png)
+
+A rectangular aperture is defined by its side lengths along the x- and 
+y-directions, `side_x` and `side_y` (**[TBC]**).
+
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
+
+The first version of the function `pwbApertureRectangularPol` determines the polarisabilitites 
+as those of an elliptical aperture with the same area and aspect ratio. The secnod version
+`pwbApertureRectangularPol2` uses a parametric fit to simulation data (**[TBC]**).
+
+parameter     | type              | unit | description
+:-------------|:-----------------:|:----:|:--------------------------------------------------
+`side_x`      | double scalar     | m    | side length of rectangular aperture in x-direction
+`side_y`      | double scalar     | m    | side length of rectangular aperture in y-direction
+`area`        | double scalar     | m^2  | area of aperture
+`alpha_mxx`   | double scalar     | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy`   | double scalar     | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz`   | double scalar     | m^3  | z-component of electric polarisability tensor  
 
 ## `pwbApertureTCS`
 
-**[TBC]**
+![Figure: Generic aperture](figures/GenericAperture.png)
+
+The function
+
+    [ TCS , TE , f_c ] = pwbApertureTCS( f , area , alpha_mxx , alpha_myy , alpha_ezz )
+
+determines the average transmission cross-section of an aperture from its area and electric
+and magnetic polarisabiltites ([Hill1994][]). 
+
+The input arguments and output values are:
+
+argument/return | type          | unit | description
+:---------------|:-------------:|:----:|:---------------------------------------------
+`f`             | real vector   | Hz   | frequencies
+`area`          | real scalar   | m^2  | area
+`alpha_mxx`     | double scalar | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy`     | double scalar | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz`     | double scalar | m^3  | z-component of electric polarisability tensor
+`TCS`           | real vector   | m^2  | transmission cross-section
+`TE`            | real vector   | -    | transmission efficiency
 
 ## `pwbLucentWall`
 
@@ -313,7 +442,7 @@ The input arguments and output values are:
 
 argument/return | type              | unit  | description
 :---------------|:-----------------:|:-----:|:---------------------------------------
-`f`             | string            | Hz    | frequencies
+`f`             | real vector       | Hz    | frequencies
 `area`          | real scalar       | m^2   | area
 `thicknesses`   | real vector       | m     | thicknesses of layers, side 1 first
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
@@ -324,7 +453,7 @@ argument/return | type              | unit  | description
 `TCS`           | real vector       | m^2   | transmission cross-section
 `AE1`           | real vector       | -     | absorbers efficiency of side 1
 `AE2`           | real vector       | -     | absorbers efficiency of side 2
-`tE`            | real vector       | -     | transmission efficiency
+`TE`            | real vector       | -     | transmission efficiency
 
 [1] The material arrays must have `numLayer` columns and either one row for frequency
 independent parameters or the same number of rows as the length of `f` for frequency
@@ -336,6 +465,32 @@ dependent parameters.
 
 ([Bohren2004]) C. F. Bohren and D. R. Huffman, "Absorption and Scattering of Light by Small
 Particles", Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim, 2004.
+
+[Hill1993]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1361.pdf
+
+([Hill1993]) D. A. Hill, J. W. Adams, M. T. Ma, A. R. Ondrejka and B. F. Riddle,
+"Aperture excitation of electrically large, lossy cavities", NIST Technical Note 1361, Sept, 1993.
+
+[Hill1996]: http://ieeexplore.ieee.org/document/544314/
+
+([Hill1996]) D. A. Hill, "A reflection coefficient derivation for the Q of a reverberation chamber",
+IEEE Transactions on Electromagnetic Compatibility, vol. 38, no. 4, pp. 591-592, Nov 1996.
+
+[Hill1998]: http://ieeexplore.ieee.org/document/709418/
+
+([Hill1998]) D. A. Hill, "Plane wave integral representation for fields in reverberation chambers",
+IEEE Transactions on Electromagnetic Compatibility, vol. 40, no. 3, pp. 209-217, Aug 1998.
+
+[Hill1994]: http://ieeexplore.ieee.org/document/305461
+
+([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford and R. T. Johnk, 
+"Aperture excitation of electrically large, lossy cavities", IEEE Transactions on Electromagnetic 
+Compatibility, vol. 36, no. 3, pp. 169-178, Aug 1994.
+
+[Hill2009]: http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0470495049.html
+
+([Hill2009]) D. A. Hill, "Electromagnetic fields in cavities: deterministic and statistical theories",
+IEEE Press Series on Electromagntic Wave Theory, John Wiley & Sons, 2009.
 
 [LeRu2009]: http://store.elsevier.com/product.jsp?isbn=9780080931555
  

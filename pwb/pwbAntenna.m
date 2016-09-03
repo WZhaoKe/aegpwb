@@ -1,6 +1,5 @@
 function [ ACS , AE ] = pwbAntenna( f , isTx , AE )
-%
-% pwbAntenna - antenna average absorption cross-section.
+% pwbAntenna - average absorption cross-section of antenna.
 %
 % [ ACS , AE ] = pwbAntenna( f , isTx , AE )
 %
@@ -36,7 +35,6 @@ function [ ACS , AE ] = pwbAntenna( f , isTx , AE )
 %
 % Author: I. D Flintoft
 % Date: 19/08/2016
-% Version: 1.0.0
 
   c0 = 299792458;
   
