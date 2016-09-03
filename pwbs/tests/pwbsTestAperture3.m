@@ -40,7 +40,6 @@ function [ isPass ] = pwbsTestAperture3()
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C2' , 1 , 'ACS' , { 4.0 , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C1' , { 1 } );
   pwbm = pwbsAddAperture( pwbm , 'AP' , 'C1' , 'C2' , 1 , 'FileTCS' , { 1.0 , 'pwbsTestAperture3.asc' } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
   
   delete( 'pwbsTestAperture3.asc' );

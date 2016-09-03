@@ -37,7 +37,6 @@ function [ isPass ] = pwbsTestCompaction1()
   pwbm = pwbsAddAperture( pwbm , 'A1' , 'C1' , 'C2' , 1 , 'TCS' , { 1.0 , 1.0 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB2' , 'C2' , 1 , 'ACS' , { 1.0 , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C1' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   CCS = pwbsCompactModel( pwbm , 'Aperture' , 'A1' , { 1 } );
 
   delete( 'TestCompact1_Aperture_A1_compaction1.asc' );

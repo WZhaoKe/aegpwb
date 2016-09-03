@@ -39,7 +39,6 @@ function [ isPass ] = pwbsTestAntenna4()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'C' , 1 , 'MismatchedFileAE' , { 'pwbsTestAntenna4.asc' , 50.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Antenna' , 'Tx' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
   
   delete( 'pwbsTestAntenna4.asc' );

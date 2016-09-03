@@ -40,7 +40,6 @@ function [ isPass ] = pwbsTestAbsorber8()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C' , 1 , 'LaminatedSurface' , { area , thicknesses , epsc_r , sigma , mu_r } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
     
   [ ACS_val , AE_val ] = pwbLaminatedSurface( f , area , thicknesses , epsc_r , sigma , mu_r , zeros( size( sigma ) ) );

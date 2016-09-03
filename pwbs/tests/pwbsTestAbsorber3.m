@@ -36,7 +36,6 @@ function [ isPass ] = pwbsTestAbsorber3()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C' , 1 , 'FileACS' , { 4.0 , 'pwbsTestAbsorber3.asc' } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
   
   delete( 'pwbsTestAbsorber3.asc' );

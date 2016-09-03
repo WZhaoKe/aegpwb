@@ -38,7 +38,6 @@ function [ isPass ] = pwbsTestAllEMT()
   pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'C1' , 1 , 'Matched' , { 50.0 } );
   pwbm = pwbsAddAntenna( pwbm , 'Rx' , 'C2' , 1 , 'Matched' , { 50.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Antenna' , 'Tx' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbsDrawEMT( pwbm ); 
   close();
   

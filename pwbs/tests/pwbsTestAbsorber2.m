@@ -34,7 +34,6 @@ function [ isPass ] = pwbsTestAbsorber2()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C' , 1 , 'AE' , { 4.0 , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'AB' , { 'ACS' , 'AE' , 'absorbedPower' } );

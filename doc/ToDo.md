@@ -1,4 +1,3 @@
-# AEG PWB: Things to do list
 
 [TOC]
 
@@ -11,8 +10,6 @@
   with small black dots or make invisible? They are not really relevant to 
   using the solver.
 
-* Is keeping the setup phase user visible worth it or useful - maybe not.
-
 * Make third party tools required for Mie Series discovered at run time and 
   error message if not found. Add instruction for obtaining and installing.
   
@@ -22,6 +19,8 @@
 ## Toolbox
 
 * Use Legendre quadrature in pwbLucentWall.
+
+* Function [ ACCS ] = pwbAverageCCS( CCS , isHemisphere )
 
 * Port rest of old toolbox:
 

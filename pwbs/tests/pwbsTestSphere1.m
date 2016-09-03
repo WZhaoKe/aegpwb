@@ -41,7 +41,6 @@ function [ isPass ] = pwbsTestSphere1()
   pwbm = pwbsAddCavity( pwbm , 'C1' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C1' , { 1 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C1' , 1 , 'LaminatedSphere' , { radius , eps_r , sigma , mu_r } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'AB' , { 'ACS' , 'AE' } );

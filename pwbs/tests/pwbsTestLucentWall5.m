@@ -46,7 +46,6 @@ function [ isPass ] = pwbsTestLucentWall5()
   pwbm = pwbsAddCavity( pwbm , 'C2' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C1' , { 1 } );
   pwbm = pwbsAddAperture( pwbm , 'LW' , 'C1' , 'C2' , 1 , 'LucentWallFileCE' , { area , 'pwbsTestLucentWall5.asc' } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
  
   delete( 'pwbsTestLucentWall5.asc' );

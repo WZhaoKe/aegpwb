@@ -44,7 +44,6 @@ function [ isPass ] = pwbsTestLucentWall2()
   pwbm = pwbsAddCavity( pwbm , 'C2' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C1' , { 1 } );
   pwbm = pwbsAddAperture( pwbm , 'LW' , 'C1' , 'C2' , 1 , 'LucentWallCCS' , { area , ACS1_val , ACS2_val , TCS_val } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ data , units ] = pwbsGetOutput( pwbm , 'Aperture' , 'LW_T' , { 'TCS' , 'TE' } );

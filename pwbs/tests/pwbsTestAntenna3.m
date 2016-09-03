@@ -37,7 +37,6 @@ function [ isPass ] = pwbsTestAntenna3()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'C' , 1 , 'MismatchedAE' , { 0.5 .* ones( size( f ) ) , 50.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Antenna' , 'Tx' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ data , units ] = pwbsGetOutput( pwbm , 'Antenna' , 'Tx' , { 'ACS' , 'AE' , 'absorbedPower' } );

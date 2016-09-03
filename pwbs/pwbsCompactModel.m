@@ -57,6 +57,9 @@ function [ CCS ] = pwbsCompactModel( pwbm , objectType , objectTag , parameters 
   
   options.isUseCholesky = false;
   options.isUseAMD = false;
+    
+  % Setup model.
+  [ pwbm ] = pwbsSetupModel( pwbm );
   
   if( ~strcmp( pwbm.state , 'setup' ) )
     error( 'PWB model is not set up' );

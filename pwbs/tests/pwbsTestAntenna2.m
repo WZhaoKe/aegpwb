@@ -38,7 +38,6 @@ function [ isPass ] = pwbsTestAntenna2()
   pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'C' , 1 , 'Matched' , { 50.0 } );
   pwbm = pwbsAddAntenna( pwbm , 'Rx' , 'C' , 1 , 'Matched' , { 50.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Antenna' , 'Tx' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ data , units ] = pwbsGetOutput( pwbm , 'Antenna' , 'Tx' , { 'ACS' , 'AE' , 'absorbedPower' } );

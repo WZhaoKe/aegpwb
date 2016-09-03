@@ -41,7 +41,6 @@ function [ isPass ] = pwbsTestCavity2()
   pwbm = pwbsInitModel( f , 'TestCavity2' );
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { area , volume , sigma , mu_r } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   [ ACS_val , ~ ] = pwbGenericCavityWallACS( f , area , volume , sigma , mu_r );

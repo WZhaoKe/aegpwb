@@ -68,17 +68,7 @@ point at which they are used. Virtual objects, such as scatterers are not
 represented directly in the circuit model; their effect is internal to other 
 objects.
 
-The model can be in one of three states:
-
-   1. 'init'   - The model is initialised and objects may been added to the model.
-   2. 'setup'  - Dependencies between the objects have been set up.
-   3. 'solved' - The solution has been calculated.
-
-Once a model is set up further objects cannot be added.
-
-The various model outputs become available with progress through the different 
-states. The state in which an output is available is noted below for the outputs 
-of each object types below.
+Once a model is solved further objects cannot be added.
 
 ## ASCII input data files
 
@@ -165,19 +155,6 @@ source (power )          | named edge with filled arrow and circle in direction 
 source (power density)   | named edge with unfilled arrow and circle in direction of power absorption
 
 The reference node is the ultimate source/sink of all power in the model.
-
-## Setting up the model
-
-Before the model can be solved various linkages have to be made between the 
-objects in the model. This set up process is carried out by calling the function
-
-    [ pwbm ] = pwbsSetupModel( pwbm )
-
-with input arguments and output values:
-
-argument/return | type      | unit | description
-:---------------|:---------:|:----:|:-----------
-`pwbm`          | structure | -    | model state 
 
 ## Solving the model
 
@@ -441,39 +418,39 @@ for higher frequencies.
 
 The supported cavity outputs in the different model states are
 
-output                | state  | type              | unit  | description
-:---------------------|:------:|:-----------------:|:-----:|:----------------------------------------------
-`tag`                 | init   | string            | -     | name of cavity
-`type`                | init   | string            | -     | type of cavity
-`area`                | init   | double scalar     | m^2   | area of closed bounding surface
-`volume`              | init   | double scalar     | m^3   | volume
-`f_1`                 | init   | double scalar     | Hz    | frequency of first mode
-`f_60`                | init   | double scalar     | Hz    | frequency of sixtieth mode
-`numModes`            | init   | double vector [1] | -     | cumulative number of modes
-`modeDensity`         | init   | double vector [1] | /Hz   | mode density 
-`wallArea`            | setup  | double scalar     | m^2   | area of cavity walls
-`apertureArea`        | setup  | double scalar     | m^2   | total area of all apertures in cavity
-`wallACS`             | setup  | double vector [1] | m^2   | ACS of cavity walls
-`wallAE`              | setup  | double vector [1] | -     | AE of cavity walls
-`wallQ`               | setup  | double vector [1] | -     | partial quality factor of cavity walls
-`wallDecayRate`       | setup  | double vector [1] | /s    | energy decay rate of cavity walls
-`wallTimeConst`       | setup  | double vector [1] | s     | energy time constant of cavity walls
-`modeBandwidth`       | solved | double vector [1] | Hz    | mode bandwidth 
-`specificModeDensity` | solved | double vector [1] | -     | specific mode density
-`f_Schroeder`         | solved | double scalar     | Hz    | Schroeder frequency of cavity
-`powerDensity`        | solved | double vector [1] | W/m^2 | average scalar power density in cavity
-`energyDensity`       | solved | double vector [1] | J/m^3 | average energy density in cavity
-`wallPower`           | solved | double vector [1] | W     | average power absorbed in cavity walls
-`totalACS`            | solved | double vector [1] | m^2   | total ACS of all absorbers in cavity
-`totalTCS`            | solved | double vector [1] | m^2   | total TCS of all apertures in cavity
-`totalQ`              | solved | double vector [1] | -     | total Q factor of cavity
-`totalDecayRate`      | solved | double vector [1] | /s    | total energy decay rate of cavity
-`totalTimeConst`      | solved | double vector [1] | s     | total energy time constant of cavity
-`totalSourcePower`    | solved | double vector [1] | W     | total source power injected into cavity
-`totalAbsorbedPower`  | solved | double vector [1] | W     | total power absorbed in cavity
-`totalCoupledPower`   | solved | double vector [1] | W     | total power coupled out of cavity through apertures
-`NindPaddle`          | solved | double vector [1] | -     | number of independent samples from scatterers
-`NindFreq`            | solved | double vector [1] | /Hz   | number of independent samples per hertz
+output                | type              | unit  | description
+:---------------------|:-----------------:|:-----:|:----------------------------------------------
+`tag`                 | string            | -     | name of cavity
+`type`                | string            | -     | type of cavity
+`area`                | double scalar     | m^2   | area of closed bounding surface
+`volume`              | double scalar     | m^3   | volume
+`f_1`                 | double scalar     | Hz    | frequency of first mode
+`f_60`                | double scalar     | Hz    | frequency of sixtieth mode
+`numModes`            | double vector [1] | -     | cumulative number of modes
+`modeDensity`         | double vector [1] | /Hz   | mode density 
+`wallArea`            | double scalar     | m^2   | area of cavity walls
+`apertureArea`        | double scalar     | m^2   | total area of all apertures in cavity
+`wallACS`             | double vector [1] | m^2   | ACS of cavity walls
+`wallAE`              | double vector [1] | -     | AE of cavity walls
+`wallQ`               | double vector [1] | -     | partial quality factor of cavity walls
+`wallDecayRate`       | double vector [1] | /s    | energy decay rate of cavity walls
+`wallTimeConst`       | double vector [1] | s     | energy time constant of cavity walls
+`modeBandwidth`       | double vector [1] | Hz    | mode bandwidth 
+`specificModeDensity` | double vector [1] | -     | specific mode density
+`f_Schroeder`         | double scalar     | Hz    | Schroeder frequency of cavity
+`powerDensity`        | double vector [1] | W/m^2 | average scalar power density in cavity
+`energyDensity`       | double vector [1] | J/m^3 | average energy density in cavity
+`wallPower`           | double vector [1] | W     | average power absorbed in cavity walls
+`totalACS`            | double vector [1] | m^2   | total ACS of all absorbers in cavity
+`totalTCS`            | double vector [1] | m^2   | total TCS of all apertures in cavity
+`totalQ`              | double vector [1] | -     | total Q factor of cavity
+`totalDecayRate`      | double vector [1] | /s    | total energy decay rate of cavity
+`totalTimeConst`      | double vector [1] | s     | total energy time constant of cavity
+`totalSourcePower`    | double vector [1] | W     | total source power injected into cavity
+`totalAbsorbedPower`  | double vector [1] | W     | total power absorbed in cavity
+`totalCoupledPower`   | double vector [1] | W     | total power coupled out of cavity through apertures
+`NindPaddle`          | double vector [1] | -     | number of independent samples from scatterers
+`NindFreq`            | double vector [1] | /Hz   | number of independent samples per hertz
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
@@ -655,22 +632,22 @@ this method.
 
 The supported aperture outputs in the different model states are
 
-output         | state  | type              | unit | description
-:--------------|:------:|:-----------------:|:----:|:---------------------------------------------------------
-`tag`          | init   | string            | -    | name of aperture
-`type`         | init   | string            | -    | type of aperture
-`multiplicity` | init   | integer scalar    | -    | number of apertures
-`area`         | init   | double scalar     | m^2  | area of aperture
-`f_c`          | init   | double scalar     | Hz   | cut-off frequency of aperture
-`TCS`          | init   | double vector [1] | m^2  | TCS of aperture
-`TE`           | init   | double vector [1] | -    | TE of aperture
-`Q1`           | init   | double vector [1] | -    | partial quality factor of aperture in cavity on side 1
-`Q2`           | init   | double vector [1] | -    | partial quality factor of aperture in cavity on side 2
-`decayRate1`   | init   | double vector [1] | /s   | energy decay rate of aperture in cavity on side 1
-`decayRate2`   | init   | double vector [1] | /s   | energy decay rate of aperture in cavity on side 2
-`timeConst1`   | init   | double vector [1] | s    | energy decay time constant of aperture in cavity on side 1
-`timeConst2`   | init   | double vector [1] | s    | energy decay time constant of aperture in cavity on side 2
-`coupledPower` | solved | double vector [1] | W    | average net flow power from side 1 to side 2
+output         | type              | unit | description
+:--------------|:-----------------:|:----:|:---------------------------------------------------------
+`tag`          | string            | -    | name of aperture
+`type`         | string            | -    | type of aperture
+`multiplicity` | integer scalar    | -    | number of apertures
+`area`         | double scalar     | m^2  | area of aperture
+`f_c`          | double scalar     | Hz   | cut-off frequency of aperture
+`TCS`          | double vector [1] | m^2  | TCS of aperture
+`TE`           | double vector [1] | -    | TE of aperture
+`Q1`           | double vector [1] | -    | partial quality factor of aperture in cavity on side 1
+`Q2`           | double vector [1] | -    | partial quality factor of aperture in cavity on side 2
+`decayRate1`   | double vector [1] | /s   | energy decay rate of aperture in cavity on side 1
+`decayRate2`   | double vector [1] | /s   | energy decay rate of aperture in cavity on side 2
+`timeConst1`   | double vector [1] | s    | energy decay time constant of aperture in cavity on side 1
+`timeConst2`   | double vector [1] | s    | energy decay time constant of aperture in cavity on side 2
+`coupledPower` | double vector [1] | W    | average net flow power from side 1 to side 2
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
@@ -799,16 +776,16 @@ same surface area. The material parameter arrays should be either scalars or
 
 The supported absorber outputs in the different model states are:
 
-output          | state  | type              | unit | description
-:---------------|:------:|:-----------------:|:----:|:--------------------------
-`tag`           | init   | string            | -    | name of absorber
-`type`          | init   | string            | -    | type of absorber
-`multiplicity`  | init   | integer scalar    | -    | number of absorbers
-`parameters`    | init   | cell array        | -    | raw input parameters
-`area`          | init   | double scalar     | m^2  | area of absorber
-`ACS`           | init   | double vector [1] | m^2  | ACS of absorber
-`AE`            | init   | double vector [1] | -    | AE of absorber
-`absorbedPower` | solved | double vector [1] | W    | average net power absorbed
+output          | type              | unit | description
+:---------------|:-----------------:|:----:|:--------------------------
+`tag`           | string            | -    | name of absorber
+`type`          | string            | -    | type of absorber
+`multiplicity`  | integer scalar    | -    | number of absorbers
+`parameters`    | cell array        | -    | raw input parameters
+`area`          | double scalar     | m^2  | area of absorber
+`ACS`           | double vector [1] | m^2  | ACS of absorber
+`AE`            | double vector [1] | -    | AE of absorber
+`absorbedPower` | double vector [1] | W    | average net power absorbed
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
@@ -884,17 +861,17 @@ frequency in hertz and the second column the AE.
 
 The supported antenna outputs in the different model states are
 
-output           | state  | type              | unit | description
-:----------------|:------:|:-----------------:|:----:|:-----------------------------------
-`tag`            | init   | string            | -    | name of antenna
-`type`           | init   | string            | -    | type of antenna
-`multiplicity`   | init   | integer scalar    | -    | number of antennas
-`parameters`     | init   | cell array        | -    | raw input parameters
-`area`           | init   | double scalar     | m^2  | reception aperture of antenna
-`ACS`            | init   | double vector [1] | m^2  | ACS of antenna
-`AE`             | init   | double vector [1] | -    | AE of antenna
-`loadResistance` | init   | double scalar     | ohm  | load resistance of antenna
-`absorbedPower`  | solved | double vector [1] | W    | average net power absorbed/received
+output           | type              | unit | description
+:----------------|:-----------------:|:----:|:-----------------------------------
+`tag`            | string            | -    | name of antenna
+`type`           | string            | -    | type of antenna
+`multiplicity`   | integer scalar    | -    | number of antennas
+`parameters`     | cell array        | -    | raw input parameters
+`area`           | double scalar     | m^2  | reception aperture of antenna
+`ACS`            | double vector [1] | m^2  | ACS of antenna
+`AE`             | double vector [1] | -    | AE of antenna
+`loadResistance` | double scalar     | ohm  | load resistance of antenna
+`absorbedPower`  | double vector [1] | W    | average net power absorbed/received
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
@@ -1024,12 +1001,12 @@ diffuse field through an aperture.
 
 The supported source outputs in the different model states are:
 
-output        | state  | type              | unit | description
-:-------------|:------:|:-----------------:|:----:|:------------------------
-`tag`         | init   | string            | -    | name of power source
-`type`        | init   | string            | -    | type of power source
-`parameters`  | init   | cell array        | -    | raw input parameters
-`sourcePower` | solved | double vector [1] | W    | average delivered power 
+output        | type              | unit | description
+:-------------|:-----------------:|:----:|:------------------------
+`tag`         | string            | -    | name of power source
+`type`        | string            | -    | type of power source
+`parameters`  | cell array        | -    | raw input parameters
+`sourcePower` | double vector [1] | W    | average delivered power 
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
@@ -1148,9 +1125,6 @@ Function to solve nested reberation chambers PWB problem:
 
       % Visualise the EMT.
       pwbsDrawEMT( pwbm );    
-            
-      % Setup the model.
-      pwbm = pwbsSetupModel( pwbm );
 
       % Solve the model.
       pwbm = pwbsSolveModel( pwbm );

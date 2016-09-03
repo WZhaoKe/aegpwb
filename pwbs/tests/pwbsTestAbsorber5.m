@@ -38,7 +38,6 @@ function [ isPass ] = pwbsTestAbsorber5()
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C' , 1 , 'MetalSurface' , { area , sigma , mu_r } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
     
   [ ACS_val , AE_val ] = pwbMetalSurface( f , area , sigma , mu_r );

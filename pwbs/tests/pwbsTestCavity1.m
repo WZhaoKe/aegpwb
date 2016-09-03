@@ -39,7 +39,6 @@ function [ isPass ] = pwbsTestCavity1()
   pwbm = pwbsInitModel( f , 'TestCavity1' );
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Cuboid'  , { a , b , c , sigma , mu_r } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'Direct' , 'C' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
 
   volume = a * b * c;

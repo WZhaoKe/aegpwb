@@ -36,7 +36,6 @@ function [ isPass ] = pwbsTestExt2()
   pwbm = pwbsAddAbsorber( pwbm , 'AB' , 'C' , 1 , 'ACS' , { 4.0 , 1.0 } );
   pwbm = pwbsAddAperture( pwbm , 'AP' , 'C' , 'EXT' , 1 , 'TCS' , { 1.0 , 1.0 } );
   pwbm = pwbsAddSource( pwbm , 'S' , 'PowerDensity' , 'EXT' , { 1 } );
-  pwbm = pwbsSetupModel( pwbm );
   pwbm = pwbsSolveModel( pwbm );
    
   [ data , units ] = pwbsGetOutput( pwbm , 'Absorber' , 'AB' , { 'ACS' , 'absorbedPower' } );
