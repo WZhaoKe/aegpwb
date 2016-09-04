@@ -1,15 +1,14 @@
-function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists( pwbm , objectType , objectTag , freq , quantity , dist )
-% pwbsProbDists - Get probability distributions and statistics for object.
+function [ meanQuantity , stdQuantity , quantQuantity ] = pwbsStats( pwbm , objectType , objectTag , quantity )
+% pwbsStats - Get probability distributions and statistics for object.
 %
-% [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists( pwbm ,  objectType , objectTag , quantity , dist )
+% [ meanQuantity , stdQuantity , quantQuantity ] = pwbsStats( pwbm ,  objectType , objectTag , quantity , dist )
 %
 % Inputs:
 %
 % pwbm         - structure, contains the model state.
 % objectType   - string, type of object to get distributions for.
 % objectTag    - string, name of object to get data for.
-% freq         - real scalar, frequency to get data for.
-% quantity     - string, physical quantity to determine distribution for.
+% quantity     - string, physical quantity to determine statistics for.
 %                Valid values are:
 %
 %                cavity type:
@@ -37,23 +36,13 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
 %                'I2'    - squared magnitude of current [A^2].
 %                'power' - power [W].
 %
-% dist         - string, required probability distribution.
-%                Valid values are:
-%
-%                'CDF'  - cumulative distribution
-%                'CCDF' - complementary cumulative distribution, reliability function
-%                'PDF'  - probability density function
-%
 % Output:
 %
-% x             - real vector, quantity requested []
-% y             - real vector, distribution of quantity requrested [].
-% meanQuantity  - real scalar, mean of quantity requested [].
-% stdQuantity   - real scalar, standard deviation of quantity requested [].
+% meanQuantity  - real vector, mean of quantity requested [].
+% stdQuantity   - real vector, standard deviation of quantity requested [].
 % quantQuantity - real array, quantiles  of quantity requested [].
-%                 The first row give values of the CDF the and the second row gives the 
-%                 quantiles. THe 25-th, 50-th (median), 75-th, 95-th and 99-th 
-%                 quantiles are returned.
+%                 The 25-th, 50-th (median), 75-th, 95-th and 99-th 
+%                 quantiles are returned in five columns.
 %
 
 % This file is part of aegpwb.
@@ -88,15 +77,8 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
   
   validateattributes( objectType , { 'char' } , {} , 'pwbsProbDists' , 'objectType' , 2 ); 
   validateattributes( objectTag , { 'char' } , {} , 'pwbsProbDists' , 'objectTag' , 3 ); 
-  validateattributes( freq , { 'double' } , { 'scalar' , 'positive' } , 'pwbsProbDists' , 'powerDensity' , 4 )  
-  validateattributes( quantity , { 'char' } , {} , 'pwbsProbDists' , 'quantity' , 5 );
-  validateattributes( dist , { 'char' } , {} , 'pwbsProbDists' , 'dist' , 6 );
-  validatestring( dist , { 'CDF' , 'CCDF' , 'PDF' } );
-  
-  % Get nearest frequency index.
-  if( freq < pwbm.f(1) || freq > pwbm.f(end) )
-    error( 'Frequency %g Hz is out of simulation range' ,freq );
-  end % if  
+  validateattributes( quantity , { 'char' } , {} , 'pwbsProbDists' , 'quantity' , 4 );
+    
   switch( objectType )
   case 'Cavity'
     validatestring( quantity , { 'Eir' , 'Ei' , 'Ei2' , 'E' , 'E2' , 'Hir' , 'Hi' , 'Hi2' , 'H' , 'H2' , 'PD' , 'ED' } );
@@ -107,7 +89,7 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
       error( 'unknown cavity %s' , objectTag );
     end % if  
     % Average power density in cavity at required frequency.
-    powerDensity = interp1( pwbm.f , pwbm.cavities(cavityIdx).powerDensity , freq );
+    powerDensity = pwbm.cavities(cavityIdx).powerDensity;
     % Statistics and distributions.
     switch( quantity )
     case 'Eir'
@@ -147,7 +129,7 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
       refQuantity = 'F2';
       refValue = powerDensity ./ c0;      
     end % switch 
-    [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbDistDiffuse( refQuantity , dist , refValue );
+    [ meanQuantity , stdQuantity , quantQuantity ] = pwbStatsDiffuse( refQuantity , refValue );
   case 'Antenna'
     validatestring( quantity , { 'Vir' , 'Vi' , 'Vi2' , 'Iir' , 'Ii' , 'Ii2'  , 'P' } );
     % Get antenna index.
@@ -157,7 +139,7 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
       error( 'unknown antenna %s' , objectTag );
     end % if  
     % Average power received by single antenna at required frequency.
-    power = interp1( pwbm.f , pwbm.antennas(antennaIdx).power , freq ) ./ pwbm.antennas(antennaIdx).multiplicity;
+    power = pwbm.antennas(antennaIdx).power ./ pwbm.antennas(antennaIdx).multiplicity;
     Z0 = pwbm.antennas(antennaIdx).loadResistance;
     switch( quantity )
     case 'Vr'
@@ -183,7 +165,7 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbsProbDists(
       refValue = power;      
     end % switch     
     % Statistics and distributions.
-    [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbDistDiffuse( refQuantity , dist , refValue );        
+    [ meanQuantity , stdQuantity , quantQuantity ] = pwbDistDiffuse( refQuantity , refValue );        
   otherwise
     error( 'unsupported object type %s' , objectType );
   end % switch

@@ -121,6 +121,47 @@ The required reference value for the different quantities are
 `'F'`      | mean of total field magnitude       
 `'F2'`     | mean square of total field magnitude
 
+## `pwbStatsDiffuse`
+
+The statistics of electromagnetic quantities in an ideally reverberant cavity 
+can be determined using the function ([Hill1998][])
+
+    [ meanQuantity , stdQuantity quantQuantity ] = ...
+      pwbStatsDiffuse( quantity , refValue )
+    
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:----------------------------
+`quantity`      | string      | -     | physical quantity
+`refValue`      | real scalar | -     | reference value for quantity  
+`meanQuantity`  | real scalar | -     | mean of quantity
+`stdQuantity`   | real scalar | -     | standard deviation of quantity
+`quantQuantity` | real array  |       | quantiles  of quantity
+
+`quantQuantity` is a two-dimensional array whose columns gives the 25-th, 
+50-th (median), 75-th, 95-th and 99-th quantiles at each frequency.
+
+Supported physical quantities are
+
+`quantity` | description
+:----------|------------------------------------------------------------------------
+`'Fir'`    | real or imaginary part of a field component or received voltage/current
+`'Fi'`     | magnitude of field component or received voltage/current
+`'Fi2'`    | squared magnitude of field component or received power
+`'F'`      | total field magnitude
+`'F2'`     | square of total field magnitude, power density or energy density
+
+The required reference value for the different quantities are
+
+`quantity` | required reference value
+-----------|-----------------------------------------------------------------------------
+`'Fir'`    | standard deviation of real/imaginary part of field component/voltage/current
+`'Fi'`     | mean of magnitude of field component/voltage/current
+`'Fi2'`    | mean square of field component magnitude/power
+`'F'`      | mean of total field magnitude       
+`'F2'`     | mean square of total field magnitude
+
 
 # Cavities
 
@@ -200,6 +241,29 @@ argument/return | type        | unit  | description
 `mu_ r`         | real vector | -     | relative permeability of walls
 `ACS`           | real vector | m^2   | average absorption cross-section of walls
 `AE`            | real vector | -     | average absorption efficiency of walls
+
+## `pwbWallLossFromMCIG`
+
+The function
+
+    [ ACS , AE , sigma_eff ] = pwbWallLossFromMCIG( f , area , volume , MCIG )
+
+estimates the absorption cross-section, absorption efficiency and effective wall 
+conductivity from the mismatch corrected insertion gain (MCIG) of a cavity 
+containing only the two antennas used to determine the insertion gain. The 
+function also assumes the relative permeability of the walls is unity.
+
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:---------------------------------
+`f`             | real vector | Hz    | frequencies
+`area`          | real scalar | m^2   | surface area
+`volume`        | real scalar | m     | volume
+`MCIG`          | real vector | -     | mismatch corrected insertion loss
+`ACS`           | real vector | m^2   | average absorption cross-section of walls
+`AE`            | real vector | -     | average absorption efficiency of walls
+`sigma_eff`     | real vector | S/m   | effective electrical conductivity of walls
 
 ## Energy loss parameters
 

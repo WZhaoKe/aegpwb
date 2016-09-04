@@ -338,6 +338,31 @@ distributions and from zero to the 999/1000-th quantile for one-sided
 distributions. The possible values of `quantity` for each object type are given 
 below
 
+### Statistics 
+
+The statistics of various quantities can be determined using the function
+
+    [ meanQuantity , stdQuantity quantQuantity ] = ...
+      pwbsStats( pwbm , objectType , objectTag , quantity )
+    
+where the input arguments and output values are:
+    
+argument/return | type          | unit | description
+:---------------|:-------------:|:----:|:-----------------------------------------
+`pwbm`          | structure     | -    | model state
+`objectType`    | string        | -    | type of object
+`objectTag`     | string        | -    | name of object
+`quantity`      | string        | -    | quantity to obtain distribution for
+`meanQuantity`  | double vector | [1]  | mean value of quantity
+`stdQuantity`   | double vector | [1]  | standard deviation of quantity
+`quantQuantity` | double array  | [1]  | quantiles of quantity
+
+[1] Units depend on the quantity and distribution type requested.
+
+The mean and standard deviation and quantiles are evaluated at all the frequencies
+in the model. `quantQuantity` has five columns with the 25-th, 50-th (median), 75-th, 
+95-th and 99-th quantiles.
+
 
 # Cavities
 

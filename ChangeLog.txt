@@ -1,5 +1,25 @@
 2016-09-04  Ian David Flintoft  <ian.flintoft@york.ac.uk>
 
+	* Install.md, ReadMe.md, doc/SolverUserManual.md, doc/ToDo.md,
+	doc/ToolboxUserManual.md:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed Install.md changed ReadMe.md changed doc/SolverUserManual.md
+	changed doc/ToDo.md changed doc/ToolboxUserManual.md
+
+	 Spell checker applied to mains documents!
+	[832785343fae] [tip]
+
+	* ChangeLog.txt, Install.md, doc/ToDo.md,
+	examples/01_UoY_NRC/pwbsTest4.m, tutorial/NRC.m,
+	tutorial/Tutorial.md:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed ChangeLog.txt changed Install.md changed doc/ToDo.md changed
+	tutorial/NRC.m changed tutorial/Tutorial.md removed
+	examples/01_UoY_NRC/pwbsTest4.m
+
+	 More documentation updates.
+	[aeb87d91d635]
+
 	* pwb/private/emFresnelCoeff.m, pwb/tests/pwbTestCavityModes.m,
 	pwb/tests/pwbTestCavityModes_modeDensity.png,
 	pwb/tests/pwbTestCavityModes_numModes.png,
@@ -71,7 +91,7 @@
 	pwb/tests/pwbTestCavityModes_numModes.png
 
 	 Fix licence typos.
-	[f4a33e7f34b3] [tip]
+	[f4a33e7f34b3]
 
 	* doc/ToDo.md, doc/ToolboxUserManual.md,
 	pwb/pwbApertureEllipticalPol.m, pwb/pwbCoupledCavities.m,
