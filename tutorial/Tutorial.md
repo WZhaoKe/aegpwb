@@ -15,7 +15,7 @@ Version 0.1, 16/08/2016
 Function to solve nested reberation chambers PWB problem:
 
     function NRC()
-    % Nested reverberation chambers.
+    % NRC - nested reverberation chamber PWB model
     
       % Set frequencies to analyse.
       f = logspace( log10( 1e9 ) , log10( 100e9 ) , 100 );

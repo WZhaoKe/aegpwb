@@ -40,7 +40,7 @@ aegpwb-working
 ### Install the m-files
 
 After getting the source code copy the sub-directories called pwb and pwbs from 
-the aegpwb-working directory to somewhere convenient and add it to your 
+the aegpwb-working directory to somewhere convenient and add them to your 
 Octave/MATLAB path. For octave you may also need to put the files in the 
 sub-directory matcompat somewhere in search path too.
 
@@ -59,21 +59,41 @@ Four [Mie codes][] are supported for determining the absorption in spheres:
 
 Instruction for installing each of these are given below.
 
-#### [SPlaC][]
+#### SPlaC
 
-**[TBC]**
+The SERS and Plasmonics Code [SPlaC][] is a package of MATLAB functions that
+includes Mie Series calculations. To use this code for multi-layer sphere 
+cacluations the code should be installed and the required sub-directories 
+add to the path, for example, using
 
-#### [scattnlay][]
+    addpath( genpath( '<path to SPlaC>/SPlaC/Mie' ) );
 
-**[TBC]**
+#### [scattnlay_v2][]
+
+Pena and Pal's [scattnlay_v2][] C code execuable can also be used for multi-layer sphere 
+cacluations. As a minimum the C program from the package should be compiled using
+
+    make standalone
+
+and the excutable `scattnlay` that is created (in the directory one level up from that
+containing the Makefile) copied to a location in the systems command search path.
+
+#### [scattnlay_v][]
+
+Pena and Pal's earlier code [scattnlay_v1][] contains a MATLAB implementation that can 
+also be used by the toolbox. To use this installed the package and add the folder 
+containing the function nMie to the MATLAB/Octave path.
 
 #### [Matzler][]
 
-**[TBC]**
+Christian Matzler's MATLAB code can also be used for homogeneous spheres. 
+Put the function `mie` into a directory in MATLAB/Octave's path.
 
 #### [scatterlib][]
 
-**[TBC]**
+K. Markowicz's MATLAB implementation of Bohren and Huffmann's code can be used
+for homogeneous spheres. Put the function `bhmie` into a directory in MATLAB/Octave's
+path.
 
 ## Run the test-suite
 
@@ -87,14 +107,15 @@ and that for the solver using
     
 All the tests should pass. If not please report a bug.
 
-    
+## References
+
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
 [Mercurial]: https://www.mercurial-scm.org/
-
-[SPlaC]: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
-[scattnlay]: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view
-[scatterlib]: https://code.google.com/archive/p/scatterlib/
-[Matzler]: http://www.iap.unibe.ch/publications/download/2004-02
 [Mie codes]: https://en.wikipedia.org/wiki/Codes_for_electromagnetic_scattering_by_spheres
+[SPlaC]: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
+[scattnlay_v1]: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view.
+[scattnlay_v2]: https://github.com/ovidiopr/scattnlay
+[Matzler]: http://www.iap.unibe.ch/publications/download/2004-02
+[scatterlib]: https://code.google.com/archive/p/scatterlib/

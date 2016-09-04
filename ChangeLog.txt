@@ -1,4 +1,154 @@
+2016-09-04  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* pwb/private/emFresnelCoeff.m, pwb/tests/pwbTestCavityModes.m,
+	pwb/tests/pwbTestCavityModes_modeDensity.png,
+	pwb/tests/pwbTestCavityModes_numModes.png,
+	pwb/tests/pwbTestLaminatedSurface1.m,
+	pwb/tests/pwbTestLucentWall1.m, pwb/tests/pwbTestMetalSurface1.m,
+	pwb/tests/pwbTestSphere1.m, pwbs/private/pwbsSetupModel.m,
+	pwbs/pwbsAddAbsorber.m, pwbs/pwbsAddAntenna.m,
+	pwbs/pwbsAddAperture.m, pwbs/pwbsAddCavity.m, pwbs/pwbsAddSource.m,
+	pwbs/pwbsCompactModel.m, pwbs/pwbsDrawEMT.m, pwbs/pwbsExportAll.m,
+	pwbs/pwbsExportOutput.m, pwbs/pwbsGetOutput.m, pwbs/pwbsInitModel.m,
+	pwbs/pwbsLoadModel.m, pwbs/pwbsProbDists.m, pwbs/pwbsSaveModel.m,
+	pwbs/pwbsSolveModel.m, pwbs/pwbsTests.m, pwbs/pwbsValidOutputs.m,
+	pwbs/tests/pwbsTestAbsorber1.m, pwbs/tests/pwbsTestAbsorber2.m,
+	pwbs/tests/pwbsTestAbsorber3.m, pwbs/tests/pwbsTestAbsorber4.m,
+	pwbs/tests/pwbsTestAbsorber5.m, pwbs/tests/pwbsTestAbsorber6.m,
+	pwbs/tests/pwbsTestAbsorber7.m, pwbs/tests/pwbsTestAbsorber8.m,
+	pwbs/tests/pwbsTestAllEMT.m, pwbs/tests/pwbsTestAntenna1.m,
+	pwbs/tests/pwbsTestAntenna2.m, pwbs/tests/pwbsTestAntenna3.m,
+	pwbs/tests/pwbsTestAntenna4.m, pwbs/tests/pwbsTestAperture1.m,
+	pwbs/tests/pwbsTestAperture2.m, pwbs/tests/pwbsTestAperture3.m,
+	pwbs/tests/pwbsTestAperture4.m, pwbs/tests/pwbsTestAperture5.m,
+	pwbs/tests/pwbsTestCavity1.m, pwbs/tests/pwbsTestCavity2.m,
+	pwbs/tests/pwbsTestCompaction1.m, pwbs/tests/pwbsTestExt1.m,
+	pwbs/tests/pwbsTestExt2.m, pwbs/tests/pwbsTestLucentWall1.m,
+	pwbs/tests/pwbsTestLucentWall2.m, pwbs/tests/pwbsTestLucentWall3.m,
+	pwbs/tests/pwbsTestLucentWall4.m, pwbs/tests/pwbsTestLucentWall5.m,
+	pwbs/tests/pwbsTestSphere1.m, pwbs/tests/pwbsTestSphere2.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed pwb/private/emFresnelCoeff.m changed
+	pwb/tests/pwbTestCavityModes.m changed
+	pwb/tests/pwbTestLaminatedSurface1.m changed
+	pwb/tests/pwbTestLucentWall1.m changed
+	pwb/tests/pwbTestMetalSurface1.m changed pwb/tests/pwbTestSphere1.m
+	changed pwbs/private/pwbsSetupModel.m changed pwbs/pwbsAddAbsorber.m
+	changed pwbs/pwbsAddAntenna.m changed pwbs/pwbsAddAperture.m changed
+	pwbs/pwbsAddCavity.m changed pwbs/pwbsAddSource.m changed
+	pwbs/pwbsCompactModel.m changed pwbs/pwbsDrawEMT.m changed
+	pwbs/pwbsExportAll.m changed pwbs/pwbsExportOutput.m changed
+	pwbs/pwbsGetOutput.m changed pwbs/pwbsInitModel.m changed
+	pwbs/pwbsLoadModel.m changed pwbs/pwbsProbDists.m changed
+	pwbs/pwbsSaveModel.m changed pwbs/pwbsSolveModel.m changed
+	pwbs/pwbsTests.m changed pwbs/pwbsValidOutputs.m changed
+	pwbs/tests/pwbsTestAbsorber1.m changed
+	pwbs/tests/pwbsTestAbsorber2.m changed
+	pwbs/tests/pwbsTestAbsorber3.m changed
+	pwbs/tests/pwbsTestAbsorber4.m changed
+	pwbs/tests/pwbsTestAbsorber5.m changed
+	pwbs/tests/pwbsTestAbsorber6.m changed
+	pwbs/tests/pwbsTestAbsorber7.m changed
+	pwbs/tests/pwbsTestAbsorber8.m changed pwbs/tests/pwbsTestAllEMT.m
+	changed pwbs/tests/pwbsTestAntenna1.m changed
+	pwbs/tests/pwbsTestAntenna2.m changed pwbs/tests/pwbsTestAntenna3.m
+	changed pwbs/tests/pwbsTestAntenna4.m changed
+	pwbs/tests/pwbsTestAperture1.m changed
+	pwbs/tests/pwbsTestAperture2.m changed
+	pwbs/tests/pwbsTestAperture3.m changed
+	pwbs/tests/pwbsTestAperture4.m changed
+	pwbs/tests/pwbsTestAperture5.m changed pwbs/tests/pwbsTestCavity1.m
+	changed pwbs/tests/pwbsTestCavity2.m changed
+	pwbs/tests/pwbsTestCompaction1.m changed pwbs/tests/pwbsTestExt1.m
+	changed pwbs/tests/pwbsTestExt2.m changed
+	pwbs/tests/pwbsTestLucentWall1.m changed
+	pwbs/tests/pwbsTestLucentWall2.m changed
+	pwbs/tests/pwbsTestLucentWall3.m changed
+	pwbs/tests/pwbsTestLucentWall4.m changed
+	pwbs/tests/pwbsTestLucentWall5.m changed
+	pwbs/tests/pwbsTestSphere1.m changed pwbs/tests/pwbsTestSphere2.m
+	removed pwb/tests/pwbTestCavityModes_modeDensity.png removed
+	pwb/tests/pwbTestCavityModes_numModes.png
+
+	 Fix licence typos.
+	[f4a33e7f34b3] [tip]
+
+	* doc/ToDo.md, doc/ToolboxUserManual.md,
+	pwb/pwbApertureEllipticalPol.m, pwb/pwbCoupledCavities.m,
+	pwb/pwbCuboidCavityModeFreqs.m, pwb/pwbCuboidCavityModesCount.m,
+	pwb/pwbCuboidCavityModesLiu.m, pwb/pwbDistDiffuse.m,
+	pwb/pwbEnergyParamsFromCCS.m, pwb/pwbEnergyParamsFromDecayRate.m,
+	pwb/pwbEnergyParamsFromQ.m, pwb/pwbEnergyParamsFromTimeConst.m,
+	pwb/pwbGenericCavityModesWeyl.m, pwb/pwbGenericCavityWallACS.m,
+	pwb/pwbSphere_Markowicz.m, pwb/pwbSphere_Matzler.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed doc/ToDo.md changed doc/ToolboxUserManual.md changed
+	pwb/pwbApertureEllipticalPol.m changed pwb/pwbCoupledCavities.m
+	changed pwb/pwbCuboidCavityModeFreqs.m changed
+	pwb/pwbCuboidCavityModesCount.m changed
+	pwb/pwbCuboidCavityModesLiu.m changed pwb/pwbDistDiffuse.m changed
+	pwb/pwbEnergyParamsFromCCS.m changed
+	pwb/pwbEnergyParamsFromDecayRate.m changed
+	pwb/pwbEnergyParamsFromQ.m changed
+	pwb/pwbEnergyParamsFromTimeConst.m changed
+	pwb/pwbGenericCavityModesWeyl.m changed
+	pwb/pwbGenericCavityWallACS.m changed pwb/pwbSphere_Markowicz.m
+	changed pwb/pwbSphere_Matzler.m
+
+	 Further toolbox documentation.
+	[9d36b16ab9fa]
+
 2016-09-03  Ian David Flintoft  <ian.flintoft@york.ac.uk>
+
+	* doc/ToolboxUserManual.md, pwb/pwbAntenna.m,
+	pwb/pwbApertureCircularPol.m, pwb/pwbApertureEllipticalPol.m,
+	pwb/pwbApertureRectangularPol.m, pwb/pwbApertureRectangularPol2.m,
+	pwb/pwbApertureSquarePol.m, pwb/pwbApertureTCS.m,
+	pwb/pwbCoupledCavities.m, pwb/pwbDielectricSurface.m,
+	pwb/pwbImportAndInterp.m, pwb/pwbLaminatedSphere.m,
+	pwb/pwbLaminatedSphere_PenaPal.m, pwb/pwbLaminatedSphere_PenaPalM.m,
+	pwb/pwbLaminatedSphere_SPlaC.m, pwb/pwbLaminatedSurface.m,
+	pwb/pwbLucentWall.m, pwb/pwbMetalSurface.m, pwb/pwbSphere.m,
+	pwb/pwbSphere_Markowicz.m, pwb/pwbSphere_Matzler.m, pwb/pwbTests.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed doc/ToolboxUserManual.md changed pwb/pwbAntenna.m changed
+	pwb/pwbApertureCircularPol.m changed pwb/pwbApertureEllipticalPol.m
+	changed pwb/pwbApertureRectangularPol.m changed
+	pwb/pwbApertureRectangularPol2.m changed pwb/pwbApertureSquarePol.m
+	changed pwb/pwbApertureTCS.m changed pwb/pwbCoupledCavities.m
+	changed pwb/pwbDielectricSurface.m changed pwb/pwbImportAndInterp.m
+	changed pwb/pwbLaminatedSphere.m changed
+	pwb/pwbLaminatedSphere_PenaPal.m changed
+	pwb/pwbLaminatedSphere_PenaPalM.m changed
+	pwb/pwbLaminatedSphere_SPlaC.m changed pwb/pwbLaminatedSurface.m
+	changed pwb/pwbLucentWall.m changed pwb/pwbMetalSurface.m changed
+	pwb/pwbSphere.m changed pwb/pwbSphere_Markowicz.m changed
+	pwb/pwbSphere_Matzler.m changed pwb/pwbTests.m
+
+	 More toolbox documentation.
+	[0b78b19a822d]
+
+	* ChangeLog.txt, doc/SolverUserManual.md, doc/ToDo.md,
+	doc/ToolboxUserManual.md, doc/figures/CompactedEMT_1.png,
+	pwb/pwbDielectricSurface.m, pwb/pwbLaminatedSphere.m,
+	pwb/pwbLaminatedSphere_PenaPal.m, pwb/pwbLaminatedSphere_PenaPalM.m,
+	pwb/pwbLaminatedSphere_SPlaC.m, pwb/pwbLaminatedSurface.m,
+	pwb/pwbLucentWall.m, pwb/pwbMetalSurface.m, pwb/pwbSphere.m,
+	pwb/pwbSphere_Matzler.m, pwb/pwbTests.m, pwbs/pwbsAddAperture.m:
+	user: Ian David Flintoft <ian.flintoft@york.ac.uk> branch 'default'
+	changed ChangeLog.txt changed doc/SolverUserManual.md changed
+	doc/ToDo.md changed doc/ToolboxUserManual.md changed
+	doc/figures/CompactedEMT_1.png changed pwb/pwbDielectricSurface.m
+	changed pwb/pwbLaminatedSphere.m changed
+	pwb/pwbLaminatedSphere_PenaPal.m changed
+	pwb/pwbLaminatedSphere_PenaPalM.m changed
+	pwb/pwbLaminatedSphere_SPlaC.m changed pwb/pwbLaminatedSurface.m
+	changed pwb/pwbLucentWall.m changed pwb/pwbMetalSurface.m changed
+	pwb/pwbSphere.m changed pwb/pwbSphere_Matzler.m changed
+	pwb/pwbTests.m changed pwbs/pwbsAddAperture.m
+
+	 Start to document toolbox functions.
+	[24e662459da8]
 
 	* doc/SolverUserManual.md, doc/ToDo.md, doc/figures/AbsorberEMT.png,
 	doc/figures/CavityEMT.png, doc/figures/CompactedEMT_1.png,
@@ -34,7 +184,7 @@
 	tutorial/NRC.m
 
 	 Make reference node in EMT implicit.
-	[4b684a65f5a8] [tip]
+	[4b684a65f5a8]
 
 	* doc/SolverUserManual.md, doc/ToDo.md, pwbs/private/pwbsSetupModel.m,
 	pwbs/pwbsCompactModel.m, pwbs/pwbsSetupModel.m,
