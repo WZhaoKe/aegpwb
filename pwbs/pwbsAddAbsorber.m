@@ -83,7 +83,6 @@ function [ pwbm ] = pwbsAddAbsorber( pwbm , tag ,  cavityTag , multiplicity , ty
 %
 % Author: I. D Flintoft
 % Date: 19/08/2016
-% Version: 1.0.0
 
   c0 = 299792458;
   

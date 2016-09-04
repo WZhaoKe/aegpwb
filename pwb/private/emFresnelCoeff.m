@@ -1,5 +1,4 @@
 function [ rhoTE , rhoTM , tauTE , tauTM ] = emFresnelCoeff( na , nb , theta ) 
-%
 % emFresnelCoeff - Fresnel coefficients for isotropic lossy media.
 %
 % [ rhoTE , rhoTM , tauTE , tauTM ] = emFresnelCoeff( na , nb , theta ) 

@@ -1,5 +1,4 @@
 function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
-%
 % pwbsAddSource - Add a power source to an antenna or aperture in a PWB model.
 %
 % [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
@@ -47,17 +46,16 @@ function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
 % the Free Software Foundation, either version 3 of the License, or
 % (at your option) any later version.
 %
-% aeggpwb is distributed in the hope that it will be useful,
+% aegpwb is distributed in the hope that it will be useful,
 % but WITHOUT ANY WARRANTY; without even the implied warranty of
 % MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 % GNU General Public License for more details.
 %
 % You should have received a copy of the GNU General Public License
-% along with aeggpwb.  If not, see <http://www.gnu.org/licenses/>.
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
 % Author: I. D Flintoft
 % Date: 19/08/2016
-% Version: 1.0.0
 
   % Basic checks on validity of parameters.
   validateattributes( tag , { 'char' } , {} , 'pwbsAddSource' , 'tag' , 2 );

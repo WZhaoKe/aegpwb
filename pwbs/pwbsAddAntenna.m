@@ -1,5 +1,4 @@
 function [ pwbm ] = pwbsAddAntenna( pwbm , tag ,  cavityTag , multiplicity , type , parameters )
-%
 % pwbsAddAntenna - Add an antenna to a PWB model.
 %
 % [ pwbm ] = pwbsAddAntenna( pwbm , tag , cavityTag , multiplicity , type , parameters )
@@ -76,7 +75,6 @@ function [ pwbm ] = pwbsAddAntenna( pwbm , tag ,  cavityTag , multiplicity , typ
 %
 % Author: I. D Flintoft
 % Date: 19/08/2016
-% Version: 1.0.0
 
   % Basic checks on validity of parameters.
   validateattributes( tag , { 'char' } , {} , 'pwbsAddAntenna' , 'tag' , 2 );
