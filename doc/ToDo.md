@@ -50,7 +50,6 @@
   numModesBW = numModes(f+BW/2) - numModes(f-BW/2) by need care with endpoints
   and sampling rate.
 
-
 ## Solver
 
 * Fix estimateCutoffFreq in pwbsAddAperture to work in both MATLAB and Octave.

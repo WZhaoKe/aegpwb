@@ -1,10 +1,9 @@
 function [ ACS , AE ] = pwbSphere_Markowicz( f , radius , eps_r , sigma , mu_r )
-%
 % pwbSphere_Markowicz - Mie absorption cross-section of a homogeneous lossy sphere
-%                       using Markowicz's MATLAB implementation of Bohren & Huffman's 
-%                       code in scatterlib [1].
 %
 % [ ACS , AE ] = pwbSphere_Markowicz( f , area , radius , eps_r , sigma , mu_r )
+%
+% Uses Markowicz's MATLAB implementation of Bohren & Huffman's code in scatterlib [1].
 %
 % Parameters:
 %

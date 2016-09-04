@@ -1,28 +1,49 @@
 function [ numModes , modeDensity , f_1 , f_60 ] = pwbCuboidCavityModesLiu( f , a , b , c )
+% pwbGenericCavityModesLiu - Liu continuum limit estimate of cavity modes in a cuboid cavity
 %
-% pwbCuboidCavityModesLiu - Liu correction to the Weyl continuum limit estimate of cavity 
-%                           modes in a cuboid cavity.
+% [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesLiu( f ,  a , b , c )
 %
-% [ numModes , modeDensity , f_1 , f_60 ] = pwbCuboidCavityModesLiu( f , a , b , c )
+% Uses the Liu formula to estimate the cumulative number and density of modes in a cuboid cavity [1].
 %
 % Inputs:
 %
-% f       - real vector, frequency (Hz).
-% a, b, c - real scalars, cavity linear dimensions [m].
+% f      - real vector, frequency [Hz].
+% volume - real scalar, cavity volume [m^3].
 %
 % Outputs:
 %
-% numModes    - integer vector, cumulative number of modes below frequencies in f [-].
-% modeDensity - real vector, density of modes at frequencies in f [/Hz]. 
-% f_1         - real scalar, frequency at which numModes is greater than or equal to 1 [Hz].
-% f_60        - real scalar, frequency at which numModes is greater than or equal to 60 [Hz].
-% 
+% numNodes    - real vector, number of modes below given frequency [-].
+% modeDensity - real vector, density of modes [/Hz]. 
+% f_1         - real scalar, lowest cavity resonant frequency [Hz].
+% f_60        - real scalar, 60-th cavity resonant frequency [Hz].
+%
 % References:
 %
 % [1] B. H. Liu, D. C. Chang, and M. T. Ma [1983], “Eigenmodes and the Composite Quality 
 %     Factor of a Reverberation Chamber,” NBS Technical Note 1066, National Institute 
 %     of Standards and Technology, Boulder, Colorado 80303-3328, USA.
 %
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aegpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aegpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D Flintoft
+% Date: 03/09/2016
 
   c0 = 299792458;
   

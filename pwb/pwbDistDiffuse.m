@@ -1,37 +1,36 @@
 function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbDistDiffuse( quantity , dist , refValue )
-%
-% pwbDistDiffuse - Probability distributions and statistics for ideal reverberant environment.
+% pwbDistDiffuse - probability distributions and statistics for ideal reverberant environment
 %
 % [ x , y , meanQuantity , stdQuantity quantQuantity ] = pwbDistDiffuse( quantity , dist , refValue )
 %
 % Inputs:
 %
-% quantity     - string, physical quantity to determine distribution for.
-%                Valid values are:
+% quantity - string, physical quantity to determine distribution for.
+%            Valid values are:
 %
-%                'Fir' - real or imaginary part of a field component or received voltage/current
-%                'Fi'  - magnitude of field component or received voltage/current
-%                'Fi2' - squared magnitude of field component or received power
-%                'F'   - total field magnitude.             
-%                'F2'  - square of total field magnitude, power density or enegy density in cavity.
+%            'Fir' - real or imaginary part of a field component or received voltage/current
+%            'Fi'  - magnitude of field component or received voltage/current
+%            'Fi2' - squared magnitude of field component or received power
+%            'F'   - total field magnitude.             
+%            'F2'  - square of total field magnitude, power density or enegy density in cavity.
 %
-% dist         - string, required probability distribution.
-%                Valid values are:
+% dist     - string, required probability distribution.
+%            Valid values are:
 %
-%                'CDF'  - cumulative distribution
-%                'CCDF' - complementary cumulative distribution, reliability function
-%                'PDF'  - probability density function
+%            'CDF'  - cumulative distribution
+%            'CCDF' - complementary cumulative distribution, reliability function
+%            'PDF'  - probability density function
 %
-% refValue     - real scalar, reference value for quantity
+% refValue - real scalar, reference value for quantity
 %
-%                quantity | required reference value
-%                ---------|-----------------------------------------------------------------
-%                'Fir'    | standard deviation of real or imaginary part of field component
-%                         |   or received voltage/current
-%                'Fi'     | mean of magnitdue of field component or received voltage/current
-%                'Fi2'    | mean square of field component magnitude or received power
-%                'F'      | mean of total field magnitude       
-%                'F2'     | mean square of total field magnitude
+%            quantity | required reference value
+%            ---------|-----------------------------------------------------------------
+%            'Fir'    | standard deviation of real or imaginary part of field component
+%                     |   or received voltage/current
+%            'Fi'     | mean of magnitdue of field component or received voltage/current
+%            'Fi2'    | mean square of field component magnitude or received power
+%            'F'      | mean of total field magnitude       
+%            'F2'     | mean square of total field magnitude
 %
 % Output:
 %
@@ -44,6 +43,32 @@ function [ x , y , meanQuantity , stdQuantity , quantQuantity ] = pwbDistDiffuse
 %                 quantiles. THe 25-th, 50-th (median), 75-th, 95-th and 99-th 
 %                 quantiles are returned.
 %
+% References:
+%
+% [1]) D. A. Hill, "Plane wave integral representation for fields in reverberation chambers",
+%      IEEE Transactions on Electromagnetic Compatibility, vol. 40, no. 3, pp. 209-217, Aug 1998.
+%
+
+% This file is part of aegpwb.
+%
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
+%
+% aegpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aegpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: I. D. Flintoft
+% Date: 16/08/2016
 
   validateattributes( quantity , { 'char' } , {} , 'pwbDistDiffuse' , 'quantity' , 1 );
   validateattributes( dist , { 'char' } , {} , 'pwbDistDiffuse' , 'dist' , 2 );

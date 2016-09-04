@@ -15,6 +15,11 @@ function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol
 % alpha_myy - real scalar, tangnetial magnetic polarisability along y direction [m^3].
 % alpha_ezz - real scalar, normal electric polarisability along z direction [m^3].
 %
+% References:
+%
+% [1] F. De Meulenaere and J. Van Bladel, "Polarizability of some small apertures",
+%     IEEE Transactions on Antennas and Propagation, vol. 25, no. 2, pp. 198-205, Mar 1977.
+%
 
 % This file is part of aegpwb.
 %

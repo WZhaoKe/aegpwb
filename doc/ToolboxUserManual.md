@@ -71,49 +71,183 @@ argument/return | type        | unit  | description
 
 ## `pwbDistDiffuse`
 
-**[TBC]**
+The probability distributions of electromagnetic quantities in an ideally
+reverberant cavity can be determined using the function ([Hill1998])
+
+    [ x , y , meanQuantity , stdQuantity quantQuantity ] = pwbDistDiffuse( quantity , dist , refValue )
+    
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:----------------------------
+`quantity`      | string      | -     | physical quantity
+`dist`          | string      | -     | distribution
+`refValue`      | real scalar | -     | reference value for quantity  
+`x`             | real vector | -     | abscissa of quantity
+`y`             | real vector | -     | ordinate of quantity
+`meanQuantity`  | real scalar | -     | mean of quantity
+`stdQuantity`   | real scalar | -     | standard deviation of quantity
+`quantQuantity` | real array  |       | quantiles  of quantity
+
+`quantQuantity` is a two-dimensional array whose first row give values of the 
+CDF the and the second row gives the quantiles. The 25-th, 50-th (median), 75-th, 
+95-th and 99-th quantiles are returned.
+
+Supported physical quantitites are
+
+`quantity` | description
+:----------|------------------------------------------------------------------------
+`'Fir'`    | real or imaginary part of a field component or received voltage/current
+`'Fi'`     | magnitude of field component or received voltage/current
+`'Fi2'`    | squared magnitude of field component or received power
+`'F'`      | total field magnitude
+`'F2'`     | square of total field magnitude, power density or enegy density
+
+Supported probability distributions are
+
+`dist`   | description
+:--------|------------------------------------------------------------------------
+`'CDF'`  | cumulative distribution
+`'CCDF'` | complementary cumulative distribution, reliability function
+`'PDF'`  | probability density function
+
+The required reference value for the different quantitites are
+
+`quantity` | required reference value
+-----------|-----------------------------------------------------------------------------
+`'Fir'`    | standard deviation of real/imaginary part of field component/voltage/current
+`'Fi'`     | mean of magnitdue of field component/voltage/current
+`'Fi2'`    | mean square of field component magnitude/power
+`'F'`      | mean of total field magnitude       
+`'F2'`     | mean square of total field magnitude
+
 
 # Cavities
 
-## `pwbCuboidCavityModeFreqs`
+## Cavity modes
 
-**[TBC]**
+### `pwbCuboidCavityModeFreqs`
 
-## `pwbCuboidCavityModesCount`
+The frequencies of the modes in a cuboid cavity can be determined using the function
+([Pozar2011][])
 
-**[TBC]**
+    [ f_c , ijkp ] = pwbCuboidCavityModeFreqs( f_max , a , b , c )
 
-## `pwbCuboidCavityModesLiu`
+The arguments and return values are:
 
-**[TBC]**
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:------------------------------
+`f_max`         | real scalar | Hz    | maximum mode frequency
+`a`, `b`, `c`   | real scalar | m     | cuboid cavity side lengths
+`f_c`           | real vector | Hz    | mode frequencies
+`ikjp`          | real array  | -     | mode indices and polarisations
 
-## `pwbGenericCavityModesWeyl`
+The mode frequencies `f_c` are returned in ascending order ans include degenerate
+frequencies. Use `unique( f_c)` to eliminate degenerate frequencies if desired.
+The two dimensional array `ijkp(m,n)` describes the m-th mode:
 
-**[TBC]**
+column, `n` | type    | unit  | description
+:-----------|:-------:|:-----:|:-------------------------------
+1           | integer | -     | x-direction mode index
+2           | integer | -     | y-direction mode index
+3           | integer | -     | z-direction mode index
+4           | integer | -     | mode polarisation TM(0) or TE (1)
+
+### `pwbGenericCavityModesWeyl`, `pwbCuboidCavityModesLiu` & `pwbCuboidCavityModesCount`
+
+The functions 
+
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( f , volume )
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbCuboidCavityModesLiu( f , a , b , c )
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbCuboidCavityModesCount( f , a  , b , c )
+    
+estimate the cumulative number of modes and mode density in a cavity using 
+different methods. `pwbGenericCavityModesWeyl` uses the basic Weyl formula for 
+an arbitrary shaped cavity of known volume ([Weyl1912][]). 
+`pwbCuboidCavityModesLiu` uses more accurate estimate for a cuboid cavity 
+([Liu1983][]) while `pwbCuboidCavityModesCount` applies exact mode counting for 
+a cuboid cavity.
+
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:--------------------------
+`f`             | real vector | Hz    | frequencies
+`volume`        | real scalar | m     | volume
+`a`, `b`, `c`   | real scalar | m     | cuboid cavity side lengths
+`numModes`      | real vector | -     | cumultive number of modes
+`modeDensity`   | real vector | /Hz   | mode density
+`f_1`           | real scalar | Hz    | frequency of first mode
+`f_60`          | real scalar | Hz    | frequency of sixtieth mode
 
 ## `pwbGenericCavityWallACS`
 
-**[TBC]**
+The losses in the walls of a cavity can be determined using the function
 
-## `pwbEnergyParamsFromCCS`
+    [ ACS , AE ] = pwbGenericCavityWallACS( f , area , volume , sigma , mu_r )
 
-**[TBC]**
+The function uses the uses a perturbative calculation of wall loss in a cuboid 
+cavity parameterised in terms of the cavity volume and sirface area ([Liu1983][]).
 
-## `pwbEnergyParamsFromDecayRate`
+The arguments and return values are:
 
-**[TBC]**
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:---------------------------------
+`f`             | real vector | Hz    | frequencies
+`area`          | real scalar | m^2   | surface area
+`volume`        | real scalar | m     | volume
+`sigma`         | real vector | S/m   | electrical conductivity of walls
+`mu_ r`         | real vector | -     | relative permeability of walls
+`ACS`           | real vector | m^2   | average absorption cross-section of walls
+`AE`            | real vector | -     | average absorption efficiency of walls
 
-## `pwbEnergyParamsFromQ`
+## Energy loss parameters
 
-**[TBC]**
+The group of functions
 
-## `pwbEnergyParamsFromTimeConst`
+    [ Q , decayRate , timeConst ] = pwbEnergyParamsFromCCS( f , CCS , volume ) 
+    [ CCS , Q , timeConst ] = pwbEnergyParamsFromDecayRate( f , decayRate , volume )
+    [ CCS , decayRate , timeConst ] = pwbEnergyParamsFromQ( f , Q , volume )
+    [ CCS , decayRate , Q ] = pwbEnergyParamsFromTimeConst( f , timeConst , volume )
+ 
+convert between different descriptions of the energy loss in the cavity ([Hill2009][]).
 
-**[TBC]**
+The arguments and return values are:
+ 
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:--------------------------
+`f`             | real vector | Hz    | frequencies
+`volume`        | real scalar | m     | volume
+`CCS`           | real vector | m^2   | total loss CCS of cavity
+`Q`             | real vector | -     | total composite Q factor
+`decayRate`     | real vector | /s    | total energy decat rate
+`timeConst`     | real vector | s     | total energy time contant
 
 ## `pwbCoupledCavities`
 
-**[TBC]**
+The function
+
+    [ PD1 , PD2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbCoupledCavities( ACS1 , ACS2 , TCS , Pt1 , Pt2 )
+
+determines the power densities, shielding ratios and effective total absorption cross-sections
+of two coupled caivities.
+
+The arguments and return values are:
+
+argument/return | type        | unit  | description
+:---------------|:-----------:|:-----:|:-------------------------------------------------
+`ACS1`          | real vector | m^2   | absorption cross-section of losses cavity 1
+`ACS2`          | real vector | m^2   | absorption cross-section of losses cavity 2
+`TCS`           | real vector | m^2   | transmission cross-section between cavitities
+`Pt1`           | real vector | W     | power injected into cavity 1
+`Pt2`           | real vector | W     | power injected into cavity 2
+`PD1`           | real vector | W/m^2 | power density in cavity 1
+`PD2`           | real vector | W/m^2 | power density in cavity 2
+`SR1`           | real vector | -     | shielding ratio of cavity 1
+`SR2`           | real vector | -     | shielding ratio of cavity 2
+`TACS1`         | real vector | m^2   | total absorption cross-section seen from cavity 1
+`TACS2`         | real vector | m^2   | total absorption cross-section senn from cavity 2
+
 
 # Antennas
 
@@ -125,7 +259,7 @@ The funtcion
 
 determines the average absorption cross-section and efficiency of an antenna.
 Transmitting antennas have twice the absorption cross-section of receiving
-antennas due to coherent enhanced back-scatttering (**[TBC]**).
+antennas due to coherent enhanced back-scatttering ([Ladbury2007][],[Junqua2012][]).
 
 The arguments and return values are:
 
@@ -329,7 +463,7 @@ of a half to be included.
 
 ![Figure: Circular aperture](figures/CircularAperture.png)
 
-A circular aperture is defined by its `radius` (**[TBC]**).
+A circular aperture is defined by its `radius` ([Hill2009][]).
 
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureCircularPol( radius )
 
@@ -346,7 +480,7 @@ parameter     | type              | unit | description
 ![Figure: Elliptical aperture](figures/EllipticalAperture.png)
 
 An elliptical aperture is defined by its semi-axes along the x- and 
-y-directions, `a_x` and `a_y` (**[TBC]**).
+y-directions, `a_x` and `a_y` ([DeMeulenaere1977][])
 
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol( a_x , b_y )
 
@@ -363,7 +497,7 @@ parameter     | type              | unit | description
 
 ![Figure: Square aperture](figures/SquareAperture.png)
 
-A square aperture is defined by its `side` length (**[TBC]**).
+A square aperture is defined by its `side` length
 
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureSquarePol( side )
 
@@ -383,14 +517,15 @@ parameter   | type              | unit | description
 ![Figure: Rectangular aperture](figures/RectangularAperture.png)
 
 A rectangular aperture is defined by its side lengths along the x- and 
-y-directions, `side_x` and `side_y` (**[TBC]**).
+y-directions, `side_x` and `side_y`
 
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
 
 The first version of the function `pwbApertureRectangularPol` determines the polarisabilitites 
 as those of an elliptical aperture with the same area and aspect ratio. The secnod version
-`pwbApertureRectangularPol2` uses a parametric fit to simulation data (**[TBC]**).
+`pwbApertureRectangularPol2` uses a parametric fit to simulation 
+data ([McDonald1985][],[McDonald1987][],[McDonald1988][]).
 
 parameter     | type              | unit | description
 :-------------|:-----------------:|:----:|:--------------------------------------------------
@@ -466,6 +601,17 @@ dependent parameters.
 ([Bohren2004]) C. F. Bohren and D. R. Huffman, "Absorption and Scattering of Light by Small
 Particles", Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim, 2004.
 
+[Butler1978]: http://ieeexplore.ieee.org/document/1141788
+
+([Butler1978]) C. Butler, Y. Rahmat-Samii and R. Mittra, “Electromagnetic penetration through 
+apertures in conducting surfaces”, IEEE Transactions on Antennas and Propagation, vol. 26, 
+no. 1, pp. 82–93, Jan 1978.
+
+[DeMeulenaere1977]: http://ieeexplore.ieee.org/document/1141568
+
+([DeMeulenaere1977]) F. De Meulenaere and J. Van Bladel, “Polarizability of some small apertures”, 
+IEEE Transactions on Antennas and Propagation, vol.25, no.2, pp. 198- 205, Mar 1977.
+
 [Hill1993]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1361.pdf
 
 ([Hill1993]) D. A. Hill, J. W. Adams, M. T. Ma, A. R. Ondrejka and B. F. Riddle,
@@ -492,10 +638,37 @@ Compatibility, vol. 36, no. 3, pp. 169-178, Aug 1994.
 ([Hill2009]) D. A. Hill, "Electromagnetic fields in cavities: deterministic and statistical theories",
 IEEE Press Series on Electromagntic Wave Theory, John Wiley & Sons, 2009.
 
+[Junqua2012]: http://ieeexplore.ieee.org/document/6151920
+
+([Junqua2012]) I. Junqua, P. Degauque, M. Liénard, and F. Issac, “On the power dissipated by an antenna in transmit 
+mode or in receive mode in a reverberation chamber”, Electromagnetic Compatibility, IEEE Transactions on, vol.54, 
+no.1, pp.174-180, February 2012. 
+
+[Kostas1991]: http://ieeexplore.ieee.org/document/99120
+
+([Kostas1991]) J. Kostas and B. Boverie, “Statistical model for a mode-stirred chamber”, IEEE Transactions on 
+Electromagnetic Compatibility, vol. 33, no. 4, pp. 366–370, November 1991.
+
+[Ladbury2007]: http://ieeexplore.ieee.org/document/4305781
+
+([Ladbury2007]) J. M. Ladbury and D. A. Hill, “Enhanced backscatter in a reverberation chamber: Inside every 
+complex problem is a simple solution struggling to get out”, IEEE International Symposium onElectromagnetic 
+Compatibility 2007, pp. 1-5, 9-13 July 2007. 
+
+[Ladbury2010]: http://ieeexplore.ieee.org/document/5711356
+
+[Ladbury2010] J. M. Ladbury and D. A. Hill, “An improved model for antennas in reverberation chambers”, 
+IEEE International Symposium on Electromagnetic Compatibility 2010, pp. 663-667, 25-30 July 2010.
+
 [LeRu2009]: http://store.elsevier.com/product.jsp?isbn=9780080931555
  
 ([LeRu2009]) E. C. Le Ru and P. G. Etchegoin, Principles of Surface-Enhanced Raman Spectroscopy and Related 
 Plasmonic Effects, Elsevier, Amsterdam, 2009.
+
+[Ladbury2010]: http://ieeexplore.ieee.org/document/5711356
+
+([Ladbury2010]) J. M. Ladbury and D. A. Hill, “An improved model for antennas in reverberation chambers”, 
+IEEE International Symposium on Electromagnetic Compatibility 2010, pp. 663-667, 25-30 July 2010.
 
 [Liu1983]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1066.pdf 
 
@@ -513,6 +686,21 @@ URL: http://code.google.com/p/scatterlib/wiki/Spheres.
 ([Matzler2002]) C. Mätzler, "MATLAB functions for Mie scattering and absorption", 
 Res. Rep. 2002-08, Inst. für Angew. Phys., Bern., 2002.
 
+[McDonald1985]: http://ieeexplore.ieee.org/document/1133186
+
+([McDonald1985]) N. A. McDonald, “Polynomial Approximations for the Electric Polarizabilities of Some Small Apertures”, 
+IEEE Transactions on Microwave Theory and Techniques, vol.33, no.11, pp. 1146-1149, Nov 1985.
+
+[McDonald1987]: http://ieeexplore.ieee.org/document/1133589
+
+([McDonald1987]) N. A. McDonald, “Polynomial Approximations for the Transverse Magnetic Polarizabilities of Some 
+Small Apertures”, IEEE Transactions on Microwave Theory and Techniques, vol.35, no.1, pp. 20- 23, Jan 1987.
+
+[McDonald1988]: http://ieeexplore.ieee.org/document/3648
+
+([McDonald1988]) N. A. McDonald, “Simple approximations for the longitudinal magnetic polarizabilities of some 
+small apertures”, IEEE Transactions on Microwave Theory and Techniques, vol.36, no.7, pp.1141-1144, Jul 1988.
+
 [Orfanidis2016]: http://www.ece.rutgers.edu/~orfanidi/ew
 
 ([Orfanidis2016]) S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers University,
@@ -522,6 +710,10 @@ New Brunswick, NJ , 2016. URL: http://www.ece.rutgers.edu/~orfanidi/ewa.
 
 ([Pena2009]) O. Pena and U. Pal, "Scattering of electromagnetic radiation by a multilayered sphere", 
 Computer Physics Communications, vol. 180, Nov. 2009, pp. 2348-2354.
+
+[Pozar2011]: http://eu.wiley.com/WileyCDA/WileyTitle/productCd-EHEP002016.html
+
+([Pozar2011]) D. M. Pozar, "Microwave Engineering", 4th edition, John Wiley & Sons; 2011.
 
 [Prahl2016]: http://omlc.org/software/mie
 
@@ -540,3 +732,7 @@ URL: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=to
 
 ([SPlaC]) SERS and Plasmonics Codes, SPlaC, University of Victoria,
 URL: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
+
+[Weyl1912]: http://link.springer.com/article/10.1007/BF01456804
+
+([Weyl1912]) H. Weyl, Mathematische Annalen, vol. 71, no. 4, pp. 441-479, 1912.

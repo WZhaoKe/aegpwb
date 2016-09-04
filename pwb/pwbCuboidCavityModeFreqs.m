@@ -1,10 +1,10 @@
 function [ f_c , ijkp ] = pwbCuboidCavityModeFreqs( f_max , a , b , c )
-%
-% pwbCuboidCavityModeFreqs - Calculates the TE/TM_ijk resonant frequencies 
-%                            of a rectangular cavity of given dimensions, 
-%                            up to a given maximum frequency.
+% pwbCuboidCavityModeFreqs - mode frequencies of cuboid cavity
 %
 % [ f_c , ijkp ] = pwbCuboidCavityModes( f_max , a , b , c )
+%
+% Calculates the TE/TM_ijk resonant frequencies of a cuboid cavity of 
+% given dimensions, up to a given maximum frequency [1].
 %
 % Inputs:
 %
@@ -18,18 +18,39 @@ function [ f_c , ijkp ] = pwbCuboidCavityModeFreqs( f_max , a , b , c )
 % f_c   - real vector, mode cut-off frequencies is ascending order [Hz].
 % ijkp -  integer array, mode indices and polarisation [-].
 %
-%         ijk(p,q) describers the p-th mode: 
+%         ijkp(m,n) describers the m-th mode: 
 %
-%                  q=1 is the x-direction mode index "i"
-%                  q=2 is the y-direction mode index "j"
-%                  q=3 is the z-direction mode index "k"
-%                  q=4 is the mode polarisation TM(0) or TE (1).
+%                  n=1 is the x-direction mode index "i"
+%                  n=2 is the y-direction mode index "j"
+%                  n=3 is the z-direction mode index "k"
+%                  n=4 is the mode polarisation TM(0) or TE (1).
+%
+% References:
+%
+% [1] D. M. Pozar, "Microwave Engineering", 4th edition, John Wiley & Sons; 2011.
 %
 
+% This file is part of aegpwb.
 %
-% MPR 9/12/2002
-% Interface changes IDF 08/04/2011.
+% aegpwb power balance toolbox and solver.
+% Copyright (C) 2016 Ian Flintoft
 %
+% aegpwb is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% aegpwb is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You should have received a copy of the GNU General Public License
+% along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
+%
+% Author: M. P. Robinson
+% Date: 09/12/2002
+%       08/04/2011 - new interface, Ian Flintoft
 
   c0 = 299792458;
   
