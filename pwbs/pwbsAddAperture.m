@@ -90,10 +90,9 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
   % Function to estimate cutoff frequency by fitting high pass response to TCS/TE.
   function [ f_c ] = estimateCutoffFreq( f , TCS )
     if( length( TCS ) > 1 )
-      fitFcn = @(p,x) x.^4 ./ ( x.^2 + p.^2 ).^2;
- %     settings = optimset( 'inequc' , { 1 , 0 } );
-%[ f_c , model_values, cvg, outp] = nonlin_curvefit( fitFcn , pwbm.f(floor(end/2)) , pwbm.f , TCS ./ TCS(end) , settings );  
-f_c = NaN;
+      highPassFcn = @(p,x) x.^4 ./ ( x.^2 + p.^2 ).^2;
+      fitFcn=@(f_c) sum( abs( highPassFcn( f_c , f ) - TCS ).^2 );
+      f_c = fminunc( fitFcn , pwbm.f(floor(end/2)) );
     else
       f_c = NaN;
     end % if  

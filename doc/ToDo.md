@@ -7,10 +7,7 @@
 * Decide whether to stay with conventional of putting factor of 1/2 from wall
   shadowing into TCS. If so, write detailed note for user manual.
 
-* Add instruction for obtaining and installing Mie codes.
-
-* `scattnlay` has been updated and is GPL3. Could consider distributing with
-  toolbox.
+* `scattnlay` is GPL3. Could consider distributing with toolbox.
 
 ## Toolbox
 
@@ -53,9 +50,9 @@
 
 ## Solver
 
-* Fix estimateCutoffFreq in pwbsAddAperture to work in both MATLAB and Octave.
+* estimateCutoffFreq in pwbsAddAperture may not work very well.
 
-* Tests for probability distributions.
+* More tests for probability distributions.
 
 * Estimate polarisabilities of apertures defined by TCS/TE from area and 
   cut-off frequency by assuming circular aperture.
