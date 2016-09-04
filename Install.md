@@ -25,7 +25,7 @@ systems.
 
 ### Get the source code
 
-Either use Mercurial to clone the source code repository on Bitbucket, for 
+Either use Mercurial to clone the source code repository on bitbucket, for 
 example using Mercurial directly from a Linux shell,
 
     $ hg clone ssh://hg@bitbucket.org/uoyaeg/aegpwb aegpwb-working
@@ -39,10 +39,10 @@ aegpwb-working
 
 ### Install the m-files
 
-After getting the source code copy the sub-directories called pwb and pwbs from 
-the aegpwb-working directory to somewhere convenient and add them to your 
-Octave/MATLAB path. For octave you may also need to put the files in the 
-sub-directory matcompat somewhere in search path too.
+After getting the source code copy the sub-directories called `pwb` and `pwbs`
+somewhere convenient and add them to your Octave/MATLAB path. For older 
+versions of Octave you may also need to put the files in the sub-directory
+`matcompat` somewhere in search path too.
 
 ### Install third party Mie codes
 
@@ -61,10 +61,10 @@ Instruction for installing each of these are given below.
 
 #### SPlaC
 
-The SERS and Plasmonics Code [SPlaC][] is a package of MATLAB functions that
+The SERS and Plasmonics Code [SPlaC][] is a package of MATLAB functions that 
 includes Mie Series calculations. To use this code for multi-layer sphere 
-cacluations the code should be installed and the required sub-directories 
-add to the path, for example, using
+calculations the code should be installed and the required sub-directories add to 
+the path, for example, using
 
     addpath( genpath( '<path to SPlaC>/SPlaC/Mie' ) );
 
@@ -75,25 +75,26 @@ cacluations. As a minimum the C program from the package should be compiled usin
 
     make standalone
 
-and the excutable `scattnlay` that is created (in the directory one level up from that
-containing the Makefile) copied to a location in the systems command search path.
+and the executable `scattnlay` that is created (in the directory one level up 
+from that containing the Makefile) copied to a location in the systems command 
+search path.
 
 #### [scattnlay_v][]
 
-Pena and Pal's earlier code [scattnlay_v1][] contains a MATLAB implementation that can 
-also be used by the toolbox. To use this installed the package and add the folder 
-containing the function nMie to the MATLAB/Octave path.
+Pena and Pal's earlier code [scattnlay_v1][] contains a MATLAB implementation 
+that can also be used by the toolbox. To use this installed the package and add 
+the folder containing the function `nMie` to the MATLAB/Octave path.
 
 #### [Matzler][]
 
-Christian Matzler's MATLAB code can also be used for homogeneous spheres. 
-Put the function `mie` into a directory in MATLAB/Octave's path.
+Christian Matzler's MATLAB code can also be used for homogeneous spheres. Put 
+the function `mie` into a directory in MATLAB/Octave's path.
 
 #### [scatterlib][]
 
-K. Markowicz's MATLAB implementation of Bohren and Huffmann's code can be used
-for homogeneous spheres. Put the function `bhmie` into a directory in MATLAB/Octave's
-path.
+K. Markowicz's MATLAB implementation of Bohren and Huffmann's code can be used 
+for homogeneous spheres. Put the function `bhmie` into a directory in 
+MATLAB/Octave's path.
 
 ## Run the test-suite
 

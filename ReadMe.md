@@ -4,7 +4,7 @@
 
 The Applied Electromagnetics Group ([AEG][]) power balance (PWB) toolbox and 
 solver for [MATLAB][] and [GNU][] [Octave][] is an [Open Source][] set of tools for 
-undertaking PWB analysis of electrically large enclosured spaces. It was 
+undertaking PWB analysis of electrically large enclosed spaces. It was 
 developed in the [Department of Electronics][] at the [University of York][] for 
 research in electromagnetic compatibility ([EMC][]).
 
@@ -27,10 +27,10 @@ Topology (EMT) methodology by Parmantier and Junqua at [ONERA][] ([Junqua2005][]
 cavities, coupled with wires, apertures, antennas etc. Each of these is assigned 
 a model for its coupling cross section, and the power transferred and the 
 resulting power density in each cavity is calculated over a broadband from a set 
-of linear equations dervied from the overall power balance in each cavity. 
+of linear equations derived from the overall power balance in each cavity. 
 
-The set of linear equations can also be represented as a equivalent cicruit in 
-which cavities are nodes of the cicuit and power absorption and transmission 
+The set of linear equations can also be represented as a equivalent circuit in 
+which cavities are nodes of the circuit and power absorption and transmission 
 processes are admittances on the edges connecting the nodes. The power densities 
 in the cavities are the across variables ("voltages") and the powers absorbed or 
 coupled through the admittances are the through variables ("currents"). For a 
@@ -44,7 +44,7 @@ cross-section (TCS) of the process.
 The power balance relationship for the equilibrium state of each cavity in the 
 system requires the total power transmitted into the cavity to be equal to the 
 total power absorption within the cavity; this leads to a linear equation 
-relating the power densities with the ACSs and TCSs as coefficients, analagous 
+relating the power densities with the ACSs and TCSs as coefficients, analogous 
 to Kirchhoff's Current Law. The ACSs and TCSs can be referred to collectively as 
 coupling cross-section (CCSs). If a system contains `N` cavities then `N` such 
 linear equations can be formed from the power balance in each cavity and then 
@@ -60,7 +60,7 @@ The toolbox and solver include:
 
 * Models for the absorption in cavity walls;
 
-* Detemination of polarisabilities and average transmission cross-sections of apertures;
+* Determination of polarisabilities and average transmission cross-sections of apertures;
 
 * Models for absorption in metal, dielectric and arbitrary laminated surfaces;
 
@@ -70,7 +70,7 @@ The toolbox and solver include:
 
 * Support for user supplied CCS, for example, from experiments;
 
-* Probabilities distributions for electromagnetic quantitities in cavities and 
+* Probabilities distributions for electromagnetic quantities in cavities and 
   received electrical parameters in antenna and transmission lines;
 
 ## Requirements
@@ -125,7 +125,7 @@ There is a Wiki on the bitbucket [project page](https://bitbucket.org/uoyaeg/aeg
 
 ## How to contribute
 
-We welcome any contributions to the development of the mesher, including:
+We welcome any contributions to the development of the code, including:
 
 * Fixing bugs.
 
@@ -153,45 +153,39 @@ details see the file [Licence.txt][].
 
 [Dr John Dawson][], <john.dawson@york.ac.uk>
 
-## Credits
-
-**[TBC]**
-
-## Related links
-
-**[TBC]**
-
 ## References
 
 [Hill1994]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=305461
 
-([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford and R. T. Johnk, 
-           "Aperture excitation of electrically large, lossy cavities,"
-           IEEE Transactions on Electromagnetic Compatibility, vol. 36, no. 3, pp. 169-178, Aug 1994.
+([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford 
+and R. T. Johnk, "Aperture excitation of electrically large, lossy cavities", 
+IEEE Transactions on Electromagnetic Compatibility, vol. 36, no. 3, pp. 169-178, 
+Aug 1994.
 
 [Hill1998]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=709418
 
-([Hill1998]) D. A. Hill, 
-           "Plane wave integral representation for fields in reverberation chambers,"
-           IEEE Transactions on Electromagnetic Compatibility, vol. 40, no. 3, pp. 209-217, Aug 1998.
+([Hill1998]) D. A. Hill, "Plane wave integral representation for fields in 
+reverberation chambers," IEEE Transactions on Electromagnetic Compatibility, 
+vol. 40, no. 3, pp. 209-217, Aug. 1998.
 
 [Junqua2005]: http://www.tandfonline.com/doi/abs/10.1080/02726340500214845
 
 ([Junqua2005]) I. Junqua, J.-P. Parmantier and F. Issac,
-             "A Network Formulation of the Power Balance Method for High-Frequency Coupling",
-             Electromagnetics Vol. 25 , Iss. 7-8,2005 
+"A Network Formulation of the Power Balance Method for High-Frequency Coupling",
+Electromagnetics, vol. 25 , no. 7-8, pp. 603-622, 2005.
 
 [Parmantier2007]: http://link.springer.com/chapter/10.1007/978-0-387-37731-5_1
 
-([Parmantier2007]) J.-P. Parmantier and I. Junqua,
-                 "EM Topology: From Theory to Application",
-                 in Ultra-Wideband, Short-Pulse Electromagnetics 7, Springer New York, pp. 3-12, 2007
+([Parmantier2007]) J.-P. Parmantier and I. Junqua, "EM Topology: From theory to 
+application", Ultra-Wideband, Short-Pulse Electromagnetics 7, Springer, New 
+York, pp. 3-12, 2007.
     
 [Tait2011]: http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=5491150
 
-([Tait2011]) G. B. Tait, R. E. Richardson, M. B. Slocum, M. O. Hatfield and M. J. Rodriguez, 
-           "Reverberant Microwave Propagation in Coupled Complex Cavities",
-           IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232, Feb. 2011.
+([Tait2011]) G. B. Tait, R. E. Richardson, M. B. Slocum, M. O. Hatfield and 
+M. J. Rodriguez, "Reverberant microwave propagation in coupled complex cavities", 
+IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232, 
+Feb. 2011.
 
 
 [Dr Ian Flintoft]: http://www.elec.york.ac.uk/staff/idf1.html

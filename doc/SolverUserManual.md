@@ -92,7 +92,7 @@ range should span the frequency range of the model, with the highest and lowest
 model lying on or between ``f(1)` and `f(n)`. The remaining columns are interpreted
 as `m` frequency dependent data vectors with units and ranges appropriate to the
 context. For examples, CCSs and CEs must be positive numbers. The data vectors are
-interpolated onto the frequencies used by the particular model. An extra colums
+interpolated onto the frequencies used by the particular model. Any extra columns
 in the ASCII file not required for the specific context will be ignored.
 
 ## Model initialisation
@@ -172,11 +172,11 @@ argument/return | type      | unit | description
 Part of an EMT can be "compacted", i.e. reduced to an equivalent single
 object CCS. This allows stable models of parts of a large structure to be
 modelled efficiently while other parts are under development. For example,
-in the EMT on the left hand side above cavity `C2` and eveything connected 
+in the EMT on the left hand side above cavity `C2` and everything connected 
 to it can be replaced by a single absorber `ABC` as shown in the EMT on the 
 right hand side. 
 
-Compaction is achivied using the function call
+Compaction is achieved using the function call
 
     [ CCS ] = pwbsCompactModel( pwbm , objectType , objectTag , parameters )
 
@@ -241,9 +241,8 @@ required outputs:
     
 The output names depend on the object type and are given in the sections below. 
 Some outputs are available immediately after an object is added while others are 
-only available after the setup or solution phases. The valid outputs for a 
-particular object type can also be determined and optionally listed using the 
-function call
+only available after the solution phase. The valid outputs for a particular object 
+type can also be determined and optionally listed using the function call
 
     [ validOutputs , units ] = pwbsValidOutputs( pwbm , objectType [ , isShow ] )
 
@@ -326,7 +325,7 @@ argument/return | type          | unit | description
 
 [1] Units depend on the quantity and distribution type requested.
 
-The following disitrbution types are supported:
+The following distribution types are supported:
 
 `dist` | description
 :------|:----------------------------------------------
@@ -394,7 +393,7 @@ the surface area and volume are given directly. The surface area is the nominal
 area of a *closed surface* including the area of the cavity walls and any 
 apertures in them. The total area of any apertures added to the cavity 
 (`apertureArea`) are subtracted from this nominal surface area to give the 
-`wallArea` of the cavity during the setup phase.
+`wallArea` of the cavity during the solution.
 
 For the `'Cuboid'` and `'Generic'` types the ACS of the cavity walls is 
 determined from `wallArea` using the electrical parameters `sigma` and `mu_r`. 
@@ -408,7 +407,7 @@ For the `'Generic'` types the number of modes (`numModes`) and mode density
 order correction. This formula is also used to estimate the 
 frequency of the first and sixtieth modes, `f_1` and `f_60`. For the `'Cuboid'` 
 type exact mode frequencies are calculated for the lowest 1000 modes and the 
-number of modes and modeDEnsity is then smoothly matched onto the Weyl estimate 
+number of modes and mode density is then smoothly matched onto the Weyl estimate 
 for higher frequencies.
 
 ## Outputs
@@ -564,7 +563,7 @@ the provided TCS/TE data.
 ![Figure: Generic aperture](figures/GenericAperture.png)
 
 A generic aperture is defined by its area, normal electric polarisability, 
-`alpha_ezz` and tangential magnetic polarisabilitites `alpha_mxx` and `alpha_myy`.
+`alpha_ezz` and tangential magnetic polarisabilities `alpha_mxx` and `alpha_myy`.
 
 ### `'Circular'`
 
@@ -727,7 +726,7 @@ file, together with its surface area provided as a parameter.
 ### `'MetalSurface'`
 
 The absorption by a metal surface of defined area can be modelled by providing 
-the conducitivity and relative permeability of the metal, as frequency 
+the conductivity and relative permeability of the metal, as frequency 
 independent scalars or frequency dependent vectors. The provided parameters must 
 define a good conductor over the full bandwidth of the model.
 
@@ -846,8 +845,8 @@ For the matched type the absorption/antenna efficiency is unity.
 
 ### `'MismatchedAE'` & `'MismatchedFileAE'`
 
-Mismatch antennas can be moddled by providing the absorption/antenna efficiency
-asa parameters or from a two column ASCII data with the first column giving the 
+Mismatch antennas can be modelled by providing the absorption/antenna efficiency
+as parameters or from a two column ASCII data with the first column giving the 
 frequency in hertz and the second column the AE.
 
 ### `'Monopole'` & `'Dipole'`
@@ -1080,7 +1079,7 @@ optimisation via the JIT compiler.
 
 ![Figure: EMT for nested reverberation chambers](figures/NRC_EMT.png)
 
-Function to solve nested reberation chambers PWB problem:
+Function to solve nested reverberation chambers PWB problem:
 
     function NRC()
     % Nested reverberation chambers.
@@ -1144,8 +1143,10 @@ Function to solve nested reberation chambers PWB problem:
       % Plot the SE.
       figure();
       semilogx( f ./ 1e9 , 10 .* log10( SE ) , 'lineWidth' , 3 );
-      xlabel( 'Frequency [Hz]' , 'fontSize' , 12 , 'fontName' , 'Helvetica' );
-      ylabel( 'Shielding effectiveness, SE (dB)' , 'fontSize' , 12 , 'fontName' , 'Helvetica' );
+      xlabel( 'Frequency [Hz]' , 'fontSize' , 12 , ...
+        'fontName' , 'Helvetica' );
+      ylabel( 'Shielding effectiveness, SE (dB)' , ...
+        'fontSize' , 12 , 'fontName' , 'Helvetica' );
       set( gca , 'XMinorTick' , 'on' , 'XMinorGrid', 'on' );
       set( gca , 'XTickLabel' , num2str( get( gca , 'XTick' )' ) );
       set( gca , 'fontSize' , 12 , 'fontName' , 'Helvetica' );

@@ -41,8 +41,8 @@ The function
 
     [ data ] = pwbImportAndInterp( f , fileName )
 
-loads and interpolates frequency dependent data from an ASCII file.
-The input ASCII file must have the format: 
+loads and interpolates frequency dependent data from an ASCII file. The input 
+ASCII file must have the format: 
 
     # Optional header/comment using initial # character. 
     # M+1 columns of real data with N rows
@@ -55,11 +55,10 @@ The input ASCII file must have the format:
     ......    .....   .....   ......
     ft(N)     DV1(N)  .....   DVM(N)
 
-The first frequency in the file, `ft(1)`, must less than or equal to the 
-lowest frequency in `f` and the last frequency in the file, `ft(N)`,
-must greater than or equal to the highest frequency in `f`. The data at 
-the frequencies given in the file are interpolated onto the frequencies 
-requested. 
+The first frequency in the file, `ft(1)`, must less than or equal to the lowest 
+frequency in `f` and the last frequency in the file, `ft(N)`, must greater than 
+or equal to the highest frequency in `f`. The data at the frequencies given in 
+the file are interpolated onto the frequencies requested. 
 
 The arguments and return values are:
 
@@ -71,10 +70,11 @@ argument/return | type        | unit  | description
 
 ## `pwbDistDiffuse`
 
-The probability distributions of electromagnetic quantities in an ideally
-reverberant cavity can be determined using the function ([Hill1998])
+The probability distributions of electromagnetic quantities in an ideally 
+reverberant cavity can be determined using the function ([Hill1998][])
 
-    [ x , y , meanQuantity , stdQuantity quantQuantity ] = pwbDistDiffuse( quantity , dist , refValue )
+    [ x , y , meanQuantity , stdQuantity quantQuantity ] = ...
+      pwbDistDiffuse( quantity , dist , refValue )
     
 The arguments and return values are:
 
@@ -90,10 +90,10 @@ argument/return | type        | unit  | description
 `quantQuantity` | real array  |       | quantiles  of quantity
 
 `quantQuantity` is a two-dimensional array whose first row give values of the 
-CDF the and the second row gives the quantiles. The 25-th, 50-th (median), 75-th, 
-95-th and 99-th quantiles are returned.
+CDF the and the second row gives the quantiles. The 25-th, 50-th (median), 
+75-th, 95-th and 99-th quantiles are returned.
 
-Supported physical quantitites are
+Supported physical quantities are
 
 `quantity` | description
 :----------|------------------------------------------------------------------------
@@ -101,7 +101,7 @@ Supported physical quantitites are
 `'Fi'`     | magnitude of field component or received voltage/current
 `'Fi2'`    | squared magnitude of field component or received power
 `'F'`      | total field magnitude
-`'F2'`     | square of total field magnitude, power density or enegy density
+`'F2'`     | square of total field magnitude, power density or energy density
 
 Supported probability distributions are
 
@@ -111,12 +111,12 @@ Supported probability distributions are
 `'CCDF'` | complementary cumulative distribution, reliability function
 `'PDF'`  | probability density function
 
-The required reference value for the different quantitites are
+The required reference value for the different quantities are
 
 `quantity` | required reference value
 -----------|-----------------------------------------------------------------------------
 `'Fir'`    | standard deviation of real/imaginary part of field component/voltage/current
-`'Fi'`     | mean of magnitdue of field component/voltage/current
+`'Fi'`     | mean of magnitude of field component/voltage/current
 `'Fi2'`    | mean square of field component magnitude/power
 `'F'`      | mean of total field magnitude       
 `'F2'`     | mean square of total field magnitude
@@ -128,8 +128,8 @@ The required reference value for the different quantitites are
 
 ### `pwbCuboidCavityModeFreqs`
 
-The frequencies of the modes in a cuboid cavity can be determined using the function
-([Pozar2011][])
+The frequencies of the modes in a cuboid cavity can be determined using the 
+function ([Pozar2011][])
 
     [ f_c , ijkp ] = pwbCuboidCavityModeFreqs( f_max , a , b , c )
 
@@ -142,9 +142,9 @@ argument/return | type        | unit  | description
 `f_c`           | real vector | Hz    | mode frequencies
 `ikjp`          | real array  | -     | mode indices and polarisations
 
-The mode frequencies `f_c` are returned in ascending order ans include degenerate
-frequencies. Use `unique( f_c)` to eliminate degenerate frequencies if desired.
-The two dimensional array `ijkp(m,n)` describes the m-th mode:
+The mode frequencies `f_c` are returned in ascending order ans include 
+degenerate frequencies. Use `unique( f_c)` to eliminate degenerate frequencies 
+if desired. The two dimensional array `ijkp(m,n)` describes the m-th mode:
 
 column, `n` | type    | unit  | description
 :-----------|:-------:|:-----:|:-------------------------------
@@ -175,7 +175,7 @@ argument/return | type        | unit  | description
 `f`             | real vector | Hz    | frequencies
 `volume`        | real scalar | m     | volume
 `a`, `b`, `c`   | real scalar | m     | cuboid cavity side lengths
-`numModes`      | real vector | -     | cumultive number of modes
+`numModes`      | real vector | -     | cumulative number of modes
 `modeDensity`   | real vector | /Hz   | mode density
 `f_1`           | real scalar | Hz    | frequency of first mode
 `f_60`          | real scalar | Hz    | frequency of sixtieth mode
@@ -187,7 +187,7 @@ The losses in the walls of a cavity can be determined using the function
     [ ACS , AE ] = pwbGenericCavityWallACS( f , area , volume , sigma , mu_r )
 
 The function uses the uses a perturbative calculation of wall loss in a cuboid 
-cavity parameterised in terms of the cavity volume and sirface area ([Liu1983][]).
+cavity parametrised in terms of the cavity volume and surface area ([Liu1983][]).
 
 The arguments and return values are:
 
@@ -210,7 +210,8 @@ The group of functions
     [ CCS , decayRate , timeConst ] = pwbEnergyParamsFromQ( f , Q , volume )
     [ CCS , decayRate , Q ] = pwbEnergyParamsFromTimeConst( f , timeConst , volume )
  
-convert between different descriptions of the energy loss in the cavity ([Hill2009][]).
+convert between different descriptions of the energy loss in the cavity 
+([Hill2009][]).
 
 The arguments and return values are:
  
@@ -220,17 +221,18 @@ argument/return | type        | unit  | description
 `volume`        | real scalar | m     | volume
 `CCS`           | real vector | m^2   | total loss CCS of cavity
 `Q`             | real vector | -     | total composite Q factor
-`decayRate`     | real vector | /s    | total energy decat rate
-`timeConst`     | real vector | s     | total energy time contant
+`decayRate`     | real vector | /s    | total energy decay rate
+`timeConst`     | real vector | s     | total energy time constant
 
 ## `pwbCoupledCavities`
 
 The function
 
-    [ PD1 , PD2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbCoupledCavities( ACS1 , ACS2 , TCS , Pt1 , Pt2 )
+    [ PD1 , PD2 , SR1 , SR2 , TACS1 , TACS2 ] = ...
+      pwbCoupledCavities( ACS1 , ACS2 , TCS , Pt1 , Pt2 )
 
-determines the power densities, shielding ratios and effective total absorption cross-sections
-of two coupled caivities.
+determines the power densities, shielding ratios and effective total absorption 
+cross-sections of two coupled cavities.
 
 The arguments and return values are:
 
@@ -238,7 +240,7 @@ argument/return | type        | unit  | description
 :---------------|:-----------:|:-----:|:-------------------------------------------------
 `ACS1`          | real vector | m^2   | absorption cross-section of losses cavity 1
 `ACS2`          | real vector | m^2   | absorption cross-section of losses cavity 2
-`TCS`           | real vector | m^2   | transmission cross-section between cavitities
+`TCS`           | real vector | m^2   | transmission cross-section between cavities
 `Pt1`           | real vector | W     | power injected into cavity 1
 `Pt2`           | real vector | W     | power injected into cavity 2
 `PD1`           | real vector | W/m^2 | power density in cavity 1
@@ -246,7 +248,7 @@ argument/return | type        | unit  | description
 `SR1`           | real vector | -     | shielding ratio of cavity 1
 `SR2`           | real vector | -     | shielding ratio of cavity 2
 `TACS1`         | real vector | m^2   | total absorption cross-section seen from cavity 1
-`TACS2`         | real vector | m^2   | total absorption cross-section senn from cavity 2
+`TACS2`         | real vector | m^2   | total absorption cross-section seen from cavity 2
 
 
 # Antennas
@@ -257,14 +259,15 @@ The funtcion
 
     [ ACS , AE ] = pwbAntenna( f , isTx , AE )
 
-determines the average absorption cross-section and efficiency of an antenna.
-Transmitting antennas have twice the absorption cross-section of receiving
-antennas due to coherent enhanced back-scatttering ([Ladbury2007][],[Junqua2012][]).
+determines the average absorption cross-section and efficiency of an antenna. 
+Transmitting antennas have twice the absorption cross-section of receiving 
+antennas due to coherent enhanced back-scattering 
+([Ladbury2007][],[Junqua2012][]).
 
 The arguments and return values are:
 
 argument/return | type            | unit | description
-:---------------|:---------------:|:----:|:------------------------------------
+:---------------|:---------------:|:----:|:-----------------------------------
 `f`             | real vector     | Hz   | frequencies
 `isTx`          | boolean         | -    | true if transmitting antenna
 `AE`            | real vector [1] | -    | total antenna/absorption efficiency
@@ -279,9 +282,10 @@ The function
 
     [ ACS , AE ] = pwbMetalSurface( f , area , sigma , mu_r )
 
-determines the average absorption cross-section and efficiency of a highly
-conducting surface by averaging the reflectance determined from the Fresnel
-coefficients over the angles of arrival and the polarisations ([Orfanidis2016][]).
+determines the average absorption cross-section and efficiency of a highly 
+conducting surface by averaging the reflectance determined from the Fresnel 
+coefficients over the angles of arrival and the polarisations 
+([Orfanidis2016][]).
        
 The input arguments and output values are:
 
@@ -294,8 +298,8 @@ argument/return | type               | unit  | description
 `ACS`           | real vector        | m^2   | absorption cross-section
 `AE`            | real vector        | -     | absorbers efficiency
 
-[1] The material vectors must be either scalars for frequency independent parameters 
-or have the same length as `f` for frequency dependent parameters.
+[1] The material vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
 
 ## `pwbDielectricSurface`
 
@@ -304,8 +308,9 @@ The function
     [ ACS , AE ] = pwbDielectricSurface( f , area , eps_r , sigma , mu_r )
 
 determines the average absorption cross-section and efficiency of a lossy 
-dielectric surface by averaging the reflectance determined from the Fresnel
-coefficients over the angles of arrival and the polarisations ([Orfanidis2016][]).
+dielectric surface by averaging the reflectance determined from the Fresnel 
+coefficients over the angles of arrival and the polarisations 
+([Orfanidis2016][]).
         
 The input arguments and output values are:
 
@@ -319,8 +324,8 @@ argument/return | type               | unit  | description
 `ACS`           | real vector        | m^2   | absorption cross-section
 `AE`            | real vector        | -     | absorbers efficiency
 
-[1] The material vectors must be either scalars for frequency independent parameters 
-or have the same length as `f` for frequency dependent parameters.
+[1] The material vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
 
 ## `pwbLaminatedSurface`
 
@@ -328,12 +333,14 @@ or have the same length as `f` for frequency dependent parameters.
 
 The function 
 
-    [ ACS , AE ] = pwbLaminatedSurface( f , area , thicknesses , eps_r , sigma , mu_r , sigmam )
+    [ ACS , AE ] = ...
+      pwbLaminatedSurface( f , area , thicknesses , eps_r , sigma , mu_r , sigmam )
 
 determines the (average) absorption cross-section and efficiency of a lossy 
-multilayer surface. It uses a multi-layer reflection and transmission code to
+multilayer surface. It uses a multi-layer reflection and transmission code to 
 determine the reflectance at oblique incidence for TE and TM polarisations and 
-then averages over the angles of arrival and the polarisations ([Orfanidis2016][]).
+then averages over the angles of arrival and the polarisations 
+([Orfanidis2016][]).
         
 The input arguments and output values are:
 
@@ -349,9 +356,9 @@ argument/return | type              | unit  | description
 `ACS`           | real vector       | m^2   | absorption cross-section
 `AE`            | real vector       | -     | absorbers efficiency
 
-[1] The material arrays must have `numLayer` columns and either one row for frequency
-independent parameters or the same number of rows as the length of `f` for frequency
-dependent parameters.
+[1] The material arrays must have `numLayer` columns and either one row for 
+frequency independent parameters or the same number of rows as the length of `f` 
+for frequency dependent parameters.
 
 ## `pwbSphere`
 
@@ -361,8 +368,8 @@ The function
 
 determines the (average) absorption cross-section and efficiency of a lossy 
 homogeneous sphere. It uses a [Mie Series][] calculation to determine the 
-absorption efficiency. Interfaces are provide for a number of different Mie
-codes which can be called explicity using
+absorption efficiency. Interfaces are provide for a number of different Mie 
+codes which can be called explicitly using
 
     [ ACS , AE ] = pwbLaminatedSphere_Matzler( f , radius , eps_r , sigma , mu_r )
     [ ACS , AE ] = pwbLaminatedSphere_Markowicz( f , radius , eps_r , sigma , mu_r )
@@ -390,7 +397,7 @@ This version of the function uses Christian Matzler's MATLAB code
 
 ### `pwbSphere_Markowicz`
 
-This version of the function uses a MATLAB implementation of Bohren and
+This version of the function uses a MATLAB implementation of Bohren and 
 Huffman's code ([Bohren2004][],[Markowicz2016][]).
 
 ## `pwbLaminatedSphere`
@@ -403,14 +410,15 @@ The function
 
 determines the (average) absorption cross-section and efficiency of a lossy 
 multilayer sphere. It uses a [Mie Series][] calculation to determine the 
-absorption efficiency. Interfaces are provide for a number of different Mie
-codes which can be called explicity using
+absorption efficiency. Interfaces are provide for a number of different Mie 
+codes which can be called explicitly using
 
     [ ACS , AE ] = pwbLaminatedSphere_SPlaC( f , radii , eps_r , sigma , mu_r )
     [ ACS , AE ] = pwbLaminatedSphere_PenaPal( f , radii , eps_r , sigma , mu_r )
     [ ACS , AE ] = pwbLaminatedSphere_PenaPalM( f , radii , eps_r , sigma , mu_r )
     
-The generic function `pwbLaminatedSphere` chooses the best available code it can find.  
+The generic function `pwbLaminatedSphere` chooses the best available code it can 
+find.  
         
 The input arguments and output values are:
 
@@ -424,37 +432,36 @@ argument/return | type              | unit | description
 `ACS`           | real vector       | m^2  | absorption cross-section
 `AE`            | real vector       | -    | absorbers efficiency
 
-[1] The material arrays must have `numLayer` columns and either one row for frequency
-independent parameters or the same number of rows as the length of `f` for frequency
-dependent parameters.
+[1] The material arrays must have `numLayer` columns and either one row for 
+frequency independent parameters or the same number of rows as the length of `f` 
+for frequency dependent parameters.
 
 ### `pwbLaminatedSphere_SPlaC`
 
 This version of the function uses the SERS and Plasmonics Codes (SPlaC) package 
-([SPlaC][],[LeRu2009][]).
-If appears to give the large dynamic range with respect to the loss and 
-electrical size of the sphere. 
+([SPlaC][],[LeRu2009][]). If appears to give the large dynamic range with 
+respect to the loss and electrical size of the sphere. 
 
 ### `pwbLaminatedSphere_PenaPal`
 
 This version of the function uses the C program from Pena and Pal's more recent 
-scattnlay package ([scattnlay_v2][],[Pena2009][]).
-It appears to provide a moderate dynamic range with respect to the loss and 
-electrical size of the sphere.
+`scattnlay` package ([scattnlay_v2][],[Pena2009][]). It appears to provide a 
+moderate dynamic range with respect to the loss and electrical size of the 
+sphere.
 
 ### `pwbLaminatedSphere_PenaPalM`
 
 This version of the function uses the MATLAB program from Pena and Pal's 
-original scattnlay package ([scattnlay_v1][],[Pena2009][]).
-It appears to provide a moderate dynamic range with respect to the loss and 
-electrical size of the sphere.
+original `scattnlay` package ([scattnlay_v1][],[Pena2009][]). It appears to 
+provide a moderate dynamic range with respect to the loss and electrical size of 
+the sphere.
 
 # Apertures
 
-Note: TCSs and TEs used in the toolbbox follow the convention of including the 
+Note: TCSs and TEs used in the toolbox follow the convention of including the 
 factor of half from the half-space illumination in the cross-section itself. 
 Taking the product of the power density in the cavity with such a TCS therefore 
-directly yields the power coupled through the aperture without needing a factor
+directly yields the power coupled through the aperture without needing a factor 
 of a half to be included.
 
 ## Aperture polarisabilities
@@ -482,7 +489,8 @@ parameter     | type              | unit | description
 An elliptical aperture is defined by its semi-axes along the x- and 
 y-directions, `a_x` and `a_y` ([DeMeulenaere1977][])
 
-    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol( a_x , b_y )
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = ...
+       pwbApertureEllipticalPol( a_x , b_y )
 
 parameter     | type              | unit | description
 :-------------|:-----------------:|:----:|:-----------------------------------------------
@@ -501,8 +509,8 @@ A square aperture is defined by its `side` length
 
     [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureSquarePol( side )
 
-The function determines the polarisabilitites as those of a circular aperture with 
-the same area.
+The function determines the polarisabilities as those of a circular aperture 
+with the same area.
 
 parameter   | type              | unit | description
 :-----------|:-----------------:|:----:|:---------------------------------------------
@@ -519,13 +527,16 @@ parameter   | type              | unit | description
 A rectangular aperture is defined by its side lengths along the x- and 
 y-directions, `side_x` and `side_y`
 
-    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
-    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y )
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = ...
+      pwbApertureRectangularPol( side_x , side_y )
+      
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = ...
+      pwbApertureRectangularPol2( side_x , side_y )
 
-The first version of the function `pwbApertureRectangularPol` determines the polarisabilitites 
-as those of an elliptical aperture with the same area and aspect ratio. The secnod version
-`pwbApertureRectangularPol2` uses a parametric fit to simulation 
-data ([McDonald1985][],[McDonald1987][],[McDonald1988][]).
+The first version of the function `pwbApertureRectangularPol` determines the 
+polarisabilities as those of an elliptical aperture with the same area and 
+aspect ratio. The second version `pwbApertureRectangularPol2` uses a parametric 
+fit to simulation data ([McDonald1985][],[McDonald1987][],[McDonald1988][]).
 
 parameter     | type              | unit | description
 :-------------|:-----------------:|:----:|:--------------------------------------------------
@@ -544,8 +555,8 @@ The function
 
     [ TCS , TE , f_c ] = pwbApertureTCS( f , area , alpha_mxx , alpha_myy , alpha_ezz )
 
-determines the average transmission cross-section of an aperture from its area and electric
-and magnetic polarisabiltites ([Hill1994][]). 
+determines the average transmission cross-section of an aperture from its area 
+and electric and magnetic polarisabilities ([Hill1994][]). 
 
 The input arguments and output values are:
 
@@ -568,10 +579,11 @@ The function
     [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = ...
        pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 
-determines the average absorption and transmission cross-sections and efficiencies
-of a lossy multilayer surface. It uses a multi-layer reflection and transmission code 
-to determine the reflectance at oblique incidence for TE and TM polarisations and 
-then averages over the angles of arrival and the polarisations ([Orfanidis2016][]).
+determines the average absorption and transmission cross-sections and 
+efficiencies of a lossy multilayer surface. It uses a multi-layer reflection and 
+transmission code to determine the reflectance at oblique incidence for TE and 
+TM polarisations and then averages over the angles of arrival and the 
+polarisations ([Orfanidis2016][]).
 
 The input arguments and output values are:
 
@@ -590,148 +602,168 @@ argument/return | type              | unit  | description
 `AE2`           | real vector       | -     | absorbers efficiency of side 2
 `TE`            | real vector       | -     | transmission efficiency
 
-[1] The material arrays must have `numLayer` columns and either one row for frequency
-independent parameters or the same number of rows as the length of `f` for frequency
-dependent parameters.
+[1] The material arrays must have `numLayer` columns and either one row for 
+frequency independent parameters or the same number of rows as the length of `f` 
+for frequency dependent parameters.
 
 # References
 
 [Bohren2004]: http://onlinelibrary.wiley.com/book/10.1002/9783527618156
 
-([Bohren2004]) C. F. Bohren and D. R. Huffman, "Absorption and Scattering of Light by Small
-Particles", Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim, 2004.
+([Bohren2004]) C. F. Bohren and D. R. Huffman, "Absorption and Scattering of 
+Light by Small Particles", Wiley-VCH Verlag GmbH & Co. KGaA, Weinheim, 2004.
 
 [Butler1978]: http://ieeexplore.ieee.org/document/1141788
 
-([Butler1978]) C. Butler, Y. Rahmat-Samii and R. Mittra, “Electromagnetic penetration through 
-apertures in conducting surfaces”, IEEE Transactions on Antennas and Propagation, vol. 26, 
-no. 1, pp. 82–93, Jan 1978.
+([Butler1978]) C. Butler, Y. Rahmat-Samii and R. Mittra, “Electromagnetic 
+penetration through apertures in conducting surfaces”, IEEE Transactions on 
+Antennas and Propagation, vol. 26, no. 1, pp. 82–93, Jan 1978.
 
 [DeMeulenaere1977]: http://ieeexplore.ieee.org/document/1141568
 
-([DeMeulenaere1977]) F. De Meulenaere and J. Van Bladel, “Polarizability of some small apertures”, 
-IEEE Transactions on Antennas and Propagation, vol.25, no.2, pp. 198- 205, Mar 1977.
+([DeMeulenaere1977]) F. De Meulenaere and J. Van Bladel, “Polarizability of some 
+small apertures”, IEEE Transactions on Antennas and Propagation, vol.25, no.2, 
+pp. 198- 205, Mar 1977.
 
 [Hill1993]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1361.pdf
 
-([Hill1993]) D. A. Hill, J. W. Adams, M. T. Ma, A. R. Ondrejka and B. F. Riddle,
-"Aperture excitation of electrically large, lossy cavities", NIST Technical Note 1361, Sept, 1993.
+([Hill1993]) D. A. Hill, J. W. Adams, M. T. Ma, A. R. Ondrejka and B. F. Riddle, 
+"Aperture excitation of electrically large, lossy cavities", NIST Technical Note 
+1361, Sept, 1993.
 
 [Hill1996]: http://ieeexplore.ieee.org/document/544314/
 
-([Hill1996]) D. A. Hill, "A reflection coefficient derivation for the Q of a reverberation chamber",
-IEEE Transactions on Electromagnetic Compatibility, vol. 38, no. 4, pp. 591-592, Nov 1996.
+([Hill1996]) D. A. Hill, "A reflection coefficient derivation for the Q of a 
+reverberation chamber", IEEE Transactions on Electromagnetic Compatibility, vol. 
+38, no. 4, pp. 591-592, Nov 1996.
 
 [Hill1998]: http://ieeexplore.ieee.org/document/709418/
 
-([Hill1998]) D. A. Hill, "Plane wave integral representation for fields in reverberation chambers",
-IEEE Transactions on Electromagnetic Compatibility, vol. 40, no. 3, pp. 209-217, Aug 1998.
+([Hill1998]) D. A. Hill, "Plane wave integral representation for fields in 
+reverberation chambers", IEEE Transactions on Electromagnetic Compatibility, 
+vol. 40, no. 3, pp. 209-217, Aug 1998.
 
 [Hill1994]: http://ieeexplore.ieee.org/document/305461
 
-([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford and R. T. Johnk, 
-"Aperture excitation of electrically large, lossy cavities", IEEE Transactions on Electromagnetic 
-Compatibility, vol. 36, no. 3, pp. 169-178, Aug 1994.
+([Hill1994]) D. A. Hill, M. T. Ma, A. R. Ondrejka, B. F. Riddle, M. L. Crawford 
+and R. T. Johnk, "Aperture excitation of electrically large, lossy cavities", 
+IEEE Transactions on Electromagnetic Compatibility, vol. 36, no. 3, pp. 169-178, 
+Aug 1994.
 
 [Hill2009]: http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0470495049.html
 
-([Hill2009]) D. A. Hill, "Electromagnetic fields in cavities: deterministic and statistical theories",
-IEEE Press Series on Electromagntic Wave Theory, John Wiley & Sons, 2009.
+([Hill2009]) D. A. Hill, "Electromagnetic fields in cavities: deterministic and 
+statistical theories", IEEE Press Series on Electromagntic Wave Theory, John 
+Wiley & Sons, 2009.
 
 [Junqua2012]: http://ieeexplore.ieee.org/document/6151920
 
-([Junqua2012]) I. Junqua, P. Degauque, M. Liénard, and F. Issac, “On the power dissipated by an antenna in transmit 
-mode or in receive mode in a reverberation chamber”, Electromagnetic Compatibility, IEEE Transactions on, vol.54, 
-no.1, pp.174-180, February 2012. 
+([Junqua2012]) I. Junqua, P. Degauque, M. Liénard, and F. Issac, “On the power 
+dissipated by an antenna in transmit mode or in receive mode in a reverberation 
+chamber”, Electromagnetic Compatibility, IEEE Transactions on, vol.54, no.1, 
+pp.174-180, February 2012. 
 
 [Kostas1991]: http://ieeexplore.ieee.org/document/99120
 
-([Kostas1991]) J. Kostas and B. Boverie, “Statistical model for a mode-stirred chamber”, IEEE Transactions on 
-Electromagnetic Compatibility, vol. 33, no. 4, pp. 366–370, November 1991.
+([Kostas1991]) J. Kostas and B. Boverie, “Statistical model for a mode-stirred 
+chamber”, IEEE Transactions on Electromagnetic Compatibility, vol. 33, no. 4, 
+pp. 366–370, November 1991.
 
 [Ladbury2007]: http://ieeexplore.ieee.org/document/4305781
 
-([Ladbury2007]) J. M. Ladbury and D. A. Hill, “Enhanced backscatter in a reverberation chamber: Inside every 
-complex problem is a simple solution struggling to get out”, IEEE International Symposium onElectromagnetic 
+([Ladbury2007]) J. M. Ladbury and D. A. Hill, “Enhanced backscatter in a 
+reverberation chamber: Inside every complex problem is a simple solution 
+struggling to get out”, IEEE International Symposium onElectromagnetic 
 Compatibility 2007, pp. 1-5, 9-13 July 2007. 
 
 [Ladbury2010]: http://ieeexplore.ieee.org/document/5711356
 
-[Ladbury2010] J. M. Ladbury and D. A. Hill, “An improved model for antennas in reverberation chambers”, 
-IEEE International Symposium on Electromagnetic Compatibility 2010, pp. 663-667, 25-30 July 2010.
+[Ladbury2010] J. M. Ladbury and D. A. Hill, “An improved model for antennas in 
+reverberation chambers”, IEEE International Symposium on Electromagnetic 
+Compatibility 2010, pp. 663-667, 25-30 July 2010.
 
 [LeRu2009]: http://store.elsevier.com/product.jsp?isbn=9780080931555
  
-([LeRu2009]) E. C. Le Ru and P. G. Etchegoin, Principles of Surface-Enhanced Raman Spectroscopy and Related 
-Plasmonic Effects, Elsevier, Amsterdam, 2009.
+([LeRu2009]) E. C. Le Ru and P. G. Etchegoin, Principles of Surface-Enhanced 
+Raman Spectroscopy and Related Plasmonic Effects, Elsevier, Amsterdam, 2009.
 
 [Ladbury2010]: http://ieeexplore.ieee.org/document/5711356
 
-([Ladbury2010]) J. M. Ladbury and D. A. Hill, “An improved model for antennas in reverberation chambers”, 
-IEEE International Symposium on Electromagnetic Compatibility 2010, pp. 663-667, 25-30 July 2010.
+([Ladbury2010]) J. M. Ladbury and D. A. Hill, “An improved model for antennas in 
+reverberation chambers”, IEEE International Symposium on Electromagnetic 
+Compatibility 2010, pp. 663-667, 25-30 July 2010.
 
 [Liu1983]: http://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1066.pdf 
 
 ([Liu1983]) B. H. Liu, D. C. Chang, and M. T. Ma, "Eigenmodes and the Composite 
-Quality Factor of a Reverberation Chamber", NBS Technical Note 1066, National Institute 
-of Standards and Technology, Boulder, Colorado, 1983.
+Quality Factor of a Reverberation Chamber", NBS Technical Note 1066, National 
+Institute of Standards and Technology, Boulder, Colorado, 1983.
             
 [Markowicz2016]: http://code.google.com/p/scatterlib/wiki/Spheres
 
-([Markowicz2016]) K. Markowicz, in "scatterlib" (August 16, 2016),
-URL: http://code.google.com/p/scatterlib/wiki/Spheres.
+([Markowicz2016]) K. Markowicz, in "scatterlib" (August 16, 2016), URL: 
+http://code.google.com/p/scatterlib/wiki/Spheres.
 
 [Matzler2002]: http://www.atmo.arizona.edu/students/courselinks/spring08/atmo336s1/courses/spring09/atmo656b/maetzler_mie_v2.pdf
 
-([Matzler2002]) C. Mätzler, "MATLAB functions for Mie scattering and absorption", 
-Res. Rep. 2002-08, Inst. für Angew. Phys., Bern., 2002.
+([Matzler2002]) C. Mätzler, "MATLAB functions for Mie scattering and 
+absorption", Res. Rep. 2002-08, Inst. für Angew. Phys., Bern., 2002.
 
 [McDonald1985]: http://ieeexplore.ieee.org/document/1133186
 
-([McDonald1985]) N. A. McDonald, “Polynomial Approximations for the Electric Polarizabilities of Some Small Apertures”, 
-IEEE Transactions on Microwave Theory and Techniques, vol.33, no.11, pp. 1146-1149, Nov 1985.
+([McDonald1985]) N. A. McDonald, “Polynomial Approximations for the Electric 
+Polarizabilities of Some Small Apertures”, IEEE Transactions on Microwave Theory 
+and Techniques, vol.33, no.11, pp. 1146-1149, Nov 1985.
 
 [McDonald1987]: http://ieeexplore.ieee.org/document/1133589
 
-([McDonald1987]) N. A. McDonald, “Polynomial Approximations for the Transverse Magnetic Polarizabilities of Some 
-Small Apertures”, IEEE Transactions on Microwave Theory and Techniques, vol.35, no.1, pp. 20- 23, Jan 1987.
+([McDonald1987]) N. A. McDonald, “Polynomial Approximations for the Transverse 
+Magnetic Polarizabilities of Some Small Apertures”, IEEE Transactions on 
+Microwave Theory and Techniques, vol.35, no.1, pp. 20- 23, Jan 1987.
 
 [McDonald1988]: http://ieeexplore.ieee.org/document/3648
 
-([McDonald1988]) N. A. McDonald, “Simple approximations for the longitudinal magnetic polarizabilities of some 
-small apertures”, IEEE Transactions on Microwave Theory and Techniques, vol.36, no.7, pp.1141-1144, Jul 1988.
+([McDonald1988]) N. A. McDonald, “Simple approximations for the longitudinal 
+magnetic polarizabilities of some small apertures”, IEEE Transactions on 
+Microwave Theory and Techniques, vol.36, no.7, pp.1141-1144, Jul 1988.
 
 [Orfanidis2016]: http://www.ece.rutgers.edu/~orfanidi/ew
 
-([Orfanidis2016]) S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers University,
-New Brunswick, NJ , 2016. URL: http://www.ece.rutgers.edu/~orfanidi/ewa.
+([Orfanidis2016]) S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers 
+University, New Brunswick, NJ , 2016. URL: 
+http://www.ece.rutgers.edu/~orfanidi/ewa.
 
 [Pena2009]: http://www.sciencedirect.com/science/article/pii/S0010465509002306
 
-([Pena2009]) O. Pena and U. Pal, "Scattering of electromagnetic radiation by a multilayered sphere", 
-Computer Physics Communications, vol. 180, Nov. 2009, pp. 2348-2354.
+([Pena2009]) O. Pena and U. Pal, "Scattering of electromagnetic radiation by a 
+multilayered sphere", Computer Physics Communications, vol. 180, Nov. 2009, pp. 
+2348-2354.
 
 [Pozar2011]: http://eu.wiley.com/WileyCDA/WileyTitle/productCd-EHEP002016.html
 
-([Pozar2011]) D. M. Pozar, "Microwave Engineering", 4th edition, John Wiley & Sons; 2011.
+([Pozar2011]) D. M. Pozar, "Microwave Engineering", 4th edition, John Wiley & 
+Sons; 2011.
 
 [Prahl2016]: http://omlc.org/software/mie
 
-([Prahl2016]) S. Prahl, Mie Scattering codes web page, URL: http://omlc.org/software/mie
+([Prahl2016]) S. Prahl, Mie Scattering codes web page, URL: 
+http://omlc.org/software/mie
 
 [scattnlay_v1]: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view.
 
 ([scattnlay_v1]) Computer Physics Communications Program Library, AEEY_v1_0, 
-URL: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view.
+URL: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar
+&deliverytype=view.
 
 [scattnlay_v2]: https://github.com/ovidiopr/scattnlay
 
-([scattnlay_v2]) github, scattnlay source code. URL: https://github.com/ovidiopr/scattnlay.
+([scattnlay_v2]) github, scattnlay source code. URL: 
+https://github.com/ovidiopr/scattnlay.
 
 [SPlaC]: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes 
 
-([SPlaC]) SERS and Plasmonics Codes, SPlaC, University of Victoria,
-URL: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
+([SPlaC]) SERS and Plasmonics Codes, SPlaC, University of Victoria, URL: 
+http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
 
 [Weyl1912]: http://link.springer.com/article/10.1007/BF01456804
 
