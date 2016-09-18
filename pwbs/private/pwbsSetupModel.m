@@ -83,21 +83,7 @@ function [ pwbm ] = pwbsSetupModel( pwbm )
   for cavityIdx=1:pwbm.numCavities
     pwbm.cavities(cavityIdx).apertureArea = apertureArea(cavityIdx);
   end % for
-  
-  %
-  % Sources.
-  %
-  for sourceIdx=1:pwbm.numSources
-    switch( pwbm.sources(sourceIdx).type )
-    case 'Antenna'
-      % Delivered power from antenna is source power reduced by efficiency.
-      pwbm.sources(sourceIdx).sourcePower = pwbm.antennas(pwbm.sources(sourceIdx).objectIdx).AE .* pwbm.sources(sourceIdx).parameters{1};
-    end % switch
-    % Add to total source power in associated cavity.
-    cavityIdx = pwbm.sources(sourceIdx).cavityIdx(1);
-    pwbm.cavities(cavityIdx).totalSourcePower = pwbm.cavities(cavityIdx).totalSourcePower + pwbm.sources(sourceIdx).sourcePower;  
-  end % for
-  
+    
   %
   % Cavities
   %
@@ -112,11 +98,18 @@ function [ pwbm ] = pwbsSetupModel( pwbm )
     sigma = pwbm.cavities(cavityIdx).sigma;
     mu_r = pwbm.cavities(cavityIdx).mu_r;
     % Determine ACS and AE of cavity walls and insert in cavity object.
-    [ wallACS , wallAE ] = pwbGenericCavityWallACS( pwbm.f , area , volume , sigma , mu_r );
-    pwbm.cavities(cavityIdx).wallACS = wallACS;
-    pwbm.cavities(cavityIdx).wallAE = wallAE;
-    volume = pwbm.cavities(cavityIdx).volume;
+    switch( pwbm.cavities(cavityIdx).type )
+    case { 'Cuboid' ,  'Generic' }
+      [ wallACS , wallAE ] = pwbGenericCavityWallACS( pwbm.f , area , volume , sigma , mu_r );
+      pwbm.cavities(cavityIdx).wallACS = wallACS;
+      pwbm.cavities(cavityIdx).wallAE = wallAE;
+    case { 'GenericACS' , 'GenericFileACS' }
+      pwbm.cavities(cavityIdx).wallAE = 4.0 .* pwbm.cavities(cavityIdx).wallACS ./ area;
+    case { 'GenericAE' , 'GenericFileAE' }
+      pwbm.cavities(cavityIdx).wallACS = 0.25 .* pwbm.cavities(cavityIdx).wallAE .* area;
+    end % switch
     % Set Q, decay rate and time constant of cavity walls.
+    volume = pwbm.cavities(cavityIdx).volume;    
     [ wallQ , wallDecayRate , wallTimeConst ] = pwbEnergyParamsFromCCS( pwbm.f , wallACS , volume );
     pwbm.cavities(cavityIdx).wallQ = wallQ;
     pwbm.cavities(cavityIdx).wallDecayRate = wallDecayRate;     
@@ -139,6 +132,32 @@ function [ pwbm ] = pwbsSetupModel( pwbm )
     else
       pwbm.cavities(cavityIdx).f_Schroeder = pwbm.f(idx);
     end % if
+  end % for
+
+  %
+  % Sources.
+  %
+  
+  for sourceIdx=1:pwbm.numSources
+    switch( pwbm.sources(sourceIdx).type )
+    case 'Antenna'
+      % Delivered power from antenna is source power reduced by efficiency.
+      pwbm.sources(sourceIdx).sourcePower = pwbm.antennas(pwbm.sources(sourceIdx).objectIdx).AE .* pwbm.sources(sourceIdx).parameters{1};
+    case 'Thermal'
+      switch( pwbm.sources(sourceIdx).objectType )
+      case 'cavity'
+        cavityIdx = pwbm.sources(sourceIdx).objectIdx;
+        area = pwbm.cavities(cavityIdx).wallArea;
+        emissivity = pwbm.cavities(cavityIdx).wallAE;
+        pwbm.sources(sourceIdx).sourcePower = area .* emissivity .* pwbm.sources(sourceIdx).sourcePower; 
+      case 'antenna'
+        antennaIdx = pwbm.sources(sourceIdx).objectIdx;
+        pwbm.sources(sourceIdx).sourcePower = pwbm.antennas(antennaIdx).AE .* pwbm.sources(sourceIdx).sourcePower; 
+      end % switch
+    end % switch
+    % Add to total source power in associated cavity.
+    cavityIdx = pwbm.sources(sourceIdx).cavityIdx(1);
+    pwbm.cavities(cavityIdx).totalSourcePower = pwbm.cavities(cavityIdx).totalSourcePower + pwbm.sources(sourceIdx).sourcePower;  
   end % for
   
   pwbm.state = 'setup';

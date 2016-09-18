@@ -50,6 +50,10 @@
 
 ## Solver
 
+* Check and write tests for plane-wave apertures sources.
+
+* Check and write tests for short-circuit field aperture sources.
+
 * estimateCutoffFreq in pwbsAddAperture may not work very well.
 
 * More tests for probability distributions.
@@ -67,8 +71,5 @@
   Maybe make it possible to delete objects. Difficult as they are linked.
   Maybe refuse to delete if object is referenced by another and feedback to
   user names of linked objects so the user can delete recursively if desired.
-  
-  Review state - is it safe to allow adding new objects after solved ans running
-  solver again? 
-  
-  Is setup function safe to run multiple times, e.g. in compaction function?
+  Is it safe to allow adding new objects after solved ans running solver again? 
+

@@ -91,6 +91,8 @@ function [ pwbm ] = pwbsAddCavity( pwbm , tag , type , parameters )
     area = 2.0 * ( a * b + b * c + c * a );
     volume = a * b * c;
     [ numModes , modeDensity , f_1 , f_60 ] = pwbCuboidCavityModesLiu( pwbm.f , a , b , c );
+    wallACS = [];
+    wallAE = [];
   case 'Generic'
     if( length( parameters ) ~= 4 )
       error( 'generic cavity requires four parameters' );
@@ -104,13 +106,70 @@ function [ pwbm ] = pwbsAddCavity( pwbm , tag , type , parameters )
     validateattributes( parameters{4} , { 'double' } , { 'scalar' , '>=' , 1.0 } , 'parameters{}' , 'mu_r' , 4 );
     mu_r = ones( size( pwbm.f ) ) .* parameters{4}(:);    
     [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( pwbm.f , volume ); 
+    wallACS = [];
+    wallAE = [];
   case 'GenericACS'
+    if( length( parameters ) ~= 3 )
+      error( 'generic ACS cavity requires three parameters' );
+    end % if  
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};    
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'volume' , 2 );  
+    volume = parameters{2};
+    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'positive' } , 'parameters{}' , 'ACS' , 3 );
+    wallACS = ones( size( pwbm.f ) ) .* parameters{3};
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( pwbm.f , volume ); 
+    wallAE = [];
   case 'GenericFileACS'
-    error( 'unimplemented cavity type %s' , type );
+    if( length( parameters ) ~= 3 )
+      error( 'generic file ACS cavity requires three parameters' );
+    end % if  
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};    
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'volume' , 2 );  
+    volume = parameters{2};
+    validateattributes( parameters{3} , { 'char' } , {} , 'parameters{}' , 'fileName' , 3 );
+    if( ~exist( parameters{3} , 'file' ) )
+      error( 'cannot open ACS file %s' , parameters{3} );
+    else
+      [ data ] = pwbImportAndInterp( pwbm.f , parameters{3} );
+      wallACS = data(:,1);
+    end % if   
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( pwbm.f , volume ); 
+    wallAE = [];
+  case 'GenericAE'
+    if( length( parameters ) ~= 3 )
+      error( 'generic AE cavity requires three parameters' );
+    end % if  
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};    
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'volume' , 2 );  
+    volume = parameters{2};
+    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'positive' } , 'parameters{}' , 'AE' , 3 );
+    wallAE = ones( size( pwbm.f ) ) .* parameters{3};
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( pwbm.f , volume ); 
+    wallACS = [];
+  case 'GenericFileAE' 
+    if( length( parameters ) ~= 3 )
+      error( 'generic file AE cavity requires three parameters' );
+    end % if  
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
+    area = parameters{1};    
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'volume' , 2 );  
+    volume = parameters{2};
+    validateattributes( parameters{3} , { 'char' } , {} , 'parameters{}' , 'fileName' , 3 );
+    if( ~exist( parameters{3} , 'file' ) )
+      error( 'cannot open AE file %s' , parameters{3} );
+    else
+      [ data ] = pwbImportAndInterp( pwbm.f , parameters{3} );
+      wallAE = data(:,1);
+    end % if   
+    [ numModes , modeDensity , f_1 , f_60 ] = pwbGenericCavityModesWeyl( pwbm.f , volume ); 
+    wallACS = [];
   otherwise
     error( 'unknown cavity type %s' , type );
   end % switch
-  
+
   % Change state.
   pwbm.state = 'init';
 
@@ -134,8 +193,8 @@ function [ pwbm ] = pwbsAddCavity( pwbm , tag , type , parameters )
   % These attributes are set in the setup phase.
   pwbm.cavities(pwbm.numCavities).wallArea = [];                                % Total wall area of cavity, excluding apertures.
   pwbm.cavities(pwbm.numCavities).apertureArea = 0.0;                           % Total aperture area of cavity.
-  pwbm.cavities(pwbm.numCavities).wallACS = [];                                 % ACS of walls.
-  pwbm.cavities(pwbm.numCavities).wallAE = [];                                  % AE of walls.
+  pwbm.cavities(pwbm.numCavities).wallACS = wallACS;                            % ACS of walls.
+  pwbm.cavities(pwbm.numCavities).wallAE = wallAE;                              % AE of walls.
   pwbm.cavities(pwbm.numCavities).wallDecayRate = [];                           % Energy decay rate or antenna.
   pwbm.cavities(pwbm.numCavities).wallTimeConst = [];                           % Energy decay time constant of antenna.
   pwbm.cavities(pwbm.numCavities).wallQ = [];                                   % Partial Q-factor antenna.

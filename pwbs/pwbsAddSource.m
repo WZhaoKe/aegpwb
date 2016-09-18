@@ -17,23 +17,26 @@ function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
 %
 % The supported source types are:
 %
-% type`               | objectType   | parameters
-% --------------------|:------------:|:-------------------------------------
-% 'Direct'            | cavity       | { sourcePower }
-% 'Antenna'           | antenna      | { sourcePower }
-% 'DiffuseAperture'   | aperture     | { powerDensity }
-% 'PlanewaveAperture' | aperture     | { powerDensity , theta , phi , psi }
-% 'PowerDensity'      | 'EXT' cavity | { powerDensity }
+% type`               | objectType              | parameters
+% --------------------|:-----------------------:|:-------------------------------------
+% 'Direct'            | cavity                  | { sourcePower }
+% 'Antenna'           | antenna                 | { sourcePower }
+% 'DiffuseAperture'   | aperture                | { powerDensity }
+% 'PlanewaveAperture' | aperture                | { powerDensity , theta , phi , psi }
+% 'PowerDensity'      | 'EXT' cavity            | { powerDensity }
+% 'Thermal'           | cavity/absorber/antenna | { temperature , bandwidth }
 %
 % The parameters are:
 %
-% parameter    | type          | unit   | description
-% :------------|:-------------:|:------:|:---------------------------------------
-% sourcePower  | double vector | W      | power of source
-% powerDensity | double vector | W/m^2  | power density illuminating the aperture
-% theta        | double scalar | degree | angle of incidence on aperture
-% phi          | double scalar | degree | plane of incidence on aperture
-% psi          | double scalar | degree | polarisation of electric field
+% parameter     | type          | unit   | description
+% :-------------|:-------------:|:------:|:---------------------------------------
+% sourcePower   | double vector | W      | power of source
+% powerDensity  | double vector | W/m^2  | power density illuminating the aperture
+% theta         | double scalar | degree | angle of incidence on aperture
+% phi           | double scalar | degree | plane of incidence on aperture
+% psi           | double scalar | degree | polarisation of electric field
+% `temperature` | double scalar | K      | temperature of object
+% `bandwidth`   | double scalar | Hz     | bandwidth for thermal source
 %
 
 % This file is part of aegpwb.
@@ -57,6 +60,9 @@ function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
 % Author: I. D Flintoft
 % Date: 19/08/2016
 
+  % Boltzmann's contant.
+  k = 1.38064852e-23;
+    
   % Basic checks on validity of parameters.
   validateattributes( tag , { 'char' } , {} , 'pwbsAddSource' , 'tag' , 2 );
   validateattributes( type , { 'char' } , {} , 'pwbsAddAntenna' , 'type' , 3 );
@@ -195,9 +201,40 @@ function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
       error( 'power density source can only attach to "EXT" cavity' );
     end % if
     pwbm.powerDensitySource.powerDensity = parameters{1}; 
-  case 'FileShortCircuitField'
-  case 'ShortCircuitField'
-    error( 'unimplemented source type' , type );    
+  case { 'FileShortCircuitField' , 'ShortCircuitField' }
+    error( 'unimplemented source type' , type );
+  case 'Thermal'
+    if( length( parameters ) ~= 2 )
+      error( 'Thermal source requires two parameters' );
+    end % if  
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'temperature' , 1 );
+    temperature = parameters{1};
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'bandwidth' , 2 );
+    bandwidth = parameters{2};
+    if( mapIsKey( pwbm.cavityMap , objectTag ) )
+      objectIdx = mapGet( pwbm.cavityMap , objectTag ); 
+      cavityIdx = objectIdx;
+      objectType = 'cavity';
+      % Area and emissivity are factored in during setup.
+      sourcePower = bandwidth .* bbExitance( temperature , pwbm.f ); 
+    elseif( mapIsKey( pwbm.absorberMap , objectTag ) )
+      objectIdx = mapGet( pwbm.absorberMap , objectTag ); 
+      absorberIdx = objectIdx;
+      cavityIdx = pwbm.absorbers(absorberIdx).cavityIdx;
+      objectType = 'absorber';
+      area = pwbm.absorbers(absorberIdx).area;
+      emissivity = pwbm.absorbers(absorberIdx).AE;
+      sourcePower = area .* emissivity .* bandwidth .* bbExitance( temperature , pwbm.f ); 
+    elseif( mapIsKey( pwbm.antennaMap , objectTag ) )
+      objectIdx = mapGet( pwbm.antennaMap , objectTag ); 
+      antennaIdx = objectIdx;
+      cavityIdx = pwbm.antennas(antennaIdx).cavityIdx;
+      objectType = 'antenna';
+      % Antenna efficiency is factored in during setup.
+      sourcePower = k .* temperature .* bandwidth;
+    else
+      error( 'unknown object with tag %s' , objectTag );
+    end % if
   otherwise
     error( 'invalid source type' , type );
   end % switch  
@@ -246,5 +283,5 @@ function [ pwbm ] = pwbsAddSource( pwbm , tag , type , objectTag , parameters )
     pwbm.aperture(objectIdx).isSource = true;
     pwbm.aperture(objectIdx).sourceIdx = pwbm.numSources;
   end % switch
-    
+
 end % function

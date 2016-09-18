@@ -39,7 +39,7 @@ The functions forming the power balance (PWB) solver all have the prefix `pwbs`.
 
 Tags used for naming objects must be valid variables names, .i.e they must begin 
 with a letter and contain only letters, numbers and underscore characters. 
-Letter can be upper or lower case and the tag in case-sensitive.
+Letter can be upper or lower case and the tag is case-sensitive.
 
 The representation of the different objects in the PWB model and their 
 associated coupling cross-sections (CCSs) are given in the table below:
@@ -73,9 +73,7 @@ Once a model is solved further objects cannot be added.
 ## ASCII input data files
 
 Many of the objects are able to read input parameters from external ASCII files. 
-For general format supported for these files is
-
-The ASCII files have the format:
+The general format supported for these files is:
     
     # Optional header lines using hash comment character
     #
@@ -89,10 +87,10 @@ The ASCII files have the format:
      
 The first column is interpreted as the frequency vector in hertz. The frequency
 range should span the frequency range of the model, with the highest and lowest 
-model lying on or between ``f(1)` and `f(n)`. The remaining columns are interpreted
-as `m` frequency dependent data vectors with units and ranges appropriate to the
-context. For examples, CCSs and CEs must be positive numbers. The data vectors are
-interpolated onto the frequencies used by the particular model. Any extra columns
+model frequency lying on or between ``f(1)` and `f(n)`. The remaining columns are 
+interpreted as `m` frequency dependent data vectors with units and ranges appropriate 
+to the context. For examples, CCSs and CEs must be positive numbers. The data vectors 
+are interpolated onto the frequencies used by the particular model. Any extra columns
 in the ASCII file not required for the specific context will be ignored.
 
 ## Model initialisation
@@ -120,7 +118,8 @@ To save a PWB model to a file use the function call
     pwbsSaveModel( pwbm )
 
 This will save the model state to a file called `modelName.mat` where 
-`modelName` is the name of the model. To load a model from a file use
+`modelName` is the name of the model given to the initialisation function. 
+To load a model from a file use
     
     [ pwbm ] = pwbsLoadModel( modelName )
     
@@ -149,8 +148,8 @@ cavity                   | aqua circle with cavity name inside
 cavity with scatterer(s) | aqua circle with cavity name inside inside another circle
 external environment     | coral circle with label 'EXT' inside
 absorber/antenna         | named edge with filled arrow in direction of power absorption
-aperture                 | named edge with unfilled arrow in direction of net power flow
-source (power )          | named edge with filled arrow and circle in direction of source power
+aperture                 | named edge with unfilled arrow in direction of positive net power flow
+source (power)           | named edge with filled arrow and circle in direction of source power
 source (power density)   | named edge with unfilled arrow and circle in direction of power absorption
 
 ## Solving the model
@@ -391,6 +390,8 @@ The supported cavity types are
 `'Generic'`        | `{ area , volume , sigma , mu_r }`
 `'GenericACS'`     | `{ area , volume , wallACS }`
 `'GenericFileACS'` | `{ area , volume , fileName }`
+`'GenericAE'`      | `{ area , volume , wallAE }`
+`'GenericFileAE'`  | `{ area , volume , fileName }`
 
 with parameters
 
@@ -410,7 +411,13 @@ parameter   | type              | unit | range | description
 
 ## Types
 
-### `'Generic'` & `'Cuboid'`
+For the `'Generic'` types the number of modes (`numModes`) and mode density 
+(`modeDensity`) in the cavity are determined from the Weyl formula with first 
+order correction. This formula is also used to estimate the 
+frequency of the first and sixtieth modes, `f_1` and `f_60`. For the `'Cuboid'` 
+type exact mode frequencies are calculated for the lowest 1000 modes and the 
+number of modes and mode density is then smoothly matched onto the Weyl estimate 
+for higher frequencies.
 
 For the `'Cuboid'` type the cavity surface `area` and `volume`, are determined 
 from the cuboid side lengths (`a`,`b` & `c`), whereas for the `'Generic'` types 
@@ -422,18 +429,14 @@ apertures in them. The total area of any apertures added to the cavity
 
 For the `'Cuboid'` and `'Generic'` types the ACS of the cavity walls is 
 determined from `wallArea` using the electrical parameters `sigma` and `mu_r`. 
-For the types `'GenericACS'` and `'GenericFileACS'` the wall ACS is specified 
-by the user either as a parameter or in an external file. This data would 
-typically be determined from a measurement of the empty cavity, accounting for 
-the losses in the measurement antennas used and any apertures in the cavity.
+For the types `'GenericACS'` and `'GenericFileACS'` the wall ACS is provided 
+directly as a parameter or in an ASCII file. The ACS is applied directly assuming 
+the user has accounted for the aperture area of the cavity in the provided ACS. The 
+wall AE is determined using `wallArea`.
 
-For the `'Generic'` types the number of modes (`numModes`) and mode density 
-(`modeDensity`) in the cavity are determined from the Weyl formula with first 
-order correction. This formula is also used to estimate the 
-frequency of the first and sixtieth modes, `f_1` and `f_60`. For the `'Cuboid'` 
-type exact mode frequencies are calculated for the lowest 1000 modes and the 
-number of modes and mode density is then smoothly matched onto the Weyl estimate 
-for higher frequencies.
+For `'GenericAE'` and  `'GenericFileAE'` cavity types the wall AE is provided 
+directly as a parameter or in an ASCII file. The wall ACS is determined using 
+`wallArea`.
 
 ## Outputs
 
@@ -935,15 +938,16 @@ argument/return | type       | unit | description
 
 The supported source types are:
 
-`type`                  | `objectType`   | `parameters`
-:-----------------------|:--------------:|:-------------------------------------
-`'Direct'`              | cavity         | `{ sourcePower }`
-`'Antenna'`             |  antenna        | `{ sourcePower }`
-`'DiffuseAperture'`     | aperture [1]   | `{ powerDensity }`
-`'PlanewaveAperture'`   | aperture [1]   | `{ powerDensity , theta , phi , psi }`
-`'SCFieldAperture'`     | aperture [1]   | `{ HxSC , HySC , EzSC }`
-`'FileSCFieldAperture'` | aperture [1]   | `{ fileName }`
-`'PowerDensity'`        | `'EXT'` cavity | `{ powerDensity }`
+`type`                  | `objectType`            | `parameters`
+:-----------------------|:-----------------------:|:-------------------------------------
+`'Direct'`              | cavity                  | `{ sourcePower }`
+`'Antenna'`             | antenna                 | `{ sourcePower }`
+`'DiffuseAperture'`     | aperture [1]            | `{ powerDensity }`
+`'PlanewaveAperture'`   | aperture [1]            | `{ powerDensity , theta , phi , psi }`
+`'SCFieldAperture'`     | aperture [1]            | `{ HxSC , HySC , EzSC }`
+`'FileSCFieldAperture'` | aperture [1]            | `{ fileName }`
+`'PowerDensity'`        | `'EXT'` cavity          | `{ powerDensity }`
+`'Thermal'`             | cavity/absorber/antenna | `{ temperature , bandwidth }`
 
 [1] The associated aperture must be coupling a cavity to the external environment `EXT`.
 
@@ -960,6 +964,8 @@ parameter      | type              | unit   |  range   | description
 `HySC`         | double vector [1] | A/m    | >0       | y-polarised short-circuit magnetic field in aperture
 `EzSC`         | double vector [1] | V/m    | >0       | z-polarised short-circuit electric field in aperture
 `fileName`     | string            | -      | -        | name of file containing short-circuit fields in aperture
+`temperature`  | double scalar     | K      | >= 0     | temperature of object
+`bandwidth`    | double scalar     | Hz     | > 0      | bandwidth for thermal source
 
 [1] Must be either a scalar or an `numFreq x 1` column vector.
 
@@ -1017,6 +1023,14 @@ act as a ''power density reservoir'', i.e any power delivered to, or taken from,
 the external environment does not alter its power density. This essentially provides
 a Thevenin equivalent for the `DiffuseAperture` source for coupling of an external
 diffuse field through an aperture.
+
+### `'Thermal'`
+
+The thermal source type adds a power source associated with the thermal radiation 
+emiited by an object. The spectral exitance at the required temperature is determined 
+using Planck's Radiation Law over the bandwidth specified and taking the hemispherical
+emissivity to be equal to the average absorption efficiency (absorptivity) of the 
+referenced object in accordance with Kirchhoff's Radiation Law.
 
 ## Outputs
 
