@@ -110,7 +110,7 @@ significant bugs are listed in the file doc/[Bugs.md][]  in the source code.
 
 Please report bugs using the bitbucket issue tracker at 
 <https://bitbucket.org/uoyaeg/aegpwb/issues> or by email to 
-<ian.flintoft@york.ac.uk>.
+<ian.flintoft@googlemail.com>.
 
 For general guidance on how to write a good bug report see, for example:
 
@@ -135,7 +135,7 @@ We welcome any contributions to the development of the code, including:
 
 * Items in the to-do list in the file doc/[ToDo.md][].
 
-Please contact [Dr Ian Flintoft], <ian.flintoft@york.ac.uk>, if you are 
+Please contact [Dr Ian Flintoft], <ian.flintoft@googlemail.com>, if you are 
 interested in helping with these or any other aspect of development.
 
 ## Licence
@@ -145,11 +145,11 @@ details see the file [Licence.txt][].
 
 ## Developers
 
-[Dr Ian Flintoft][], <ian.flintoft@york.ac.uk>
+[Dr Ian Flintoft][], <ian.flintoft@googlemail.com>
 
 ## Contacts
 
-[Dr Ian Flintoft][], <ian.flintoft@york.ac.uk>
+[Dr Ian Flintoft][], <ian.flintoft@googlemail.com>
 
 [Dr John Dawson][], <john.dawson@york.ac.uk>
 
@@ -188,7 +188,7 @@ IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232,
 Feb. 2011.
 
 
-[Dr Ian Flintoft]: http://www.elec.york.ac.uk/staff/idf1.html
+[Dr Ian Flintoft]: https://scholar.google.co.uk/citations?user=2RZgeUQAAAAJ
 [Dr John Dawson]: http://www.elec.york.ac.uk/staff/jfd1.html
 [University of York]: http://www.york.ac.uk
 [Department of Electronics]: http://www.elec.york.ac.uk

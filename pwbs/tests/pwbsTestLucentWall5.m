@@ -35,9 +35,10 @@ function [ isPass ] = pwbsTestLucentWall5()
   mu_r = 1.0;
   thickness = 0.2;
   
-  [ ACS1_val , ACS2_val , TCS_val , AE1_val , AE2_val , TE_val ] = pwbLucentWall( f , area , thickness , epsc_r , sigma , mu_r );
+  [ ACS1_val , ACS2_val , RCS1_val , RCS2_val , TCS_val , AE1_val , AE2_val , RE1_val , RE2_val , TE_val ] = ...
+    pwbLucentWall( f , area , thickness , epsc_r , sigma , mu_r );
   
-  dlmwrite( 'pwbsTestLucentWall5.asc' , [ f , AE1_val , AE2_val , TE_val ] , ' ' );
+  dlmwrite( 'pwbsTestLucentWall5.asc' , [ f , RE1_val , RE2_val , TE_val ] , ' ' );
   
   pwbm = pwbsInitModel( f , 'TestLucentWall5' );
   pwbm = pwbsAddCavity( pwbm , 'C1' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );

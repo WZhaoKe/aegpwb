@@ -640,10 +640,10 @@ argument/return | type          | unit | description
 
 The function 
 
-    [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = ...
-       pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
+    [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = ...
+                pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 
-determines the average absorption and transmission cross-sections and 
+determines the average absorption, reflection and transmission cross-sections and 
 efficiencies of a lossy multilayer surface. It uses a multi-layer reflection and 
 transmission code to determine the reflectance at oblique incidence for TE and 
 TM polarisations and then averages over the angles of arrival and the 
@@ -652,18 +652,22 @@ polarisations ([Orfanidis2016][]).
 The input arguments and output values are:
 
 argument/return | type              | unit  | description
-:---------------|:-----------------:|:-----:|:---------------------------------------
+:---------------|:-----------------:|:-----:|:--------------------------------------------
 `f`             | real vector       | Hz    | frequencies
 `area`          | real scalar       | m^2   | area
 `thicknesses`   | real vector       | m     | thicknesses of layers, side 1 first
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
 `sigma`         | real array [1]    | S/m   | conductivities of layers
 `mu_r`          | real array [1]    | -     | relative permeabilities of layers
-`ACS1`          | real vector       | m^2   | absorption cross-section of side 1
-`ACS2`          | real vector       | m^2   | absorption cross-section of side 2
+`ACS1`          | real vector       | m^2   | effective absorption cross-section of side 1
+`ACS2`          | real vector       | m^2   | effective absorption cross-section of side 2
+`RCS1`          | real vector       | m^2   | reflection cross-section of side 1
+`RCS2`          | real vector       | m^2   | reflection cross-section of side 2
 `TCS`           | real vector       | m^2   | transmission cross-section
-`AE1`           | real vector       | -     | absorbers efficiency of side 1
-`AE2`           | real vector       | -     | absorbers efficiency of side 2
+`AE1`           | real vector       | -     | effective absorbers efficiency of side 1
+`AE2`           | real vector       | -     | effective absorbers efficiency of side 2
+`RE1`           | real vector       | -     | reflection efficiency of side 1
+`RE2`           | real vector       | -     | reflection efficiency of side 2
 `TE`            | real vector       | -     | transmission efficiency
 
 [1] The material arrays must have `numLayer` columns and either one row for 

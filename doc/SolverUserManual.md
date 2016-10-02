@@ -24,6 +24,8 @@ PoA     | Point of absorption
 PoC     | Point of coupling
 PoE     | Point of entry/exit
 PWB     | Power balance
+RCS     | Reflection cross-section
+SE      | Reflection efficiency
 SC      | Short circuited
 SCS     | Scattering cross-section
 SE      | Scattering efficiency
@@ -499,6 +501,14 @@ quantity          | unit    | description
 
 # Apertures and lucent walls
 
+Apertures are characterised by their transmission cross-section (TCS) or transmission
+efficiency (TE). For diffuse coupling between cavitites this is an average TCS defined 
+such that the average power coupled through the aperture is one quarter of the TCS times
+the aperture area. The product of this average TCS with the average power density in the
+cavity than gives the average power coupled through the aperture. In this definition the 
+factor of one-half due to the half-space illuminiation of the aperture is included in
+the average cross-section.
+
 ## Constructor
 
 ![Figure: Aperture EMT](figures/ApertureEMT.png)
@@ -538,8 +548,8 @@ The supported aperture types are:
 `'Square'`            | `{ side }`
 `'Rectangular'`       | `{ side_x , side_y }`
 `'LucentWall'`        | `{ area , thickness , eps_r , sigma , mu_r }`
-`'LucentWallCCS'`     | `{ area , ACS1 , ACS2 , TCS }`
-`'LucentWallCE'`      | `{ area , AE1 , AE2 , TE }`
+`'LucentWallCCS'`     | `{ area , RCS1 , RCS2 , TCS }`
+`'LucentWallCE'`      | `{ area , RE1 , RE2 , TE }`
 `'LucentWallFileCCS'` | `{ area , fileName }`
 `'LucentWallFileCE'`  | `{ area , fileName }`
 
@@ -565,8 +575,8 @@ parameter     | type              | unit | range | description
 `epcs_r`      | complex array     | -    | -     | complex relative permittivity of layers
 `sigma`       | double array      | S/m  | >0    | conductivity of layers
 `mu_r`        | double array      | -    | >=1   | relative permeability of layers
-`ACS1`/`ACS2` | double vector [1] | m^2  | >0    | average ACS side1/side2 of lossy aperture
-`AE1`/`AE2`   | double vector [1] | -    | >0    | average AE side1/side2 of lossy aperture
+`RCS1`/`RCS2` | double vector [1] | m^2  | >0    | average RCS of side1/side2 of lossy aperture
+`RE1`/`RE2`   | double vector [1] | -    | >0    | average RE of side1/side2 of lossy aperture
 
 [1] Must be either a scalar or an `numFreq` x 1 column vector.
 
@@ -622,18 +632,26 @@ y-directions, `side_x` and `side_y`.
 ### `'LucentWall'`
 
 A translucent wall between two cavities is a lossy aperture in which part of the 
-incident power is absorbed in the wall and part is transmitted to the other 
-side. With regard to the EMT a lucent wall contributes three edges:
+incident power is reflected and part is transmitted to the other side. The 
+average reflected power is the product of the average reflection cross-section 
+(RCS) and the average power density in the cavity. The RCS is one-quarter of the 
+average reflection efficiency (RE) of the wall and the surface area. Note that 
+the reflection efficiency may be different on each side of the material. The 
+transmitted power is represented by the TCs or TE in exaclty the same way as for 
+a normal aperture.
 
- * An absorption in the first cavity (ACS1).
- * An absorption in the second cavity (ACS2).
+With regard to the EMT a lucent wall contributes three edges:
+
+ * An effective absorption in the first cavity (ACS1 = 1 - RCS1 - TCS).
+ * An effective absorption in the second cavity (ACS2 = 1 - RCS2 - TCS).
  * A transmission between the two cavities (TCS)
  
-This is shown in the EMT diagram below. The absorption on the first side is 
-tagged with `tag_A1`, that on the second side with `tag_A2`, and the 
+This is shown in the EMT diagram below. The effective absorption on the first 
+side is tagged with `tag_A1`, that on the second side with `tag_A2`, and the 
 transmission by `tag_T`. The absorptions are implemented by adding separate 
 absorber objects for each side. Implicitly this model assumes a GO limit 
-approximation, i.e, the wall dimensions electrically large.
+approximation, i.e, the wall dimensions electrically large and the cross-section 
+are related to the corresponding efficiencies by one-quater of the surface area.
 
 ![Figure: Lucent wall](figures/LucentWallEMT.png)
 
@@ -648,7 +666,7 @@ parameters or `numFreq x numLayer` for frequency dependent parameters.
 
 ### `'LucentWallCCS'`, `'LucentWallCE'`, `'LucentWallFileCCS'` & `'LucentWallFileCE'`
 
-The ACSs and TCS of a lucent wall can also be provided directly as parameters of 
+The RCSs and TCS of a lucent wall can also be provided directly as parameters of 
 imported from external ASCII files. Corresponding CEs can also be applied using 
 this method.
 

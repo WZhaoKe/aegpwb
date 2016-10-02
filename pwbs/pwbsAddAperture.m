@@ -34,8 +34,8 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 % 'Square'            | { side }
 % 'Rectangular'       | { side_x , side_y }
 % 'LucentWall'        | { area , thickness , eps_r , sigma , mu_r }
-% 'LucentWallCCS'     | { area , ACS1 , ACS2 , TCS }
-% 'LucentWallCE'      | { area , AE1 , AE2 , TE }
+% 'LucentWallCCS'     | { area , RCS1 , RCS2 , TCS }
+% 'LucentWallCE'      | { area , RE1 , RE2 , TE }
 % 'LucentWallFileCCS' | { area , fileName }
 % 'LucentWallFileCE'  | { area , fileName }
 %
@@ -61,8 +61,8 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 % epcs_r      | complex array | -    | complex relative permittivity of layers
 % sigma       | double array  | S/m  | conductivity of each layers
 % mu_r        | double array  | -    | relative permeability of layers
-% ACS1/ACS2   | double vector | m^2  | average ACS side1/side2 of lossy aperture
-% AE1/AE2     | double vector | -    | average AE side1/side2 of lossy aperture
+% RCS1/RCS2   | double vector | m^2  | average RCS of side1/side2 of lossy aperture
+% RE1/RE2     | double vector | -    | average RE of side1/side2 of lossy aperture
 % fileName    | string        | -    | file name for external CCS data
 %
 
@@ -236,34 +236,34 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
       error( 'LucentWallCCS aperture type requires four parameters' );
     end % if  
     validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
-    validateattributes( parameters{2} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'ACS1' , 2 );
-    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'ACS2' , 3 );
+    validateattributes( parameters{2} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'RCS1' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'RCS2' , 3 );
     validateattributes( parameters{4} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'TCS' , 4 );
     area = parameters{1};
-    ACS1 = parameters{2};
-    ACS2 = parameters{3};
+    RCS1 = parameters{2};
+    RCS2 = parameters{3};
     TCS = parameters{4};
     TE = 4.0 .* TCS / area;
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , 1.0 - RCS1 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } );
     tag = [ tag , '_T' ];
   case 'LucentWallCE'
     if( length( parameters ) ~= 4 )
       error( 'LucentWallCE aperture type requires four parameters' );
     end % if  
     validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 1 );
-    validateattributes( parameters{2} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'AE1' , 2 );
-    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'AE2' , 3 );
+    validateattributes( parameters{2} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'RE1' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'RE2' , 3 );
     validateattributes( parameters{4} , { 'double' } , { 'vector' , 'nonnegative' } , 'parameters{}' , 'TE' , 4 );
     area = parameters{1};
-    ACS1 = 0.25 .* area .* parameters{2};
-    ACS2 = 0.25 .* area .* parameters{3};
+    RCS1 = 0.25 .* area .* parameters{2};
+    RCS2 = 0.25 .* area .* parameters{3};
     TE = parameters{4};
     TCS = 0.25 .* area .* TE;
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } );  
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , 1.0 - RCS1 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } );  
     tag = [ tag , '_T' ];
   case 'LucentWallFileCCS'
     if( length( parameters ) ~= 2 )
@@ -276,14 +276,14 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
       error( 'cannot open CCS file %s' , parameters{2} );
     else
       [ CCS ] = pwbImportAndInterp( pwbm.f , parameters{2} );
-      ACS1 = CCS(:,1);
-      ACS2 = CCS(:,2);
+      RCS1 = CCS(:,1);
+      RCS2 = CCS(:,2);
       TCS = CCS(:,3);
     end % if
     TE = 4.0 .* TCS / area;  
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } );  
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , 1.0 - RCS1 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } );  
     tag = [ tag , '_T' ];
   case 'LucentWallFileCE'
     if( length( parameters ) ~= 2 )
@@ -296,16 +296,16 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
       error( 'cannot open CE file %s' , parameters{2} );
     else
       [ CE ] = pwbImportAndInterp( pwbm.f , parameters{2} );
-      AE1 = CE(:,1);
-      AE2 = CE(:,2);
+      RE1 = CE(:,1);
+      RE2 = CE(:,2);
       TE = CE(:,3);
     end % if
-    ACS1 = 0.25 .* area .* AE1;
-    ACS2 = 0.25 .* area .* AE1;
+    RCS1 = 0.25 .* area .* RE1;
+    RCS2 = 0.25 .* area .* RE1;
     TCS = 0.25 .* area .* TE;    
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } );    
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , 1.0 - RCS1 } );
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } );    
     tag = [ tag , '_T' ];
   case 'LucentWall'
     if( length( parameters ) ~= 5 )
@@ -334,7 +334,7 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
     if( size( mu_r , 1 ) ~= 1 && size( mu_r , 1 ) ~= numFreq )
       error( 'mu_r must be a scalar or the same size as f' );
     end % if
-    [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( pwbm.f , area , thicknesses , epsc_r , sigma , mu_r );
+    [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = pwbLucentWall( pwbm.f , area , thicknesses , epsc_r , sigma , mu_r );
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
     [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , ACS1 } );
     [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , ACS2 } ); 

@@ -1,7 +1,9 @@
-function [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
+function [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = ...
+                       pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 % pwbLucntWall - Absorption and transmission cross-sections of a translucent surface.
 %
-% [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
+% [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = ...
+%                     pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 %
 %             |   |   |       |          |
 %             |   |   |       |          |
@@ -28,11 +30,15 @@ function [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thic
 %         
 % Outputs:
 %
-% ACS1 - real vector (numFreq x 1), average absorption cross-section of side 1 [m^2].
-% ACS2 - real vector (numFreq x 1), average absorption cross-section of side 2 [m^2].
+% ACS1 - real vector (numFreq x 1), average effective absorption cross-section of side 1 [m^2].
+% ACS2 - real vector (numFreq x 1), average effective absorption cross-section of side 2 [m^2].
+% RCS1 - real vector (numFreq x 1), average reflection cross-section of side 1 [m^2].
+% RCS2 - real vector (numFreq x 1), average reflection cross-section of side 2 [m^2].
 % TCS  - real vector (numFreq x 1), average transmission cross-section [m^2].
-% AE1  - real vector (numFreq x 1), average absorption efficiency of side 1 [-].
-% AE2  - real vector (numFreq x 1), average absorption efficiency of side 2 [-].
+% AE1  - real vector (numFreq x 1), average effective absorption efficiency of side 1 [-].
+% AE2  - real vector (numFreq x 1), average effective absorption efficiency of side 2 [-].
+% RE1  - real vector (numFreq x 1), average reflection efficiency of side 1 [-].
+% RE2  - real vector (numFreq x 1), average reflection efficiency of side 2 [-].
 % TE   - real vector (numFreq x 1), average transmission efficiency [-].
 %
 % References:
@@ -106,6 +112,8 @@ function [ ACS1 , ACS2 , TCS , AE1 , AE2 , TE ] = pwbLucentWall( f , area , thic
   G = 0.25 * area;
   ACS1 = G .* AE1;
   ACS2 = G .* AE2;
+  RCS1 = G .* RE1;
+  RCS2 = G .* RE2;
   TCS = G .* TE;
  
 end %function

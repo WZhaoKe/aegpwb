@@ -35,7 +35,7 @@ function [ isPass ] = pwbTestLucentWall1()
   sigmam = 0.0;
   
   [ ACS1 , AE1 ] = pwbDielectricSurface( f , area , epsc_r , sigma , mu_r );
-  [ ACS1b , ACS2b , TCSb , AE1b , AE2b , TEb ] = pwbLucentWall( f , area , [5] , epsc_r , sigma , mu_r );
+  [ ACS1b , ACS2b , RCS1b , RCS2b , TCSb , AE1b , AE2b , RE1b , RE2b , TEb ] = pwbLucentWall( f , area , [5] , epsc_r , sigma , mu_r );
 
   isPass = isPass && isValid( ACS1 , ACS1b );
   isPass = isPass && isValid( ACS1 , ACS2b );
