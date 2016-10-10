@@ -188,7 +188,7 @@ IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232,
 Feb. 2011.
 
 
-[Dr Ian Flintoft]: https://scholar.google.co.uk/citations?user=2RZgeUQAAAAJ
+[Dr Ian Flintoft]: https://idflintoft.bitbucket.io
 [Dr John Dawson]: http://www.elec.york.ac.uk/staff/jfd1.html
 [University of York]: http://www.york.ac.uk
 [Department of Electronics]: http://www.elec.york.ac.uk

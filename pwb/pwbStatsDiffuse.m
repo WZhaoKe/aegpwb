@@ -42,7 +42,7 @@ function [ meanQuantity , stdQuantity , quantQuantity ] = pwbStatsDiffuse( quant
 % This file is part of aegpwb.
 %
 % aegpwb power balance toolbox and solver.
-% Copyright (C) 2016 Ian Flintoft
+% Copyright (C) 2016 Ian Flintoft <ian.flintoft@googlemail.com>
 %
 % aegpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by

@@ -34,7 +34,7 @@ function [ ACS , AE ] = pwbSphere_Markowicz( f , radius , eps_r , sigma , mu_r )
 % This file is part of aegpwb.
 %
 % aegpwb power balance toolbox and solver.
-% Copyright (C) 2016 Ian Flintoft
+% Copyright (C) 2016 Ian Flintoft <ian.flintoft@googlemail.com>
 %
 % aegpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ function [ ACS , AE ] = pwbSphere_Markowicz( f , radius , eps_r , sigma , mu_r )
 % You should have received a copy of the GNU General Public License
 % along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
-% Author: I. D Flintoft
+% Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 19/08/2016
 % Version: 1.0.0
 

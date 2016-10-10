@@ -35,7 +35,7 @@ function [ data ] = pwbImportAndInterp( f , fileName )
 % This file is part of aegpwb.
 %
 % aegpwb power balance toolbox and solver.
-% Copyright (C) 2016 Ian Flintoft
+% Copyright (C) 2016 Ian Flintoft <ian.flintoft@googlemail.com>
 %
 % aegpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -50,7 +50,7 @@ function [ data ] = pwbImportAndInterp( f , fileName )
 % You should have received a copy of the GNU General Public License
 % along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
-% Author: I. D Flintoft
+% Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 01/09/2016
 
   if( ~exist( fileName , 'file' ) )

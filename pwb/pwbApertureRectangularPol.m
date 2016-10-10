@@ -21,7 +21,7 @@ function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPo
 % This file is part of aegpwb.
 %
 % aegpwb power balance toolbox and solver.
-% Copyright (C) 2016 Ian Flintoft
+% Copyright (C) 2016 Ian Flintoft <ian.flintoft@googlemail.com>
 %
 % aegpwb is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -36,7 +36,7 @@ function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPo
 % You should have received a copy of the GNU General Public License
 % along with aegpwb.  If not, see <http://www.gnu.org/licenses/>.
 %
-% Author: I. D Flintoft
+% Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 01/09/2016
 
   area = side_x * side_y;
