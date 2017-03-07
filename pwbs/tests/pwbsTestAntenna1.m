@@ -31,7 +31,6 @@ function [ isPass ] = pwbsTestAntenna1()
   f = [ 1e9 ];
   lambda = c0 ./ f;
   
-  pwbm = pwbsInitModel( f , 'TestAntennas1' );
   pwbm = pwbsInitModel( f , 'TestAntenna1' );
   pwbm = pwbsAddCavity( pwbm , 'C' , 'Generic'  , { 1.0 , 1.0 , Inf , 1.0 } );
   pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'C' , 1 , 'Matched' , { 50.0 } );

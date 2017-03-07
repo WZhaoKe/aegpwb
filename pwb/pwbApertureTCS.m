@@ -1,5 +1,5 @@
 function [ TCS , TE , f_c ] = pwbApertureTCS( f , area  , alpha_mxx , alpha_myy , alpha_ezz )
-% pwbsApertureTCS - Average transmission cross-section of aperture.
+%pwbsApertureTCS - Average transmission cross-section of an aperture.
 %
 % [ TCS , TE , f_c ] = pwbApertureTCS( f , area , alpha_mxx , alpha_myy , alpha_ezz )
 %

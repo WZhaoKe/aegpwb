@@ -18,7 +18,7 @@ function [ PD1 , PD2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbCoupledCavities( ACS1 , 
 %
 % ACS1 - real vector, absorption cross-section of losses cavity 1 [m^2].
 % ACS2 - real vector, absorption cross-section of losses cavity 2 [m^2].
-% TCS  - real vector, transmission cross-section between cavitities [m^2].
+% TCS  - real vector, transmission cross-section between captivities [m^2].
 % Pt1  - real vector, power injected into cavity 1 [W].
 % Pt2  - real vector, power injected into cavity 2 [W].
 %
@@ -29,7 +29,7 @@ function [ PD1 , PD2 , SR1 , SR2 , TACS1 , TACS2 ] = pwbCoupledCavities( ACS1 , 
 % SR1   - real vector, shielding ratio of cavity 1 [-].
 % SR2   - real vector, shielding ratio of cavity 2 [-].
 % TACS1 - real vector, total absorption cross-section seen from cavity 1 [m^2].
-% TACS2 - real vector, total absorption cross-section senn from cavity 2 [m^2].
+% TACS2 - real vector, total absorption cross-section seen from cavity 2 [m^2].
 %
 
 % This file is part of aegpwb.

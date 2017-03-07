@@ -42,7 +42,7 @@ function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPo
   area = side_x * side_y;
   aspect = side_x / side_y;
   a_x = sqrt( area * aspect / pi );
-  b_x = sqrt( area / aspect / pi );
+  b_y = sqrt( area / aspect / pi );
   [ ~ , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol( a_x , b_y );
 
 end %function

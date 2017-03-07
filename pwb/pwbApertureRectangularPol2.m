@@ -23,17 +23,20 @@ function [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPo
 %
 
   area  = side_x * side_y;
-  aspect = side_y / side_x;
+ 
 
-  if( aspect <= 1 )
+  if( side_y <= side_x )
+    aspect = side_y / side_x;
     alpha_mxx = side_x^3 * 0.132 / log( 1 + 0.660 / aspect );
     alpha_myy = side_x^3 * pi / 16 * aspect^2 * ( 1 + 0.3221 * aspect );    
     alpha_ezz   = side_x^3 * pi / 16 * aspect^2 * ( 1 - 0.5663 * aspect + 0.1398 * aspect^2 );
   else
-    aspect = 1 / aspect;
-    side_x = side_y;
-    alpha_mxx = side_x^3 * pi / 16 * aspect^2 * ( 1 + 0.3221 * aspect );   
+    tmp = side_y;
+    side_y = side_x;
+    side_x = tmp; 
+    aspect = side_y / side_x;
     alpha_myy = side_x^3 * 0.132 / log( 1 + 0.660 / aspect );
+    alpha_mxx = side_x^3 * pi / 16 * aspect^2 * ( 1 + 0.3221 * aspect );    
     alpha_ezz   = side_x^3 * pi / 16 * aspect^2 * ( 1 - 0.5663 * aspect + 0.1398 * aspect^2 );
   end %if
 

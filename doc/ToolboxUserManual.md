@@ -162,6 +162,76 @@ The required reference value for the different quantities are
 `'F'`      | mean of total field magnitude       
 `'F2'`     | mean square of total field magnitude
 
+## `pwbGaussLegendreAngles`, `pwbGaussLegendreAverage` & `pwbGaussLegendreIntegral`
+
+These functions provide support for integrating functions of spherical polar angles of
+arrival and field polarisation angle over a sphere or hemisphere and over the polarisation
+using Gauss-Legendre quadrature.
+
+The spherical polar and polarisation sample angles for integrating are determined by 
+the function 
+
+    [ theta , phi , psi , weight ] = pwbGaussLegendreAngles( order , isCylindircal , ...
+                                                             isHemisphere , isPlot )
+                                                             
+where the arguments and return values are:
+
+argument/return | type           | unit  | description
+:---------------|:--------------:|:-----:|:------------------------------------------
+`order`         | string         | -     | order of quadrature, >=1
+`isCylindircal` | boolean scalar | -     | true if cylindrical symmetry in phi  
+`isHemisphere`  | boolean scalar | -     | true if restricted to z >= 0 hemisphere 
+`isPlot`        | boolean scalar | -     | true if plot of sample directions required
+`theta`         | real array     | rad   | polar sampling angles
+`phi`           | real array     | rad   | azimuthal sampling angles
+`psi`           | real array     | rad   | polarisation sampling angles
+`weight`        | real array     | -     | Gauss-Legendre weights
+
+Physics convention spherical coordinates are used with `theta` being the polar angles 
+measured from the `z`-axis to the direction vector, `phi` being the azimuthal angles 
+between the `x`-axis and the projection of the direction vector in the `x-y` plane. 
+The polarisation angle, `psi`,  is measured from the minus `theta` direction according 
+to the right-hand rule. All the return values are `N_theta x N_phi x N_psi` arrays. So, 
+for example `theta(i,j,k)` is the value of the the polar angles for the sample corresponding 
+to the `i`-th `theta` direction, `j`-th `psi` direction and `k`-th `psi` polarisation. 
+Vectors of sampling angles can be obtained from:
+
+    theta = squeeze( theta(:,1,1,) );
+    psi = squeeze( psi(1,:,1) );
+    psi  = squeeze( psi(1,1,:) );
+
+The `kernel` of the function to be integrated should then be determined by the user at the 
+sampling angles and the integral or average value determined using
+
+    [ surfIntegral ] = pwbGaussLegendreIntegral( kernel , order , weight , ...
+                                                 isCylindircal , isHemisphere );
+
+    [ avgSurfIntegral ] = pwbGaussLegendreAverage( kernel , order , weight , ...
+                                                   isCylindircal , isHemisphere );
+    
+where the additional arguments and return values are:
+
+argument/return  | type        | unit  | description
+:----------------|:-----------:|:-----:|:----------------------------------------------
+`kernel`         | real array  | -     | order of quadrature, >=1
+`surfIntegral`   | real scalar | -     | sum over direction and polarisation angles
+`avgSurfIntegral`| real scalar | -     | average over direction and polarisation angles  
+
+The `kernel` array can have three forms:
+
+1. A vector with the same number of elements as weight. In this case it is assumed
+   to be a flattened array of samples with order corresponding to `theta(:)`, `phi(:)`,
+   and `psi(:)`.
+   
+2. A two-dimensional array in which each row is assumed to be a flattened array of 
+   samples with order corresponding to `theta(:)`, `phi(:)`, and `psi(:)`.
+   
+3. A three-dimensional array with the same shape as weight with the samples
+   in the corresponding positions.
+
+Note that the average returned by `pwbGaussLegendreAverag()` is a mathematical average
+and does not include the conventional factor of a half that sometimes appears in 
+average cross-sections to account single-sided illumination. 
 
 # Cavities
 
@@ -634,6 +704,57 @@ argument/return | type          | unit | description
 `TCS`           | real vector   | m^2  | transmission cross-section
 `TE`            | real vector   | -    | transmission efficiency
 
+## `pwbApertureArrayTCS`
+
+![Figure: Generic aperture](figures/GenericApertureArray.png)
+
+The function
+
+    [ TCS , TE ] = pwbApertureArrayTCS( f , arrayArea , arrayPeriodX , arrayPeriodY , ...
+                                        unitCellArea , thickness , apertureArea , ...
+                                        alpha_mxx , alpha_myy , alpha_ezz [ , cutOffFreq ] )
+
+determines the average transmission cross-section of a large array of apertures from their
+periodicities and individual properties ([Paoletti2012][]). 
+
+The input arguments and output values are:
+
+argument/return     | type            | unit | description
+:-------------------|:---------------:|:----:|:--------------------------------------------------------
+`f`                 | real vector     | Hz   | frequencies
+`arrayArea`         | real scalar     | m^2  | area of the whole array
+`arrayPeriodX`      | real scalar     | m    | period of the primitive unit cell in x direction
+`arrayPeriodY`      | real scalar     | m    | period of the primitive unit cell in y direction
+`unitCellArea`      | real scalar     | m^2  | area of the primitive unit cell 
+`thickness`         | real scalar     | m    | thickness of plate
+`apertureArea`      | real scalar     | m^2  | area of a single aperture
+`alpha_mxx`         | double scalar   | m^3  | x-component of magnetic polarisability tensor
+`alpha_myy`         | double scalar   | m^3  | y-component of magnetic polarisability tensor
+`alpha_ezz`         | double scalar   | m^3  | z-component of electric polarisability tensor
+`cutOffFreq`        | double scalar   | Hz   | cut-off frequency of aperture fundamental waveguide mode
+`TCS`               | real vector     | m^2  | transmission cross-section of the array
+`TE`                | real vector     | -    | transmission efficiency of the array
+
+## `pwbPerforatedScreen`
+
+The function
+
+    [ TCS , TE ] = pwbPerforatedScreen( f , arrayArea , arrayPeriod , apertureArea )
+
+estimates the average transmission cross-section of a large area of metal plate perforated 
+with a two-dimensional array of low aspect ratio apertures ([Lee1982][]).
+
+The input arguments and output values are:
+
+argument/return  | type         | unit | description
+:----------------|:------------:|:----:|:-------------------------------------------------
+`f`              | real vector  | Hz   | frequencies
+`arrayArea`      | real scalar  | m^2  | area of the whole array
+`arrayPeriod`    | real scalar  | m    | period of the primitive unit cell in x direction
+`apertureArea`   | real scalar  | m^2  | area of a single aperture
+`TCS`            | real vector  | m^2  | transmission cross-section of the array
+`TE`             | real vector  | -    | transmission efficiency of the array
+
 ## `pwbLucentWall`
 
 ![Figure: Lucent wall](figures/LaminatedWall.png)
@@ -750,6 +871,12 @@ Compatibility 2007, pp. 1-5, 9-13 July 2007.
 reverberation chambers”, IEEE International Symposium on Electromagnetic 
 Compatibility 2010, pp. 663-667, 25-30 July 2010.
 
+[Lee1982]: http://ieeexplore.ieee.org/document/1142923
+
+([Lee1982]) S.-W. Lee, G. Zarrillo and C.-L. Law, "Simple formulas for 
+transmission through periodic metal grids or plates", IEEE Transactions 
+on Antennas and Propagation, vol. 30, no. 5, pp. 904-909, Sep 1982.
+
 [LeRu2009]: http://store.elsevier.com/product.jsp?isbn=9780080931555
  
 ([LeRu2009]) E. C. Le Ru and P. G. Etchegoin, Principles of Surface-Enhanced 
@@ -800,6 +927,12 @@ Microwave Theory and Techniques, vol.36, no.7, pp.1141-1144, Jul 1988.
 ([Orfanidis2016]) S. J. Orfanidis, "Electromagnetic waves and antennas", Rutgers 
 University, New Brunswick, NJ , 2016. URL: 
 http://www.ece.rutgers.edu/~orfanidi/ewa.
+
+[Paoletti2012]: http://dx.doi.org/10.1109/APEMC.2012.6237888
+
+([Paoletti2012]) U. Paoletti, T. Suga and H. Osaka, "Average transmission cross 
+section of aperture arrays in electrically large complex enclosures", 2012 
+Asia-Pacific Symposium on Electromagnetic Compatibility, Singapore, 2012, pp. 677-680.
 
 [Pena2009]: http://www.sciencedirect.com/science/article/pii/S0010465509002306
 

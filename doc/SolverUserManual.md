@@ -547,7 +547,12 @@ The supported aperture types are:
 `'Elliptical'`        | `{ a_x , a_y }`
 `'Square'`            | `{ side }`
 `'Rectangular'`       | `{ side_x , side_y }`
-`'LucentWall'`        | `{ area , thickness , eps_r , sigma , mu_r }`
+`'GenericArray'`      | `{ arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , area , alpha_mxx , alpha_myy , alpha_ezz [, cutOffFreq ] }`
+`'CircularArray'`     | `{ arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , radius }`
+`'EllipticalArray'`   | `{ arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , a_x , a_y }`
+`'SquareArray'`       | `{ arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , side }`
+`'RectangularArray'`  | `{ arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , side_x , side_y }`
+`'LucentWall'`        | `{ area , thicknesses , eps_r , sigma , mu_r }`
 `'LucentWallCCS'`     | `{ area , RCS1 , RCS2 , TCS }`
 `'LucentWallCE'`      | `{ area , RE1 , RE2 , TE }`
 `'LucentWallFileCCS'` | `{ area , fileName }`
@@ -555,30 +560,38 @@ The supported aperture types are:
 
 with parameters
 
-parameter     | type              | unit | range | description
-:-------------|:-----------------:|:----:|:-----:|:----------------------------------------------
-`area`        | double scalar     | m^2  | >0    | area of aperture
-`TCS`         | double vector [1] | m^2  | >0    | average TCS of aperture
-`TE`          | double vector [1] | -    | >0    | average TE of aperture
-`fileName`    | string            | -    | -     | name of ASCII file containing CCS/CE data
-`alpha_mxx`   | double scalar     | m^3  | >=0   | x-component of magnetic polarisability tensor
-`alpha_myy`   | double scalar     | m^3  | >=0   | y-component of magnetic polarisability tensor
-`alpha_ezz`   | double scalar     | m^3  | >=0   | z-component of electric polarisability tensor
-`radius`      | double scalar     | m    | >0    | radius of circular aperture
-`a_x`         | double scalar     | m    | >0    | semi-axis of elliptical aperture in x-direction
-`a_y`         | double scalar     | m    | >0    | semi-axis of elliptical aperture in y-direction
-`side`        | double scalar     | m    | >0    | side length of square aperture
-`side_x`      | double scalar     | m    | >0    | side length of rectangular aperture in x-direction
-`side_y`      | double scalar     | m    | >0    | side length of rectangular aperture in y-direction
-`area`        | double scalar     | m^2  | >0    | area of aperture
-`thicknesses` | double vector     | m    | >0    | thicknesses of layers
-`epcs_r`      | complex array     | -    | -     | complex relative permittivity of layers
-`sigma`       | double array      | S/m  | >0    | conductivity of layers
-`mu_r`        | double array      | -    | >=1   | relative permeability of layers
-`RCS1`/`RCS2` | double vector [1] | m^2  | >0    | average RCS of side1/side2 of lossy aperture
-`RE1`/`RE2`   | double vector [1] | -    | >0    | average RE of side1/side2 of lossy aperture
+parameter      | type              | unit | range | description
+:--------------|:-----------------:|:----:|:-----:|:----------------------------------------------
+`area`         | double scalar     | m^2  | >0    | area of aperture
+`TCS`          | double vector [1] | m^2  | >0    | average TCS of aperture
+`TE`           | double vector [1] | -    | >0    | average TE of aperture
+`fileName`     | string            | -    | -     | name of ASCII file containing CCS/CE data
+`alpha_mxx`    | double scalar     | m^3  | >=0   | x-component of magnetic polarisability tensor
+`alpha_myy`    | double scalar     | m^3  | >=0   | y-component of magnetic polarisability tensor
+`alpha_ezz`    | double scalar     | m^3  | >=0   | z-component of electric polarisability tensor
+`radius`       | double scalar     | m    | >0    | radius of circular aperture
+`a_x`          | double scalar     | m    | >0    | semi-axis of elliptical aperture in x-direction
+`a_y`          | double scalar     | m    | >0    | semi-axis of elliptical aperture in y-direction
+`side`         | double scalar     | m    | >0    | side length of square aperture
+`side_x`       | double scalar     | m    | >0    | side length of rectangular aperture in x-direction
+`side_y`       | double scalar     | m    | >0    | side length of rectangular aperture in y-direction
+`area`         | double scalar     | m^2  | >0    | area of aperture
+`arrayArea`    | double scalar     | m^2  | >0    | area of whole array
+`arrayPeriodX` | double scalar     | m    | >0    | period of the primitive unit cell in x-direction
+`arrayPeriodY` | double scalar     | m    | >0    | period of the primitive unit cell in y-direction
+`unitCellArea` | double scalar     | m^2  | >0    | area of primitive unit cell
+`thickness`    | double scalar     | m    | >0    | thickness of plate
+`cutOffFreq`   | double scalar [2] | Hz   | >0    | cut-off frequency of aperture fundamental waveguide mode
+`thicknesses`  | double vector     | m    | >0    | thicknesses of layers
+`epcs_r`       | complex array     | -    | -     | complex relative permittivity of layers
+`sigma`        | double array      | S/m  | >0    | conductivity of layers
+`mu_r`         | double array      | -    | >=1   | relative permeability of layers
+`RCS1`/`RCS2`  | double vector [1] | m^2  | >0    | average RCS of side1/side2 of lossy aperture
+`RE1`/`RE2`    | double vector [1] | -    | >0    | average RE of side1/side2 of lossy aperture
 
 [1] Must be either a scalar or an `numFreq` x 1 column vector.
+
+[2] If omitted this is estimated from the polarisabilities.
 
 ## Types
 
@@ -628,6 +641,19 @@ A square aperture is defined by its `side` length.
 
 A rectangular aperture is defined by its side lengths along the x- and 
 y-directions, `side_x` and `side_y`.
+
+### `'GenericArray'`, `'CircularArray'`, `'EllipticalArray'`, `'SquareArray'` and `'RectangularArray'`
+
+![Figure: Generic aperture](figures/GenericApertureArray.png)
+
+A large array of apertures formed from primitive units cells of area `unitCellArea` 
+containing one aperture arranged on a two-dimensional lattice with periods
+`arrayPeriodX` and `arrayPeriodY` in the x- and y-directions respectively. The
+attenuation due to the finite `thickness` of the metal plate is also estimated
+from the dispersion charateristic of the lowest waveguide mode in the aperture.
+In the case of the generic array the aperture attenuation is estimated assuming a
+an equivalent elliptical aperture. The parameters of the individual apertures are
+defined as above.
 
 ### `'LucentWall'`
 

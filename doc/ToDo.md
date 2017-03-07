@@ -2,6 +2,12 @@
 
 [TOC]
 
+
+## Documentation
+
+* Add documentation for pwbGaussLegendreAngles,  pwbGaussLegendreAverage, pwbGaussLegendreIntegral
+  and pwbPerforatedScreen to toolbox manual.
+
 ## General
 
 * Decide whether to stay with conventional of putting factor of 1/2 from wall

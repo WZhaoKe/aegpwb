@@ -33,6 +33,16 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 % 'Elliptical'        | { a_x , a_y }
 % 'Square'            | { side }
 % 'Rectangular'       | { side_x , side_y }
+% 'GenericArray'      | arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , 
+%                     | thickness , area , alpha_mxx , alpha_myy , alpha_ezz
+% 'CircularArray'     | arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , 
+%                     | thickness , radius
+% 'EllipticalArray'   | arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , 
+%                     | thickness , a_x , a_y
+% 'SquareArray'       | arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , 
+%                     | thickness , side
+% 'RectangularArray'  | arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , 
+%                     | thickness , side_x , side_y
 % 'LucentWall'        | { area , thickness , eps_r , sigma , mu_r }
 % 'LucentWallCCS'     | { area , RCS1 , RCS2 , TCS }
 % 'LucentWallCE'      | { area , RE1 , RE2 , TE }
@@ -43,27 +53,32 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 %
 % parameter    | type         | unit | description
 % -------------|:------------:|:----:|:---------------------------------------------------
-% area        | double scalar | m^2  | area of aperture
-% TCS         | double vector | m^2  | average TCS of aperture
-% TE          | double vector | -    | average TE of aperture
-% fileName    | string        | -    | name of ASCII file containing TCS/TE data
-% alpha_mxx   | double scalar | m^3  | x-component of magnetic polarisability tensor
-% alpha_myy   | double scalar | m^3  | y-component of magnetic polarisability tensor
-% alpha_ezz   | double scalar | m^3  | z-component of electric polarisability tensor
-% radius      | double scalar | m    | radius of circular aperture
-% a_x         | double scalar | m    | semi-axis of elliptical aperture in x-direction
-% a_y         | double scalar | m    | semi-axis of elliptical aperture in y-direction
-% side        | double scalar | m    | side length of square aperture
-% side_x      | double scalar | m    | side length of rectangular aperture in x-direction
-% side_y      | double scalar | m    | side length of rectangular aperture in y-direction
-% area        | double scalar | m^2  | area of aperture
-% thicknesses | double vector | m    | thicknesses of each layer of laminate
-% epcs_r      | complex array | -    | complex relative permittivity of layers
-% sigma       | double array  | S/m  | conductivity of each layers
-% mu_r        | double array  | -    | relative permeability of layers
-% RCS1/RCS2   | double vector | m^2  | average RCS of side1/side2 of lossy aperture
-% RE1/RE2     | double vector | -    | average RE of side1/side2 of lossy aperture
-% fileName    | string        | -    | file name for external CCS data
+% area         | double scalar | m^2 | area of aperture
+% TCS          | double vector | m^2 | average TCS of aperture
+% TE           | double vector | -   | average TE of aperture
+% fileName     | string        | -   | name of ASCII file containing TCS/TE data
+% alpha_mxx    | double scalar | m^3 | x-component of magnetic polarisability tensor
+% alpha_myy    | double scalar | m^3 | y-component of magnetic polarisability tensor
+% alpha_ezz    | double scalar | m^3 | z-component of electric polarisability tensor
+% radius       | double scalar | m   | radius of circular aperture
+% a_x          | double scalar | m   | semi-axis of elliptical aperture in x-direction
+% a_y          | double scalar | m   | semi-axis of elliptical aperture in y-direction
+% side         | double scalar | m   | side length of square aperture
+% side_x       | double scalar | m   | side length of rectangular aperture in x-direction
+% side_y       | double scalar | m   | side length of rectangular aperture in y-direction
+% area         | double scalar | m^2 | area of aperture
+% arrayArea    | double scalar | m^2 | area of whole array
+% arrayPeriodX | double scalar | m   | period of the primitive unit cell in x-direction
+% arrayPeriodY | double scalar | m   | period of the primitive unit cell in y-direction
+% unitCellArea | double scalar | m^2 | area of primitive unit cell
+% thickness    | double scalar | m   | thickness of plate
+% thicknesses  | double vector | m   | thicknesses of each layer of laminate
+% epcs_r       | complex array | -   | complex relative permittivity of layers
+% sigma        | double array  | S/m | conductivity of each layers
+% mu_r         | double array  | -   | relative permeability of layers
+% RCS1/RCS2    | double vector | m^2 | average RCS of side1/side2 of lossy aperture
+% RE1/RE2      | double vector | -   | average RE of side1/side2 of lossy aperture
+% fileName     | string        | -   | file name for external CCS data
 %
 
 % This file is part of aegpwb.
@@ -87,6 +102,9 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
 % Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 19/08/2016
 
+  % Physical consts.
+  c0 = 299792458;
+  
   % Function to estimate cutoff frequency by fitting high pass response to TCS/TE.
   function [ f_c ] = estimateCutoffFreq( f , TCS )
     if( length( TCS ) > 1 )
@@ -197,6 +215,7 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
     validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_mxx' , 2 );
     validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_myy' , 3 );
     validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_ezz' , 4 );    
+    area = parameters{1};
     alpha_ezz = parameters{2};
     alpha_mxx = parameters{3}; 
     alpha_myy = parameters{4};
@@ -228,9 +247,130 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
       error( 'Rectangular aperture type requires two parameters' );
     end % if 
     validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side_x' , 1 );
-    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side_y' , 2 );
+    validateattribute
+    s( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side_y' , 2 );
     [ alpha_ezz , alpha_mxx , alpha_myy , area ] = pwbApertureRectangularPol( parameters{1} , parameters{2} );
-    [ TCS , TE , f_c ] = pwbApertureTCS( pwbm.f , alpha_ezz , alpha_mxx , alpha_myy , area );    
+    [ TCS , TE , f_c ] = pwbApertureTCS( pwbm.f , alpha_ezz , alpha_mxx , alpha_myy , area );
+  case 'GenericArray'
+    if( length( parameters ) ~= 9 && length( parameters ) ~= 10 )
+      error( 'Generic array aperture type requires nine or ten parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayArea' , 1 ); 
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodX' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodY' , 3 );
+    validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'unitCellArea' , 4 );    
+    validateattributes( parameters{5} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'thickness' , 5 );
+    validateattributes( parameters{6} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'area' , 6 ); 
+    validateattributes( parameters{7} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_mxx' , 7 );
+    validateattributes( parameters{8} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_myy' , 8 );
+    validateattributes( parameters{9} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'alpha_ezz' , 9 );
+    arrayArea = parameters{1};
+    arrayPeriodX = parameters{2};
+    arrayPeriodY = parameters{3};
+    unitCellArea = parameters{4};
+    thickness = parameters{5};
+    area = parameters{6};
+    alpha_mxx = parameters{7}; 
+    alpha_myy = parameters{8};
+    alpha_ezz = parameters{9};
+    [ ~ , ~ , f_c ] = pwbApertureTCS( pwbm.f , area , alpha_mxx , alpha_myy , alpha_ezz );    
+    if( length( parameters ) == 9 )
+      [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                          area , alpha_mxx  , alpha_myy , alpha_ezz );    
+    else
+      validateattributes( parameters{10} , { 'double' } , { 'scalar' , 'nonnegative' } , 'parameters{}' , 'cutOffFreq' , 10 );    
+      cutOffFreq = parameters{10};
+      [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                          area , alpha_mxx  , alpha_myy , alpha_ezz , cutOffFreq );          
+    end % if
+  case 'CircularArray'
+    if( length( parameters ) ~= 6 )
+      error( 'Circular array aperture type requires six parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayArea' , 1 ); 
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodX' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodY' , 3 );
+    validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'unitCellArea' , 4 );    
+    validateattributes( parameters{5} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'thickness' , 5 );
+    validateattributes( parameters{6} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'radius' , 6 ); 
+    arrayArea = parameters{1};
+    arrayPeriodX = parameters{2};
+    arrayPeriodY = parameters{3};
+    unitCellArea = parameters{4};
+    thickness = parameters{5};
+    radius = parameters{6};
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureCircularPol( radius );
+    [ ~ , ~ , f_c ] = pwbApertureTCS( pwbm.f , area , alpha_mxx , alpha_myy , alpha_ezz );    
+    cutOffFreq = 3.682 * c0 / 4.0 / pi / radius;
+    [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                        area , alpha_mxx  , alpha_myy , alpha_ezz , cutOffFreq );          
+  case 'EllipticalArray'
+    if( length( parameters ) ~= 7 )
+      error( 'Elliptical array aperture type requires seven parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayArea' , 1 ); 
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodX' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodY' , 3 );
+    validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'unitCellArea' , 4 );    
+    validateattributes( parameters{5} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'thickness' , 5 );
+    validateattributes( parameters{6} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'a_x' , 6 ); 
+    validateattributes( parameters{7} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'a_y' , 7 );     
+    arrayArea = parameters{1};
+    arrayPeriodX = parameters{2};
+    arrayPeriodY = parameters{3};
+    unitCellArea = parameters{4};
+    thickness = parameters{5};
+    a_x = parameters{6};
+    a_y = parameters{7};
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureEllipticalPol( a_x , a_y );
+    [ ~ , ~ , f_c ] = pwbApertureTCS( pwbm.f , area , alpha_mxx , alpha_myy , alpha_ezz );    
+    cutOffFreq = 0.29 * c0 / max( [ a_x , a_y ] );
+    [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                        area , alpha_mxx  , alpha_myy , alpha_ezz , cutOffFreq );   
+  case 'SquareArray'
+    if( length( parameters ) ~= 6 )
+      error( 'Square array aperture type requires six parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayArea' , 1 ); 
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodX' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodY' , 3 );
+    validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'unitCellArea' , 4 );    
+    validateattributes( parameters{5} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'thickness' , 5 );
+    validateattributes( parameters{6} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side' , 6 ); 
+    arrayArea = parameters{1};
+    arrayPeriodX = parameters{2};
+    arrayPeriodY = parameters{3};
+    unitCellArea = parameters{4};
+    thickness = parameters{5};
+    side = parameters{6};
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureSquarePol( side );
+    [ ~ , ~ , f_c ] = pwbApertureTCS( pwbm.f , area , alpha_mxx , alpha_myy , alpha_ezz );    
+    cutOffFreq = c0 / 2.0 / side;
+    [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                        area , alpha_mxx  , alpha_myy , alpha_ezz , cutOffFreq );                                      
+  case 'RectangularArray'
+    if( length( parameters ) ~= 7 )
+      error( 'Rectangular array aperture type requires seven parameters' );
+    end % if
+    validateattributes( parameters{1} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayArea' , 1 ); 
+    validateattributes( parameters{2} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodX' , 2 );
+    validateattributes( parameters{3} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'arrayPeriodY' , 3 );
+    validateattributes( parameters{4} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'unitCellArea' , 4 );    
+    validateattributes( parameters{5} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'thickness' , 5 );
+    validateattributes( parameters{6} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side_x' , 6 ); 
+    validateattributes( parameters{7} , { 'double' } , { 'scalar' , 'positive' } , 'parameters{}' , 'side_y' , 7 );     
+    arrayArea = parameters{1};
+    arrayPeriodX = parameters{2};
+    arrayPeriodY = parameters{3};
+    unitCellArea = parameters{4};
+    thickness = parameters{5};
+    side_x = parameters{6};
+    side_y = parameters{7};
+    [ area , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureRectangularPol( side_x , side_y );
+    [ ~ , ~ , f_c ] = pwbApertureTCS( pwbm.f , area , alpha_mxx , alpha_myy , alpha_ezz );    
+    cutOffFreq = 0.29 * c0 / max( [ side_x , side_y ] );
+    [ TCS , TE ] = pwbApertureArrayTCS( pwbm.f , arrayArea , arrayPeriodX , arrayPeriodY , unitCellArea , thickness , ...
+                                        area , alpha_mxx  , alpha_myy , alpha_ezz , cutOffFreq );
   case 'LucentWallCCS'
     if( length( parameters ) ~= 4 )
       error( 'LucentWallCCS aperture type requires four parameters' );

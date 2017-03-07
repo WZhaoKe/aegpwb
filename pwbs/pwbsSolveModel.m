@@ -101,7 +101,7 @@ function [ pwbm ] = pwbsSolveModel( pwbm )
     end % for
 
     % Add power density source to external environment.
-    % This will be short to reference if no power density source has been added.
+    % This will be shorted to reference if no power density source has been added.
     % This adds constitutive relation of "voltage source to MNA matrices.
     Sigma(1,pwbm.numCavities+1) = 1.0;
     Sigma(pwbm.numCavities+1,1) = 1.0;
