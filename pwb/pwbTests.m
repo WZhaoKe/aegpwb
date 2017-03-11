@@ -31,6 +31,7 @@ function pwbTests()
 
   % Get base name of solver installation.
   baseName = fileparts( which( 'pwbTests' ) );
+  addpath( baseName );
   
   % Test folder.
   testDir = [ baseName , '/tests' ];

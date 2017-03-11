@@ -63,10 +63,10 @@ function [ ACS , AE ] = pwbLaminatedSphere( f , radii , eps_r , sigma , mu_r )
       [ status , resultString ] = system( cmd );
       if( status == 0 )
         % Pena & Pal scattnlay C program.
-        MieFcn = pwbLaminatedSphere_PenaPal;
+        MieFcn = @pwbLaminatedSphere_PenaPal;
       elseif ( exist( 'nMie' ) )
         % Pena & Pal scattnlay MATLAB function.
-        MieFcn = pwbLaminatedSphere_PenaPalM;
+        MieFcn = @pwbLaminatedSphere_PenaPalM;
       else
         error( 'could not find a multilayer Mie code' );
       end % if

@@ -35,6 +35,8 @@ function pwbsExportOutput( pwbm , type , tag , parameters )
 % Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 19/08/2016
 
+  strtrunc=@(x,n) x(1:min([n,length(x)]));
+
   if( ~strcmp( pwbm.state , 'solved' ) )
     error( 'pwb model has not been solved yet!' );
   end % if

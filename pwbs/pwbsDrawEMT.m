@@ -78,14 +78,15 @@ function pwbsDrawEMT( pwbm )
   fprintf( fp , '}\n' );
   fclose( fp );
   
-  [ status , output ] = system( sprintf( 'dot -Teps %s -o %s' , dotFileName , epsFileName ) );
-  if( status ~= 127 )
+  [ status , output ] = system( 'dot -?' );
+  if( status == 0 )
+    [ status , output ] = system( sprintf( 'dot -Teps %s -o %s' , dotFileName , epsFileName ) );
     [ status , output ] = system( sprintf( 'dot -Tpng %s -o %s' , dotFileName , pngFileName ) );
     [ I , map ] = imread( pngFileName );
     figure();
     imshow( I , map );
   else
-    warning( 'dot commant failed - is graphviz installed?' );
+    warning( 'dot command failed - is graphviz installed and in command path?' );
   end % if
   
 end % function

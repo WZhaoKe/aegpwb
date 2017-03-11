@@ -32,7 +32,7 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
 % Author: Ian Flintoft <ian.flintoft@googlemail.com>
 % Date: 07/03/2017
 
-  tol = 1e-5;
+  tol = 1e-2;
   isValid=@(x,y) all( abs( x - y ) < tol );
   isPass = true;
  
@@ -42,7 +42,7 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
   
   c0 = 299792458;
   
-  f = logspace( log10( 100e6 ) , log10( 6e9 ) , 100 )';
+  f = logspace( log10( 200e6 ) , log10( 6e9 ) , 100 )';
  
   % Wavenumber.
   k = 2.0 .* pi .* f ./ c0;
@@ -122,7 +122,19 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
   % TCS.
   [ TCS_hex , TE_hex ] = pwbApertureArrayTCS( f , array_area , arrayPeriodX , arrayPeriodY , cellArea , ...
     thickness , apertureArea , alpha_mxx , alpha_myy , alpha_ezz , cutOffFreq );
+  
+  % Validation data.
+  baseName = fileparts( which( mfilename ) );
+  data = dlmread( [ baseName , '/pwbTestApertureArrayTCS1_square_analytic.asc' ] ); 
+  f_sq_val = 1e9 .* data(:,1);
+  TE_sq_val = 4.0 .* 10.^( data(:,2) / 10.0 );
+  data = dlmread( [ baseName , '/pwbTestApertureArrayTCS1_hexagonal_analytic.asc' ] ); 
+  f_hex_val = 1e9 .* data(:,1);
+  TE_hex_val = 4.0 .* 10.^( data(:,2) / 10.0 );
 
+  isPass = isPass && isValid( TE_sq , interp1( f_sq_val , TE_sq_val , f ) );
+  isPass = isPass && isValid( TE_hex , interp1( f_hex_val , TE_hex_val , f )  );
+  
   %
   % Plots.
   %
@@ -132,19 +144,18 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
     figure()
     plot( f ./ 1e9 , db10( 0.25 .* TE_sq ) , 'r-' );
     hold on;
+    plot( f_sq_val ./ 1e9 , db10( 0.25 .* TE_sq_val ) , 'r:o' );
     plot( f ./ 1e9 , db10( 0.25 .* TE_hex ) , 'b-' );
+    plot( f_hex_val ./ 1e9 , db10( 0.25 .* TE_hex_val ) , 'b:^' );
     grid( 'on' );
     xlabel( 'Frequency (GHz)' );
     ylabel( '<\sigma^t> / A (dB)' );
     xlim( [ 0 , 6 ] );
     ylim( [ -45 , -20 ] );
-    legend( 'Square, analytic' , 'Hexagonal, analytic' , 'location' , 'southeast' );
+    legend( 'Square' , 'Square, Paoletti et al' , 'Hexagonal' , 'Hexagonal, Paoletti et al' , 'location' , 'southeast' );
     print( '-depsc2' , 'pwbTestApertureArrayTCS1.eps' );
     hold off;
 
   end % if
-
-%  isPass = isPass && isValid( ACS1 , ACS1b );
-%  isPass = isPass && isValid( ACS1 , ACS2b );
 
 end % function

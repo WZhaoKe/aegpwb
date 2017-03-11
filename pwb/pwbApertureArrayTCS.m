@@ -103,14 +103,15 @@ function [ TCS , TE ] = pwbApertureArrayTCS( f , arrayArea , arrayPeriodX , arra
     m = -max_mn:max_mn;
     n = m;
     [ mm , nn ] = meshgrid( m , n );
-    denom = ( ( mm .*a ./ 2 ).^2 + ( nn .* b ./ 2 ).^2 ).^-(3/2);
+    denom = ( ( mm .* a ./ 2 ).^2 + ( nn .* b ./ 2 ).^2 ).^-(3/2);
     
     % Ref [1] gives this, but its not consistent with [2] and gives wrong result.
-    %idx = find( rem( mm + nn , 2 ) == 0 & ( nn ~= 0 | mm ~= 0 ) );
-    idx = find( nn ~= 0 | mm ~= 0 );
+    idx = find( rem( mm + nn , 2 ) == 0 & ( nn ~= 0 | mm ~= 0 ) );
+    %idx = find( nn ~= 0 | mm ~= 0 );
     
     % Ref [1] has a 4 here but its not consistent with [].
-    R = 4.0 *  4.0 * pi / a / b / sum( denom(idx) );
+    R = 4.0 * pi / a / b / sum( denom(idx) );
+    %R = 4.0 *  4.0 * pi / a / b / sum( denom(idx) );
     
   end % function
   
