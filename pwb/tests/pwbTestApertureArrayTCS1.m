@@ -107,7 +107,7 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
   array_size_y = 1.0;
   array_area = array_size_x * array_size_y;
     
-  % Aperture polarisabilitites - use circular aperture of smae area.
+  % Aperture polarisabilitites - use circular aperture of same area.
   A_hex = 3 * sqrt( 3 ) / 2 * side^2;
   radius = sqrt( A_hex / pi );
   [ apertureArea , alpha_mxx , alpha_myy , alpha_ezz ] = pwbApertureCircularPol( radius );
@@ -152,7 +152,7 @@ function [ isPass ] = pwbTestApertureArrayTCS1( isPlot )
     ylabel( '<\sigma^t> / A (dB)' );
     xlim( [ 0 , 6 ] );
     ylim( [ -45 , -20 ] );
-    legend( 'Square' , 'Square, Paoletti et al' , 'Hexagonal' , 'Hexagonal, Paoletti et al' , 'location' , 'southeast' );
+    legend( 'Square, toolbox' , 'Square, Paoletti et al' , 'Hexagonal, toolbox' , 'Hexagonal, Paoletti et al' , 'location' , 'southeast' );
     print( '-depsc2' , 'pwbTestApertureArrayTCS1.eps' );
     hold off;
 

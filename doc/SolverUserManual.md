@@ -663,13 +663,13 @@ average reflected power is the product of the average reflection cross-section
 (RCS) and the average power density in the cavity. The RCS is one-quarter of the 
 average reflection efficiency (RE) of the wall and the surface area. Note that 
 the reflection efficiency may be different on each side of the material. The 
-transmitted power is represented by the TCs or TE in exaclty the same way as for 
+transmitted power is represented by the TCS or TE in exactly the same way as for 
 a normal aperture.
 
 With regard to the EMT a lucent wall contributes three edges:
 
- * An effective absorption in the first cavity (ACS1 = 1 - RCS1 - TCS).
- * An effective absorption in the second cavity (ACS2 = 1 - RCS2 - TCS).
+ * An effective absorption in the first cavity (ACS1 = 1 - RCS1).
+ * An effective absorption in the second cavity (ACS2 = 1 - RCS2).
  * A transmission between the two cavities (TCS)
  
 This is shown in the EMT diagram below. The effective absorption on the first 
@@ -677,7 +677,7 @@ side is tagged with `tag_A1`, that on the second side with `tag_A2`, and the
 transmission by `tag_T`. The absorptions are implemented by adding separate 
 absorber objects for each side. Implicitly this model assumes a GO limit 
 approximation, i.e, the wall dimensions electrically large and the cross-section 
-are related to the corresponding efficiencies by one-quater of the surface area.
+are related to the corresponding efficiencies by one-quarter of the surface area.
 
 ![Figure: Lucent wall](figures/LucentWallEMT.png)
 
@@ -692,7 +692,7 @@ parameters or `numFreq x numLayer` for frequency dependent parameters.
 
 ### `'LucentWallCCS'`, `'LucentWallCE'`, `'LucentWallFileCCS'` & `'LucentWallFileCE'`
 
-The RCSs and TCS of a lucent wall can also be provided directly as parameters of 
+The RCSs and TCS of a lucent wall can also be provided directly as parameters
 imported from external ASCII files. Corresponding CEs can also be applied using 
 this method.
 
@@ -719,7 +719,7 @@ output         | type              | unit | description
 
 [1] These outputs are `numFreq x 1` column vectors. 
 
-Lucent wall types place the absorption on each side into separate absorber 
+Lucent wall types place the effective absorption on each side into separate absorber 
 objects with names `tag_A1` and `tag_A2`. The output parameters of these can be 
 obtained using `pwbsGetOutput` with type `Absorber` and these two tags. The 
 outputs associated with the transmission  can be obtained using `pwbsGetOutput` 

@@ -1,14 +1,6 @@
 function [ isPass ] = pwbTestApertureArrayTCS2( isPlot )
 %pwbTestApertureArrayTCS2 -
 %
-% Reproduces Fig. 3 from [1].
-% 
-% References:
-%
-% [1] U. Paoletti, T. Suga and H. Osaka, 
-%     "Average transmission cross section of aperture arrays in electrically large complex enclosures",
-%     2012 Asia-Pacific Symposium on Electromagnetic Compatibility, Singapore, 2012, pp. 677-680.
-%     DOI: 10.1109/APEMC.2012.6237888
 %
 
 % This file is part of aegpwb.
@@ -39,7 +31,6 @@ function [ isPass ] = pwbTestApertureArrayTCS2( isPlot )
   if( nargin == 0 )
     isPlot = false;
   end % if
-  
   
   c0 = 299792458;
   
@@ -172,7 +163,11 @@ function [ isPass ] = pwbTestApertureArrayTCS2( isPlot )
     grid( 'on' );
     xlabel( 'Frequency (GHz)' );
     ylabel( 'Average transmission efficiency, <Q^t> / A (dB)' );
-    legend( 'Square, analytic' , 'Hexagonal, analytic' , 'Cicular, analytic' , 'Check' , 'location' , 'southeast' );
+    legend( 'Square, Paoletti et al' , ...
+            'Hexagonal, Paoletti et al' , ...
+            'Cicular, Paoletti et al' , ...
+            'Square, Lee et al' , ...
+            'location' , 'southeast' );
     print( '-depsc2' , 'pwbTestApertureArrayTCS2.eps' );
     hold off;
   

@@ -5,13 +5,9 @@
 
 ## Documentation
 
-* Add documentation for pwbGaussLegendreAngles,  pwbGaussLegendreAverage, pwbGaussLegendreIntegral
-  and pwbPerforatedScreen to toolbox manual.
+* Add documentation for pwbPerforatedScreen to toolbox manual.
 
 ## General
-
-* Decide whether to stay with conventional of putting factor of 1/2 from wall
-  shadowing into TCS. If so, write detailed note for user manual.
 
 * `scattnlay` is GPL3. Could consider distributing with toolbox.
 
@@ -56,6 +52,17 @@
 
 ## Solver
 
+* Write a function to create a report on a model 
+
+  pwbReport( pwbm );
+  
+  + List input parameters for all objects.
+  + Plot EMT.
+  + Plot graphs for all outputs.
+  + Plot statistics for all outputs.
+  
+  Format: html, md?
+  
 * Check and write tests for plane-wave apertures sources.
 
 * Check and write tests for short-circuit field aperture sources.

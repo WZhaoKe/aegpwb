@@ -2,7 +2,7 @@
 
 I. D. Flintoft
 
-Version 0.1, 16/08/2016
+Version 0.2, 12/05/2017
 
 [TOC]
 
@@ -55,8 +55,8 @@ ASCII file must have the format:
     ......    .....   .....   ......
     ft(N)     DV1(N)  .....   DVM(N)
 
-The first frequency in the file, `ft(1)`, must less than or equal to the lowest 
-frequency in `f` and the last frequency in the file, `ft(N)`, must greater than 
+The first frequency in the file, `ft(1)`, must be less than or equal to the lowest 
+frequency in `f` and the last frequency in the file, `ft(N)`, must be greater than 
 or equal to the highest frequency in `f`. The data at the frequencies given in 
 the file are interpolated onto the frequencies requested. 
 
@@ -73,7 +73,7 @@ argument/return | type        | unit  | description
 The probability distributions of electromagnetic quantities in an ideally 
 reverberant cavity can be determined using the function ([Hill1998][])
 
-    [ x , y , meanQuantity , stdQuantity quantQuantity ] = ...
+    [ x , y , meanQuantity , stdQuantity , quantQuantity ] = ...
       pwbDistDiffuse( quantity , dist , refValue )
     
 The arguments and return values are:
@@ -90,7 +90,7 @@ argument/return | type        | unit  | description
 `quantQuantity` | real array  |       | quantiles  of quantity
 
 `quantQuantity` is a two-dimensional array whose first row give values of the 
-CDF the and the second row gives the quantiles. The 25-th, 50-th (median), 
+CDF and whose second row gives the quantiles. The 25-th, 50-th (median), 
 75-th, 95-th and 99-th quantiles are returned.
 
 Supported physical quantities are
@@ -187,8 +187,8 @@ argument/return | type           | unit  | description
 `psi`           | real array     | rad   | polarisation sampling angles
 `weight`        | real array     | -     | Gauss-Legendre weights
 
-Physics convention spherical coordinates are used with `theta` being the polar angles 
-measured from the `z`-axis to the direction vector, `phi` being the azimuthal angles 
+Physics convention spherical coordinates are used with `theta` being the polar angle 
+measured from the `z`-axis to the direction vector, `phi` being the azimuthal angle 
 between the `x`-axis and the projection of the direction vector in the `x-y` plane. 
 The polarisation angle, `psi`,  is measured from the minus `theta` direction according 
 to the right-hand rule. All the return values are `N_theta x N_phi x N_psi` arrays. So, 
@@ -213,8 +213,8 @@ where the additional arguments and return values are:
 
 argument/return  | type        | unit  | description
 :----------------|:-----------:|:-----:|:----------------------------------------------
-`kernel`         | real array  | -     | order of quadrature, >=1
-`surfIntegral`   | real scalar | -     | sum over direction and polarisation angles
+`kernel`         | real array  | -     | kernel of the surface integral
+`surfIntegral`   | real scalar | -     | integral over direction and polarisation angles
 `avgSurfIntegral`| real scalar | -     | average over direction and polarisation angles  
 
 The `kernel` array can have three forms:
@@ -226,11 +226,11 @@ The `kernel` array can have three forms:
 2. A two-dimensional array in which each row is assumed to be a flattened array of 
    samples with order corresponding to `theta(:)`, `phi(:)`, and `psi(:)`.
    
-3. A three-dimensional array with the same shape as weight with the samples
+3. A three-dimensional array with the same shape as weight and with the samples
    in the corresponding positions.
 
 Note that the average returned by `pwbGaussLegendreAverag()` is a mathematical average
-and does not include the conventional factor of a half that sometimes appears in 
+and does not include the conventional factor of a half that appears in 
 average cross-sections to account single-sided illumination. 
 
 # Cavities
@@ -253,8 +253,8 @@ argument/return | type        | unit  | description
 `f_c`           | real vector | Hz    | mode frequencies
 `ikjp`          | real array  | -     | mode indices and polarisations
 
-The mode frequencies `f_c` are returned in ascending order ans include 
-degenerate frequencies. Use `unique( f_c)` to eliminate degenerate frequencies 
+The mode frequencies `f_c` are returned in ascending order and include 
+degenerate frequencies. Use `unique( f_c )` to eliminate degenerate frequencies 
 if desired. The two dimensional array `ijkp(m,n)` describes the m-th mode:
 
 column, `n` | type    | unit  | description
@@ -275,7 +275,7 @@ The functions
 estimate the cumulative number of modes and mode density in a cavity using 
 different methods. `pwbGenericCavityModesWeyl` uses the basic Weyl formula for 
 an arbitrary shaped cavity of known volume ([Weyl1912][]). 
-`pwbCuboidCavityModesLiu` uses more accurate estimate for a cuboid cavity 
+`pwbCuboidCavityModesLiu` uses a more accurate estimate for a cuboid cavity 
 ([Liu1983][]) while `pwbCuboidCavityModesCount` applies exact mode counting for 
 a cuboid cavity.
 
@@ -379,11 +379,12 @@ argument/return | type        | unit  | description
 `Pt2`           | real vector | W     | power injected into cavity 2
 `PD1`           | real vector | W/m^2 | power density in cavity 1
 `PD2`           | real vector | W/m^2 | power density in cavity 2
-`SR1`           | real vector | -     | shielding ratio of cavity 1
-`SR2`           | real vector | -     | shielding ratio of cavity 2
+`SR1`           | real vector | -     | shielding ratio of cavity 1 [1]
+`SR2`           | real vector | -     | shielding ratio of cavity 2 [1]
 `TACS1`         | real vector | m^2   | total absorption cross-section seen from cavity 1
 `TACS2`         | real vector | m^2   | total absorption cross-section seen from cavity 2
 
+[1] The shielding ratio is defined as the ratio of the scalar power densities in the cavties.
 
 # Antennas
 
@@ -419,7 +420,8 @@ The function
 determines the average absorption cross-section and efficiency of a highly 
 conducting surface by averaging the reflectance determined from the Fresnel 
 coefficients over the angles of arrival and the polarisations 
-([Orfanidis2016][]).
+([Orfanidis2016][]). The surface is assumed to be much deeper than the skin
+depth.
        
 The input arguments and output values are:
 
@@ -444,7 +446,8 @@ The function
 determines the average absorption cross-section and efficiency of a lossy 
 dielectric surface by averaging the reflectance determined from the Fresnel 
 coefficients over the angles of arrival and the polarisations 
-([Orfanidis2016][]).
+([Orfanidis2016][]). The surface is assumed to be much deeper than the skin
+depth.
         
 The input arguments and output values are:
 
@@ -494,6 +497,42 @@ argument/return | type              | unit  | description
 frequency independent parameters or the same number of rows as the length of `f` 
 for frequency dependent parameters.
 
+## `pwbLucentSheet`
+
+![Figure: Lucent wall](figures/LaminatedWall.png)
+
+The function 
+
+    [ ACS , AE ] = pwbLucentSheet( f , area , thicknesses , eps_r , sigma , mu_r )
+
+determines the average absorption cross-section and efficiency of a finite sized
+thin lossy sheet that is wholly contained within a cavity. It uses a multi-layer 
+reflection and transmission code to determine the reflectance and transmittance at 
+oblique incidence for TE and TM polarisations and then averages over the angles of 
+arrival and the polarisations ([Orfanidis2016][]). The model treats each side 
+separately and applies a geometric optics approximation that does not account for 
+diffraction effects from the sheet edges.
+
+The input arguments and output values are:
+
+argument/return | type              | unit  | description
+:---------------|:-----------------:|:-----:|:--------------------------------------------
+`f`             | real vector       | Hz    | frequencies
+`area`          | real scalar       | m^2   | area of one side of sheet [2]
+`thicknesses`   | real vector       | m     | thicknesses of layers, side 1 first
+`eps_r`         | complex array [1] | -     | complex relative permittivity of layers
+`sigma`         | real array [1]    | S/m   | conductivities of layers
+`mu_r`          | real array [1]    | -     | relative permeabilities of layers
+`ACS`           | real vector       | m^2   | absorption cross-section [2]
+`AE `           | real vector       | -     | absorption efficiency [2]
+
+[1] The material arrays must have `numLayer` columns and either one row for 
+frequency independent parameters or the same number of rows as the length of `f` 
+for frequency dependent parameters.
+
+[2] The input `area` should be that of one side of the sheet only. The output
+absorption cross-section `ACS` and efficiency `AE` are for both sides of the sheet.
+
 ## `pwbSphere`
 
 The function 
@@ -501,7 +540,7 @@ The function
     [ ACS , AE ] = pwbSphere( f , radius , eps_r , sigma , mu_r )
 
 determines the (average) absorption cross-section and efficiency of a lossy 
-homogeneous sphere. It uses a [Mie Series][] calculation to determine the 
+homogeneous sphere. It uses a Mie Series calculation to determine the 
 absorption efficiency. Interfaces are provide for a number of different Mie 
 codes which can be called explicitly using
 
@@ -543,7 +582,7 @@ The function
     [ ACS , AE ] = pwbLaminatedSphere( f , radii , eps_r , sigma , mu_r )
 
 determines the (average) absorption cross-section and efficiency of a lossy 
-multilayer sphere. It uses a [Mie Series][] calculation to determine the 
+multilayer sphere. It uses a Mie Series calculation to determine the 
 absorption efficiency. Interfaces are provide for a number of different Mie 
 codes which can be called explicitly using
 
@@ -706,6 +745,8 @@ argument/return | type          | unit | description
 
 ## `pwbApertureArrayTCS`
 
+** This function is still experimental and not validated **
+
 ![Figure: Generic aperture](figures/GenericApertureArray.png)
 
 The function
@@ -736,6 +777,8 @@ argument/return     | type            | unit | description
 `TE`                | real vector     | -    | transmission efficiency of the array
 
 ## `pwbPerforatedScreen`
+
+** This function is still experimental and not validated **
 
 The function
 
@@ -780,13 +823,13 @@ argument/return | type              | unit  | description
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
 `sigma`         | real array [1]    | S/m   | conductivities of layers
 `mu_r`          | real array [1]    | -     | relative permeabilities of layers
-`ACS1`          | real vector       | m^2   | effective absorption cross-section of side 1
-`ACS2`          | real vector       | m^2   | effective absorption cross-section of side 2
+`ACS1`          | real vector       | m^2   | absorption cross-section of side 1 [2]
+`ACS2`          | real vector       | m^2   | absorption cross-section of side 2 [2]
 `RCS1`          | real vector       | m^2   | reflection cross-section of side 1
 `RCS2`          | real vector       | m^2   | reflection cross-section of side 2
 `TCS`           | real vector       | m^2   | transmission cross-section
-`AE1`           | real vector       | -     | effective absorbers efficiency of side 1
-`AE2`           | real vector       | -     | effective absorbers efficiency of side 2
+`AE1`           | real vector       | -     | absorption efficiency of side 1 [2]
+`AE2`           | real vector       | -     | absorption efficiency of side 2 [2]
 `RE1`           | real vector       | -     | reflection efficiency of side 1
 `RE2`           | real vector       | -     | reflection efficiency of side 2
 `TE`            | real vector       | -     | transmission efficiency
@@ -794,6 +837,10 @@ argument/return | type              | unit  | description
 [1] The material arrays must have `numLayer` columns and either one row for 
 frequency independent parameters or the same number of rows as the length of `f` 
 for frequency dependent parameters.
+
+[2] The absorption cross-section and efficiencies give the power actually
+dissipated within the laminate for a source on each side and do not include 
+the power lost to each side due to transmission through the wall to the other side.
 
 # References
 
