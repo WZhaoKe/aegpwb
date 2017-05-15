@@ -678,6 +678,8 @@ transmission by `tag_T`. The absorptions are implemented by adding separate
 absorber objects for each side. Implicitly this model assumes a GO limit 
 approximation, i.e, the wall dimensions electrically large and the cross-section 
 are related to the corresponding efficiencies by one-quarter of the surface area.
+Note these effective ACSs are not just due to the powers physically dissipated in
+wall, but also due to the power transmitted into the cavity at the other side.
 
 ![Figure: Lucent wall](figures/LucentWallEMT.png)
 

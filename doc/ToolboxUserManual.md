@@ -518,7 +518,7 @@ The input arguments and output values are:
 argument/return | type              | unit  | description
 :---------------|:-----------------:|:-----:|:--------------------------------------------
 `f`             | real vector       | Hz    | frequencies
-`area`          | real scalar       | m^2   | area of one side of sheet [2]
+`area`          | real scalar       | m^2   | area of one side of the sheet [2]
 `thicknesses`   | real vector       | m     | thicknesses of layers, side 1 first
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
 `sigma`         | real array [1]    | S/m   | conductivities of layers
@@ -808,9 +808,9 @@ The function
                 pwbLucentWall( f , area , thicknesses , eps_r , sigma , mu_r )
 
 determines the average absorption, reflection and transmission cross-sections and 
-efficiencies of a lossy multilayer surface. It uses a multi-layer reflection and 
-transmission code to determine the reflectance at oblique incidence for TE and 
-TM polarisations and then averages over the angles of arrival and the 
+efficiencies of a lossy multilayer wall between two cavities. It uses a multi-layer 
+reflection and transmission code to determine the reflectance at oblique incidence for 
+TE and TM polarisations and then averages over the angles of arrival and the 
 polarisations ([Orfanidis2016][]).
 
 The input arguments and output values are:
@@ -818,7 +818,7 @@ The input arguments and output values are:
 argument/return | type              | unit  | description
 :---------------|:-----------------:|:-----:|:--------------------------------------------
 `f`             | real vector       | Hz    | frequencies
-`area`          | real scalar       | m^2   | area
+`area`          | real scalar       | m^2   | area of one side of the wall
 `thicknesses`   | real vector       | m     | thicknesses of layers, side 1 first
 `eps_r`         | complex array [1] | -     | complex relative permittivity of layers
 `sigma`         | real array [1]    | S/m   | conductivities of layers
@@ -838,9 +838,13 @@ argument/return | type              | unit  | description
 frequency independent parameters or the same number of rows as the length of `f` 
 for frequency dependent parameters.
 
-[2] The absorption cross-section and efficiencies give the power actually
-dissipated within the laminate for a source on each side and do not include 
-the power lost to each side due to transmission through the wall to the other side.
+[2] The absorption cross-sections and efficiencies give the power actually
+dissipated within the laminated wall for a source on each side and do not include 
+the power lost to the cavity on each side of the wall due to transmission through 
+the wall to the other side. So, for example, the effective power lost from the 
+cavity on side 1 is determined by `1 - RCS1`, with the proportion transferred to
+cavity 2 determined by `TCS1` and that actually dissipated in the wall determined
+by `ACS1`.
 
 # References
 

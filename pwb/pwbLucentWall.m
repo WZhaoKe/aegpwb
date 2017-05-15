@@ -14,13 +14,13 @@ function [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = ...
 %             |   |   |       |          |
 %
 % Determines the average absorption and transmission cross-sections and efficiencies of 
-% a lossy multilayer surface by averaging the reflectance over angles of arrival and 
+% a lossy multilayer wall by averaging the reflectance over angles of arrival and 
 % polarisation [1].
 %
 % Inputs:
 %
 % f           - real vector (numFreq), frequencies [Hz].
-% area        - real scalar, area of surface [m^2].
+% area        - real scalar, area of one side of wall [m^2].
 % thicknesses - real vector (numLayer), layer thicknesses [m].
 % eps_r       - complex array (numFreq x numLayer) complex relative permittivities of layers [-].
 %               If first dimension is 1 assumed same for all frequencies.
@@ -32,11 +32,11 @@ function [ ACS1 , ACS2 , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = ...
 % Outputs:
 %
 % ACS1 - real vector (numFreq x 1), average absorption cross-section of side 1 [m^2].
-%        This is the absorption within the laminate for a source on side 1 and does not
-%        include the power transmitted through the laminate, which is also lost from side 1.
+%        This is the absorption within the laminated wall for a source on side 1 and does not
+%        include the power transmitted through the wall, which is also lost from side 1.
 % ACS2 - real vector (numFreq x 1), average absorption cross-section of side 2 [m^2].
-%        This is the absorption within the laminate for a source on side 2 and does not
-%        include the power transmitted through the laminate, which is also lost from side 2.
+%        This is the absorption within the laminated wall for a source on side 2 and does not
+%        include the power transmitted through the wall, which is also lost from side 2.
 % RCS1 - real vector (numFreq x 1), average reflection cross-section of side 1 [m^2].
 % RCS2 - real vector (numFreq x 1), average reflection cross-section of side 2 [m^2].
 % TCS  - real vector (numFreq x 1), average transmission cross-section [m^2].

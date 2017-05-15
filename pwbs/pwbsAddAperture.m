@@ -477,7 +477,7 @@ function [ pwbm ] = pwbsAddAperture( pwbm , tag ,  cavity1Tag , cavity2Tag , mul
     [ ~ , ~ , RCS1 , RCS2 , TCS , AE1 , AE2 , RE1 , RE2 , TE ] = pwbLucentWall( pwbm.f , area , thicknesses , epsc_r , sigma , mu_r );
     [ f_c ] = estimateCutoffFreq( pwbm.f , TE );  
     [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A1' ] ,  cavity1Tag , multiplicity , 'ACS' , { area , 1.0 - RCS1 } );
-    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } ); 
+    [ pwbm ] = pwbsAddAbsorber( pwbm , [ tag , '_A2' ] ,  cavity2Tag , multiplicity , 'ACS' , { area , 1.0 - RCS2 } );
     tag = [ tag , '_T' ];
   otherwise
     error( 'unknown aperture type' , type );
