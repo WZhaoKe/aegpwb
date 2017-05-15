@@ -499,14 +499,14 @@ for frequency dependent parameters.
 
 ## `pwbLucentSheet`
 
-![Figure: Lucent wall](figures/LaminatedWall.png)
+![Figure: Lucent sheet](figures/LaminatedSheet.png)
 
 The function 
 
     [ ACS , AE ] = pwbLucentSheet( f , area , thicknesses , eps_r , sigma , mu_r )
 
 determines the average absorption cross-section and efficiency of a finite sized
-thin lossy sheet that is wholly contained within a cavity. It uses a multi-layer 
+thin lossy sheet that is wholly contained within a single cavity. It uses a multi-layer 
 reflection and transmission code to determine the reflectance and transmittance at 
 oblique incidence for TE and TM polarisations and then averages over the angles of 
 arrival and the polarisations ([Orfanidis2016][]). The model treats each side 
