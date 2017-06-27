@@ -293,7 +293,7 @@ function [ MM ] = emMultiRefAniso( f , theta_i , thicknesses , alpha , ...
      case 'Z'
       MM(1:4,1:4,freqIdx) = Z;
      case 'Y'
-      MM(1:4,1:4,freqIdx) = inv(Z);
+      MM(1:4,1:4,freqIdx) = inv( Z );
      otherwise
       error( 'unknown parametisation' );
     end % switch

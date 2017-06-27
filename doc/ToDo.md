@@ -52,6 +52,8 @@
 
 ## Solver
 
+* Add lucent sheet absorber to solver.
+
 * Write a function to create a report on a model 
 
   pwbReport( pwbm );

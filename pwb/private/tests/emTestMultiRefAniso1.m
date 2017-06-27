@@ -218,7 +218,7 @@ function [ isPass ] = emTestMultiRefAniso1()
   semilogx( f / 1e6 , SE , 'r-' );
   hold on;
   semilogx( f / 1e6 , -db20( squeeze( S1(1,2,:) ) ) , 'r*' )
-  semilogx( f / 1e6 , -db20( squeeze( S2(1,2,:) ) ) , 'r*' )
+  semilogx( f / 1e6 , -db20( squeeze( S2(1,2,:) ) ) , 'ro' )
   xlabel( 'f (MHz)' );
   ylabel( 'SE (dB)' );
   legend( 'Normal - emPlanarSE' , 'Normal - emMutliRefAniso' , 'Normal - emMutliRef' );
