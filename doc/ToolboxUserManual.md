@@ -497,6 +497,28 @@ argument/return | type              | unit  | description
 frequency independent parameters or the same number of rows as the length of `f` 
 for frequency dependent parameters.
 
+## `pwbSubstrate`
+
+This function is a special case of `pwbLaminatedSurface` for the absorption of
+a single layer of lossy dielectric backed with PEC:
+
+    [ ACS , AE ] = pwbSubstrate( f , area , height , eps_r , tand )
+
+The input arguments and output values are:
+
+argument/return | type            | unit  | description
+:---------------|:---------------:|:-----:|:----------------------------------
+`f`             | real vector     | Hz    | frequencies
+`area`          | real scalar     | m^2   | area
+`height`        | real scalar     | m     | height of substrate
+`eps_r`         | realvector [1]  | -     | relative permittivity of substrate
+`tand`          | real vector [1] | -     | loss tangent
+`ACS`           | real vector     | m^2   | absorption cross-section
+`AE`            | real vector     | -     | absorbers efficiency
+
+[1] The material vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
+    
 ## `pwbLucentSheet`
 
 ![Figure: Lucent sheet](figures/LaminatedSheet.png)
@@ -846,6 +868,122 @@ cavity on side 1 is determined by `1 - RCS1`, with the proportion transferred to
 cavity 2 determined by `TCS1` and that actually dissipated in the wall determined
 by `ACS1`.
 
+# Transmission lines
+
+## `pwbTwoWireLineZc`
+
+Absorption in the resistive terminal loads of a two-wire transmission line described
+by its characteristic impedance are determined using the function ([Magdowski2012][]).
+
+    [ ACS , ACS_1 , ACS_2 ] = pwbTwoWireLineZc( f , length , spacing , Z_c , ...
+      eps_r [ , R_1 [ , R_2 ] ] )
+      
+The loads must be resistive, but can be frequency dependent.
+
+The input arguments and output values are:
+
+argument/return | type               | unit  | description
+:---------------|:------------------:|:-----:|:-----------------------------------
+`f`             | real vector        | Hz    | frequencies
+`length`        | real scalar        | m     | length on line
+`spacing`       | real scalar        | m     | spacing of the wires
+`Z_c`           | real scalar        | m     | characteristic impedance of line
+`eps_r`         | real vector [1]    | -     | relative permittivity of substrate
+`R_1`           | real vector [1][2] | ohm   | load resistance of first end
+`R_2`           | real vector [1][2] | ohm   | load resitance at second end
+
+[1] These vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
+
+[2] Default value is the characteristic impedance of the line.
+
+## `pwbTwoWireLineDiameter`
+
+Absorption in the resistive terminal loads of a two-wire transmission line described
+by the wire diameter are determined using the function ([Magdowski2012][]).
+
+    [ ACS , ACS_1 , ACS_2 ] = pwbTwoWireLineDiameter( f , length , spacing , ...
+       diameter [ , eps_r  [ , R_1 [ , R_2 ] ] ] )
+
+The loads must be resistive, but can be frequency dependent.
+
+The input arguments and output values are:
+
+argument/return | type               | unit  | description
+:---------------|:------------------:|:-----:|:-----------------------------------
+`f`             | real vector        | Hz    | frequencies
+`length`        | real scalar        | m     | length on line
+`spacing`       | real scalar        | m     | spacing of the wires
+`diameter`      | real scalar        | m     | wire diameter
+`eps_r`         | real vector [1]    | -     | relative permittivity of substrate
+`R_1`           | real vector [1][2] | ohm   | load resistance of first end
+`R_2`           | real vector [1][2] | ohm   | load resitance at second end
+
+[1] These vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
+
+[2] Default value is the characteristic impedance of the line.
+
+## `pwbMicrostripLineMV`
+
+The function 
+
+    [ ACS , ACS_1 , ACS_2 ] = pwbMicrostripLineMV( f , length , width , ...
+       height , eps_r , thickness [ , R_0 [ , R_l ] ] )
+
+determines the average absorption cross-section of a loaded microstrip line using
+an equivalent two-wire transmission model ([Magdowski2012][]).
+
+The loads must be resistive, but can be frequency dependent.
+
+The input arguments and output values are:
+
+argument/return | type               | unit  | description
+:---------------|:------------------:|:-----:|:-------------------------
+`f`             | real vector        | Hz    | frequencies
+`length`        | real scalar        | m     | length on line
+`width`         | real scalar        | m     | width of trace
+`height`        | real scalar        | m     | height of substrate
+`eps_r`         | real vector [1]    | -     | relative permittivity of substrate
+`thickness`     | real vector        | m     | thickness of trace metalisation
+`R_0`           | real vector [1][2] | ohm   | load resistance of first end
+`R_1`           | real vector [1][2] | ohm   | load resitance at second end
+
+[1] These vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
+
+[2] Default value is the characteristic impedance of the line.
+
+## `pwbMicrostripLineLS`
+
+The function 
+
+    [ ACS , ACS_1 , ACS_2 ] = pwbMicrostripLineLS( f , length , width , ...
+       height , eps_r , thickness , Z_0 , Z_l )
+
+determines the average absorption cross-section of a loaded microstrip line using
+Gauss-Lengedre quaqdrature applied to a rigorours microstrip line model ([Leone1999][]).
+
+The loads may be reactive and frequency dependent.
+
+The input arguments and output values are:
+
+argument/return | type                  | unit  | description
+:---------------|:---------------------:|:-----:|:-------------------------
+`f`             | real vector           | Hz    | frequencies
+`length`        | real scalar           | m     | length on line
+`width`         | real scalar           | m     | width of trace
+`height`        | real scalar           | m     | height of substrate
+`eps_r`         | real vector [1]       | -     | relative permittivity of substrate
+`thickness`     | real vector           | m     | thickness of trace metalisation
+`R_0`           | complex vector [1][2] | ohm   | load impedance of first end
+`R_1`           | complex vector [1][2] | ohm   | load impedance at second end
+
+[1] These vectors must be either scalars for frequency independent 
+parameters or have the same length as `f` for frequency dependent parameters.
+
+[2] Default value is the characteristic impedance of the line.
+
 # References
 
 [Bohren2004]: http://onlinelibrary.wiley.com/book/10.1002/9783527618156
@@ -928,6 +1066,12 @@ Compatibility 2010, pp. 663-667, 25-30 July 2010.
 transmission through periodic metal grids or plates", IEEE Transactions 
 on Antennas and Propagation, vol. 30, no. 5, pp. 904-909, Sep 1982.
 
+[Leone1999]: http://dx.doi.org/10.1109/15.809842
+
+([Leone1999]) M. Leone and H. L. Singer, "On the coupling of an external 
+electromagnetic field to a printed circuit board trace", IEEE Transactions 
+on Electromagnetic Compatibility, vol. 41, no. 4, pp. 418-424 , November 1999.
+
 [LeRu2009]: http://store.elsevier.com/product.jsp?isbn=9780080931555
  
 ([LeRu2009]) E. C. Le Ru and P. G. Etchegoin, Principles of Surface-Enhanced 
@@ -944,7 +1088,14 @@ Compatibility 2010, pp. 663-667, 25-30 July 2010.
 ([Liu1983]) B. H. Liu, D. C. Chang, and M. T. Ma, "Eigenmodes and the Composite 
 Quality Factor of a Reverberation Chamber", NBS Technical Note 1066, National 
 Institute of Standards and Technology, Boulder, Colorado, 1983.
-            
+      
+[Magdowski2012]: http://dx.doi.org/10.1109/TEMC.2012.2193130
+      
+([Magdowski2012]) M. Magdowski and R. Vick, "Closed form formulas for the stochastic 
+electromagnetic field coupling to a transmission line with arbitrary loads",
+IEEE Transactions on Electromagnetic Compatibility, vol. 54, no. 5, pp. 
+1147-1152, October 2012.
+
 [Markowicz2016]: http://code.google.com/p/scatterlib/wiki/Spheres
 
 ([Markowicz2016]) K. Markowicz, in "scatterlib" (August 16, 2016), URL: 

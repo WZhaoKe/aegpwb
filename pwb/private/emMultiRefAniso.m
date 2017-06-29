@@ -301,3 +301,4 @@ function [ MM ] = emMultiRefAniso( f , theta_i , thicknesses , alpha , ...
   end % for
 
 end % function
+
