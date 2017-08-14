@@ -10,7 +10,7 @@ Version 0.1, 16/08/2016
 
 # Nested reverberation chambers
 
-![Figure: EMT for nested reverberation chambers](figures/NRC_EMT.png)
+![Figure: EMT for nested reverberation chambers](../doc/figures/NRC_EMT.png)
 
 Function to solve nested reberation chambers PWB problem:
 
