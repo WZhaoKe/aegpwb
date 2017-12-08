@@ -5,7 +5,7 @@
 The Applied Electromagnetics Group ([AEG][]) power balance (PWB) toolbox and 
 solver for [MATLAB][] and [GNU][] [Octave][] is an [Open Source][] set of tools for 
 undertaking PWB analysis of electrically large enclosed spaces. It was 
-developed in the [Department of Electronics][] at the [University of York][] for 
+developed in the [Department of Electronic Engineering][] at the [University of York][] for 
 research in electromagnetic compatibility ([EMC][]).
 
 ## The power balance method
@@ -153,6 +153,36 @@ details see the file [Licence.txt][].
 
 [Dr John Dawson][], <john.dawson@york.ac.uk>
 
+## Publications using Vulture
+
+[Flintoft2018]: http://dx.doi.org/10.1109/TEMC.2017.2702595
+
+([Flintoft2018]) I. D. Flintoft, S. J. Bale, A. C. Marvin, M. Ye, J. F. Dawson, 
+S. L. Parker, C. Wan, M. Zhang and M. P. Robinson, “Representative contents 
+design for shielding enclosure qualification from 2 to 20 GHz”, IEEE 
+Transactions on Electromagnetic Compatibility, vol. 60, no. 1, pp. 173-181, 2018.
+
+[Flintoft2017b]: http://dx.doi.org/10.1109/TEMC.2016.2623356
+
+([Flintoft2017b]) I. D. Flintoft, A. C. Marvin, F. I. Funn, L. Dawson, X. Zhang, 
+M. P. Robinson and J. F. Dawson, “Evaluation of the diffusion equation for 
+modelling reverberant electromagnetic fields”, IEEE Transactions on Electromagnetic 
+Compatibility, vol. 59, no. 3, pp. 760-769, 2017.
+
+[Flintoft2017a]: http://dx.doi.org/10.1109/ICEAA.2017.8065293
+
+([Flintoft2017a])	I. D. Flintoft and J. F. Dawson, “3D electromagnetic diffusion 
+models for reverberant environments”, 2017 International Conference on Electromagnetics 
+in Advanced Applications (ICEAA2017), Verona, Italy, pp. 511-514, 11-15 Sep. 2017.
+
+[Marvin2016]: http://dx.doi.org/10.1109/APEMC.2016.7522926
+
+(Marvin2016])	A. C. Marvin, I. D. Flintoft, M. Ye, J. F. Dawson, M. P. Robinson, 
+S. J. Bale, S. L. Parker, M. Ye, C. Wan and M. Zhang, “Enclosure shielding assessment 
+using surrogate contents fabricated from radio absorbing material”, 7th Asia-Pacific 
+International Symposium on Electromagnetic Compatibility & Signal Integrity and 
+Technical Exhibition (APEMC 2016), Shenzhen, China, pp. 994-996, 18-21 May, 2016.
+
 ## References
 
 [Hill1994]: http://ieeexplore.ieee.org/xpl/articleDetails.jsp?tp=&arnumber=305461
@@ -188,18 +218,17 @@ IEEE Transactions on Electromagnetic Compatibility, vol. 53, no. 1, pp. 229-232,
 Feb. 2011.
 
 
-[Dr Ian Flintoft]: https://idflintoft.bitbucket.io
-[Dr John Dawson]: http://www.elec.york.ac.uk/staff/jfd1.html
 [University of York]: http://www.york.ac.uk
-[Department of Electronics]: http://www.elec.york.ac.uk
-[AEG]: http://www.elec.york.ac.uk/research/physLayer/appliedEM.html
+[Department of Electronic Engineering]: https://www.york.ac.uk/electronic-engineering
+[AEG]: https://www.york.ac.uk/electronic-engineering/research/communication-technologies/applied-electromagnetics-devices
+[Dr Ian Flintoft]: https://idflintoft.bitbucket.io
+[Dr John Dawson]: https://www.york.ac.uk/electronic-engineering/staff/john_dawson
 [Open Source]: http://opensource.org
 [GPL3]: http://www.gnu.org/copyleft/gpl.html
 [NIST]: http://www.nist.gov
 [ONERA]: http://www.onera.fr/en
 [GNU]: https://www.gnu.org/home.en.html
 [EMC]: http://www.york.ac.uk/electronics/research/physlayer/appliedem/emc/
-
 [Install.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Install.md
 [tutorial]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/tutorial/Tutorial.md
 [ToolboxUserManual.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToolboxUserManual.md
@@ -207,7 +236,6 @@ Feb. 2011.
 [Bugs.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/Bugs.md
 [ToDo.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToDo.md
 [Licence.txt]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Licence.txt
-
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
