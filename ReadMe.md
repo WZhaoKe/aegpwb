@@ -153,7 +153,7 @@ details see the file [Licence.txt][].
 
 [Dr John Dawson][], <john.dawson@york.ac.uk>
 
-## Publications using Vulture
+## Publications using AEG PWB
 
 [Flintoft2018]: http://dx.doi.org/10.1109/TEMC.2017.2702595
 
