@@ -1242,7 +1242,7 @@ Function to solve nested reverberation chambers PWB problem:
 
 The result of the model is shown below.
 
-![Figure: EMT for nested reverberation chambers](figures/NRC_SR.png)
+![Figure: Shielding effectiveness for nested reverberation chambers](figures/NRC_SE.png)
 
 # References
 
