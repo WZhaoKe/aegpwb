@@ -177,7 +177,7 @@ in Advanced Applications (ICEAA2017), Verona, Italy, pp. 511-514, 11-15 Sep. 201
 
 [Marvin2016]: http://dx.doi.org/10.1109/APEMC.2016.7522926
 
-(Marvin2016])	A. C. Marvin, I. D. Flintoft, M. Ye, J. F. Dawson, M. P. Robinson, 
+([Marvin2016])	A. C. Marvin, I. D. Flintoft, M. Ye, J. F. Dawson, M. P. Robinson, 
 S. J. Bale, S. L. Parker, M. Ye, C. Wan and M. Zhang, “Enclosure shielding assessment 
 using surrogate contents fabricated from radio absorbing material”, 7th Asia-Pacific 
 International Symposium on Electromagnetic Compatibility & Signal Integrity and 

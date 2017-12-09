@@ -8,6 +8,65 @@ Version 0.1, 16/08/2016
 
 # Single cavity with two antennas
 
+![Figure: EMT for reverberation chamber](../doc/figures/RC_EMT.png)
+
+Function to solve nested reberation chambers PWB problem:
+
+    function RC()
+
+      % Set frequencies to analyse.
+      f = logspace( log10( 1e9 ) , log10( 100e9 ) , 100 );
+
+      % Properties of chamber.
+      a_RC = 2.37;
+      b_RC = 3.00;
+      c_RC = 4.70;
+      sigma_eff_RC = 0.16e6; 
+      mu_r_RC = 1.0;
+
+      % Initial model.
+      pwbm = pwbsInitModel( f , 'RC' );
+      
+      % Add the objects to the model.
+      pwbm = pwbsAddCavity( pwbm , 'RC' , 'Cuboid'  , ...
+        { a_RC , b_RC , c_RC , sigma_eff_RC , mu_r_RC } );
+      pwbm = pwbsAddAntenna( pwbm , 'Tx' , 'RC' , 1 , 'Matched' , { 50 } );
+      pwbm = pwbsAddAntenna( pwbm , 'Rx1' , 'RC' , 1 , 'Matched' , { 50 } );
+      pwbm = pwbsAddSource( pwbm , 'STx', 'Antenna' , 'Tx' , { 1 } );
+      pwbm = pwbsAddAbsorber( pwbm , 'AB1', 'RC' , 1.0 , 'AE' , { 0.01 , 1.0 } );
+   
+      % Visualise the EMT.
+      pwbsDrawEMT( pwbm );    
+      
+      % Solve the model.
+      pwbm = pwbsSolveModel( pwbm );
+         
+      % Export all the results to ASCII files.
+      pwbsExportAll( pwbm );
+     
+      % Get the power density in each chamber.
+      data = pwbsGetOutput( pwbm , 'Antenna' , 'Rx1' , { 'absorbedPower' } );
+      IG_RC = data{1};
+       
+      % Save the model to a file.
+      pwbsSaveModel( pwbm );
+      
+      figure();
+      semilogx( f ./ 1e9 , 10 .* log10( IG_RC ) , 'lineWidth' , 3 );
+      xlabel( 'Frequency [Hz]' , 'fontSize' , 18 , 'fontName' , 'Helvetica' );
+      ylabel( 'Chamber insertion gain (dB)' , 'fontSize' , 18 , 'fontName' , 'Helvetica' );
+      set( gca , 'XMinorTick' , 'on' , 'XMinorGrid', 'on' );
+      set( gca , 'XTickLabel' , num2str( get( gca , 'XTick' )' ) );
+      set( gca , 'fontSize' , 18 , 'fontName' , 'Helvetica' );
+      ylim( [ -60 0 ] );
+      grid( 'on' );
+      
+    end % function
+
+The result of the model is shown below.
+
+![Figure: Insertion gain of reverberation chamber](../doc/figures/RC_IG.png)
+
 # Nested reverberation chambers
 
 ![Figure: EMT for nested reverberation chambers](../doc/figures/NRC_EMT.png)
@@ -91,7 +150,4 @@ Function to solve nested reberation chambers PWB problem:
 
 The result of the model is shown below.
 
-![Figure: EMT for nested reverberation chambers](../doc/figures/NRC_SR.png)
-
-
-
+![Figure: Shielding effectiveness for nested reverberation chambers](../doc/figures/NRC_SE.png)
