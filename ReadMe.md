@@ -1,4 +1,4 @@
-![](https://bitbucket.org/uoyaeg/aegpwb/wiki/aegpwb.jpg )
+![](https://github.com/flintoftid/aegpwb/tree/master/doc/aegpwb.jpg)
 
 # AEGPWB: An open source electromagnetic power balance toolbox and solver
 
@@ -85,7 +85,7 @@ Additional requirements are:
    in spherical bodies to be calculated. See [Install.md][] for the supported codes.
 
 3. (Optional) To help with development or as an alternative way to download the 
-   source a client for the [Mercurial][] Version Control System is required.
+   source a client for the [git][] Version Control System is required.
 
 The code has been primarily developed using GNU [Octave][] on Linux platforms, 
 but should run under both GNU [Octave][] and [MATLAB][] on Linux and Windows 
@@ -108,8 +108,8 @@ the solver in doc/[SolverUserManual.md][].
 The code is still under development and no doubt will contain many bugs. Known 
 significant bugs are listed in the file doc/[Bugs.md][]  in the source code. 
 
-Please report bugs using the bitbucket issue tracker at 
-<https://bitbucket.org/uoyaeg/aegpwb/issues> or by email to 
+Please report bugs using the issue tracker at 
+<https://github.com/flintoftid/aegpwb/issues> or by email to 
 <ian.flintoft@googlemail.com>.
 
 For general guidance on how to write a good bug report see, for example:
@@ -120,8 +120,6 @@ For general guidance on how to write a good bug report see, for example:
 
 Some of the tips in <http://www.catb.org/esr/faqs/smart-questions.html> are also 
 relevant to reporting bugs.
-
-There is a Wiki on the bitbucket [project page](https://bitbucket.org/uoyaeg/aegpwb/wiki/). 
 
 ## How to contribute
 
@@ -221,7 +219,7 @@ Feb. 2011.
 [University of York]: http://www.york.ac.uk
 [Department of Electronic Engineering]: https://www.york.ac.uk/electronic-engineering
 [AEG]: https://www.york.ac.uk/electronic-engineering/research/communication-technologies/applied-electromagnetics-devices
-[Dr Ian Flintoft]: https://idflintoft.bitbucket.io
+[Dr Ian Flintoft]: https://flintoftid.github.io
 [Dr John Dawson]: https://www.york.ac.uk/electronic-engineering/staff/john_dawson
 [Open Source]: http://opensource.org
 [GPL3]: http://www.gnu.org/copyleft/gpl.html
@@ -229,14 +227,14 @@ Feb. 2011.
 [ONERA]: http://www.onera.fr/en
 [GNU]: https://www.gnu.org/home.en.html
 [EMC]: http://www.york.ac.uk/electronics/research/physlayer/appliedem/emc/
-[Install.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Install.md
-[tutorial]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/tutorial/Tutorial.md
-[ToolboxUserManual.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToolboxUserManual.md
-[SolverUserManual.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/SolverUserManual.md
-[Bugs.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/Bugs.md
-[ToDo.md]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/doc/ToDo.md
-[Licence.txt]: https://bitbucket.org/uoyaeg/aegpwb/src/tip/Licence.txt
+[Install.md]: https://github.com/flintoftid/aegpwb/tree/master/Install.md
+[tutorial]:  https://github.com/flintoftid/aegpwb/tree/master/tutorial/Tutorial.md
+[ToolboxUserManual.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/ToolboxUserManual.md
+[SolverUserManual.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/SolverUserManual.md
+[Bugs.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/Bugs.md
+[ToDo.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/ToDo.md
+[Licence.txt]:  https://github.com/flintoftid/aegpwb/tree/master/Licence.txt
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
-[Mercurial]: https://www.mercurial-scm.org
+[git]: https://git-scm.com

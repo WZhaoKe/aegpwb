@@ -1,7 +1,5 @@
 # AEG PWB: Installation and testing
 
-[TOC]
-
 ## Requirements
 
 The code is written in a portable subset of GNU [Octave][] and [MATLAB][]. 
@@ -15,7 +13,7 @@ Additional requirements are:
    in spherical bodies to be calculated. See below for the supported codes.
 
 3. (Optional) To help with development or as an alternative way to download the 
-   source a client for the [Mercurial][] Version Control System is required.
+   source a client for the [git][] Version Control System is required.
 
 The code has been primarily developed using GNU [Octave][] on Linux platforms, 
 but should run under both GNU [Octave][] and [MATLAB][] on Linux and Windows 
@@ -25,14 +23,14 @@ systems.
 
 ### Get the source code
 
-Either use Mercurial to clone the source code repository on bitbucket, for 
+Either use git to clone the source code repository on github, for 
 example using Mercurial directly from a Linux shell,
 
-    $ hg clone ssh://hg@bitbucket.org/uoyaeg/aegpwb aegpwb-working
+    $ git clone https://github.com/flintoftid/aegpwb.git aegpwb-working
 
 or download a zip file of the source code from 
-https://bitbucket.org/uoyaeg/aegpwb/downloads and unzip it into a directory call 
-aegpwb-working
+https://github.com/flintoftid/aegpwb/archive/master.zip
+and unzip it into a directory call aegpwb-working
 
     $ unzip aeg-aegpwb-x12ey12ey.zip
     $ mv aeg-aegpwb-x12ey12ey aegpwb-working
@@ -113,7 +111,7 @@ All the tests should pass. If not please report a bug.
 [graphviz]: http://www.graphviz.org
 [Octave]: http://www.gnu.org/software/octave
 [MATLAB]: http://www.mathworks.co.uk/products/matlab
-[Mercurial]: https://www.mercurial-scm.org/
+[git]: https://git-scm.com
 [Mie codes]: https://en.wikipedia.org/wiki/Codes_for_electromagnetic_scattering_by_spheres
 [SPlaC]: http://www.victoria.ac.nz/scps/research/research-groups/raman-lab/numerical-tools/sers-and-plasmonics-codes
 [scattnlay_v1]: http://cpc.cs.qub.ac.uk/cpc/cgi-bin/showversions.pl/?catid=AEEY&usertype=toolbar&deliverytype=view.

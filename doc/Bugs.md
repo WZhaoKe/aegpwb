@@ -2,7 +2,7 @@
 
 [TOC]
 
-Please also see the issue tracker at <https://bitbucket.org/uoyaeg/aegpwb/issues>.
+Please also see the issue tracker at <https://github.com/flintoftid/aegpwb/issues>.
 
 ## General
 
