@@ -1,4 +1,4 @@
-![](https://github.com/flintoftid/aegpwb/tree/master/doc/aegpwb.jpg)
+![](https://github.com/flintoftid/aegpwb/blob/master/doc/aegpwb.jpg)
 
 # AEGPWB: An open source electromagnetic power balance toolbox and solver
 
@@ -226,11 +226,11 @@ Feb. 2011.
 [NIST]: http://www.nist.gov
 [ONERA]: http://www.onera.fr/en
 [GNU]: https://www.gnu.org/home.en.html
-[EMC]: http://www.york.ac.uk/electronics/research/physlayer/appliedem/emc/
+[EMC]: https://www.york.ac.uk/electronic-engineering/research/communication-technologies/applied-electromagnetics-devices/emc-shielding/
 [Install.md]: https://github.com/flintoftid/aegpwb/tree/master/Install.md
 [tutorial]:  https://github.com/flintoftid/aegpwb/tree/master/tutorial/Tutorial.md
-[ToolboxUserManual.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/ToolboxUserManual.md
-[SolverUserManual.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/SolverUserManual.md
+[ToolboxUserManual.md]: https://github.com/flintoftid/aegpwb/tree/master/doc/ToolboxUserManual.md
+[SolverUserManual.md]: https://github.com/flintoftid/aegpwb/tree/master/doc/SolverUserManual.md
 [Bugs.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/Bugs.md
 [ToDo.md]:  https://github.com/flintoftid/aegpwb/tree/master/doc/ToDo.md
 [Licence.txt]:  https://github.com/flintoftid/aegpwb/tree/master/Licence.txt
